@@ -6,7 +6,7 @@
 <title>NOVA STORE</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05070f;--card:#0d1228;--blue:#1a4fff;--blue2:#2563ff;--cyan:#00c8ff;--gold:#f5c518;--green:#00c864;--border:rgba(255,255,255,0.07);}
+:root{--bg:#05070f;--card:#0d1228;--blue:#1a4fff;--blue2:#2563ff;--cyan:#00c8ff;--gold:#f5c518;--green:#00c864;--red:#ff4444;--border:rgba(255,255,255,0.07);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,255,0.85);min-height:100vh;overflow-x:hidden;}
 .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(26,79,255,0.15),transparent 70%);}
@@ -30,14 +30,13 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .nav-brand .nav-sub{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);}
 .nav-right{display:flex;align-items:center;gap:8px;}
 .nav-wallet{background:rgba(245,197,24,0.12);border:1px solid rgba(245,197,24,0.3);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--gold);}
-.nav-user{font-size:12px;color:rgba(255,255,255,0.4);}
 .btn-out{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:rgba(255,255,255,0.4);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
 .tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;height:65px;background:rgba(5,7,15,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;border:none;background:none;color:rgba(255,255,255,0.35);font-family:'Tajawal',sans-serif;font-size:10px;position:relative;transition:.2s;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;border:none;background:none;color:rgba(255,255,255,0.35);font-family:'Tajawal',sans-serif;font-size:9px;position:relative;transition:.2s;}
 .tab.active{color:var(--cyan);}
 .tab.active::after{content:'';position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);border-radius:2px;}
-.tab-icon{font-size:19px;}
-.tab-badge{position:absolute;top:5px;right:calc(50% - 22px);background:var(--gold);color:#000;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;display:none;}
+.tab-icon{font-size:18px;}
+.tab-badge{position:absolute;top:4px;right:calc(50% - 22px);background:var(--gold);color:#000;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;display:none;}
 .tab-badge.show{display:block;}
 .content{flex:1;padding:72px 14px 78px;max-width:680px;margin:0 auto;width:100%;}
 .section{display:none;animation:fadeUp .35s ease;}
@@ -69,6 +68,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .id-row .inp{margin-bottom:0;flex:1;}
 .btn-charge{flex-shrink:0;padding:12px 16px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
 .btn-charge.pubg-btn{background:linear-gradient(135deg,#c07000,#e09000);}
+/* WALLET */
 .wallet-card{background:linear-gradient(135deg,rgba(245,197,24,0.12),rgba(245,197,24,0.04));border:1px solid rgba(245,197,24,0.25);border-radius:20px;padding:24px 20px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
 .wallet-card::before{content:'💰';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.05;}
 .wallet-label{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
@@ -83,45 +83,66 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .pay-btn{margin-top:10px;width:100%;padding:9px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
 .pay-btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
 .pay-btn-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+/* ADMIN */
 .admin-section{background:rgba(0,200,100,0.06);border:1px solid rgba(0,200,100,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
 .admin-sec-title{font-size:14px;font-weight:800;color:var(--green);margin-bottom:14px;}
 .users-list{display:flex;flex-direction:column;gap:8px;}
 .user-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
 .user-row-top{display:flex;align-items:center;gap:10px;}
-.user-name{font-weight:700;font-size:14px;flex:1;}
-.user-bal{color:var(--gold);font-weight:700;font-size:13px;}
-.btn-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:7px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
-.add-form{margin-top:10px;display:none;gap:8px;align-items:center;}
+.user-name-txt{font-weight:700;font-size:14px;flex:1;}
+.user-bal-txt{color:var(--gold);font-weight:700;font-size:13px;}
+.user-btns{display:flex;gap:6px;}
+.btn-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.btn-withdraw{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.add-form{margin-top:10px;display:none;gap:8px;align-items:center;flex-wrap:wrap;}
 .add-form.show{display:flex;}
-.add-form .inp{margin:0;flex:1;padding:9px 12px;font-size:13px;}
-.btn-confirm{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:9px 16px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.add-form .inp{margin:0;flex:1;min-width:80px;padding:9px 12px;font-size:13px;}
+.btn-confirm-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-confirm-wd{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+/* IMG UPLOAD */
 .img-upload-section{background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
 .img-upload-title{font-size:14px;font-weight:800;color:var(--cyan);margin-bottom:14px;}
 .img-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .img-upload-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.img-upload-preview{height:90px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
+.img-upload-preview{height:90px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .img-upload-preview.ff-bg{background:#000;}
 .img-upload-preview.pubg-bg{background:#0a1628;}
 .img-upload-preview img{width:100%;height:100%;object-fit:contain;}
-.img-upload-preview .no-img-sm{font-size:36px;}
+.no-img-sm{font-size:36px;}
 .img-upload-info{padding:10px 12px;}
 .img-upload-name{font-size:12px;font-weight:700;margin-bottom:8px;}
 .btn-upload{width:100%;padding:8px;background:rgba(26,79,255,0.2);border:1px solid rgba(26,79,255,0.3);border-radius:8px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
 .btn-reset-img{width:100%;padding:6px;background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.2);border-radius:8px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;margin-top:4px;}
-.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;}
-.modal-overlay.open{display:flex;animation:fadeIn .3s ease;}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-sheet{background:#0d1228;border:1px solid var(--border);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:500px;animation:slideUp .3s ease;position:relative;}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-close-btn{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;width:30px;height:30px;color:#fff;cursor:pointer;font-size:14px;}
-.modal-title{font-size:17px;font-weight:800;margin-bottom:4px;}
-.modal-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:18px;}
-.transfer-info-box{background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;}
-.inp-label{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px;display:block;}
-.coins-preview{background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:16px;display:none;}
-.btn-transfer{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
-.btn-transfer-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
-.btn-transfer-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+/* LOGOS SECTION */
+.logos-section{margin-bottom:20px;}
+.logos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.logo-slot{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;aspect-ratio:1;}
+.logo-slot img{width:100%;height:100%;object-fit:contain;background:#000;}
+.logo-slot .logo-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,0.02);cursor:pointer;}
+.logo-slot .logo-empty-icon{font-size:28px;opacity:0.3;}
+.logo-slot .logo-empty-txt{font-size:10px;color:rgba(255,255,255,0.25);}
+.logo-slot .logo-num{position:absolute;top:6px;right:8px;background:rgba(0,0,0,0.6);border-radius:6px;padding:2px 6px;font-size:10px;color:rgba(255,255,255,0.4);}
+/* ADMIN LOGOS CONTROL */
+.admin-logos-section{background:rgba(245,197,24,0.06);border:1px solid rgba(245,197,24,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
+.admin-logos-title{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:14px;}
+.logos-toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+.toggle-label{font-size:13px;font-weight:700;}
+.toggle-switch{position:relative;width:48px;height:26px;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.1);border-radius:26px;transition:.3s;}
+.toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
+.toggle-switch input:checked+.toggle-slider{background:var(--green);}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(22px);}
+.admin-logos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.admin-logo-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.admin-logo-preview{height:70px;display:flex;align-items:center;justify-content:center;background:#0a0a0a;overflow:hidden;}
+.admin-logo-preview img{width:100%;height:100%;object-fit:contain;}
+.admin-logo-preview .no-logo{font-size:24px;opacity:0.3;}
+.admin-logo-info{padding:8px 10px;}
+.admin-logo-num{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;}
+.btn-logo-upload{width:100%;padding:6px;background:rgba(26,79,255,0.15);border:1px solid rgba(26,79,255,0.25);border-radius:7px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+.btn-logo-del{width:100%;padding:5px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.15);border-radius:7px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:10px;cursor:pointer;margin-top:3px;}
+/* ORDERS */
 .order-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;}
 .order-card.pending{border-color:rgba(245,197,24,0.25);}
 .order-card.done{opacity:0.55;}
@@ -138,6 +159,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.25);}
 .empty-icon{font-size:44px;display:block;margin-bottom:10px;}
 .admin-note{background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.18);border-radius:10px;padding:9px 13px;font-size:12px;color:rgba(245,197,24,0.7);margin-bottom:14px;text-align:center;display:none;}
+/* SUPPORT */
 .support-wa{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(37,211,102,0.1),rgba(37,211,102,0.03));border:1px solid rgba(37,211,102,0.22);border-radius:16px;padding:18px;margin-bottom:14px;text-decoration:none;color:inherit;transition:.3s;}
 .support-wa:hover{transform:translateY(-2px);}
 .wa-icon{width:48px;height:48px;min-width:48px;background:#25d366;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;}
@@ -147,13 +169,29 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .info-c{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center;}
 .info-c .ic{font-size:24px;margin-bottom:6px;}
 .info-c p{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-sheet{background:#0d1228;border:1px solid var(--border);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:500px;animation:slideUp .3s ease;position:relative;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-close-btn{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;width:30px;height:30px;color:#fff;cursor:pointer;font-size:14px;}
+.modal-title{font-size:17px;font-weight:800;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:18px;}
+.transfer-info-box{background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;}
+.inp-label{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px;display:block;}
+.btn-transfer{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+.btn-transfer-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
+.btn-transfer-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
 .toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(16px);background:#111d35;border:1px solid var(--cyan);border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;color:var(--cyan);z-index:400;opacity:0;transition:.35s;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-@media(max-width:400px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.pay-methods{grid-template-columns:1fr;}.img-upload-grid{grid-template-columns:1fr;}}
+@media(max-width:400px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.pay-methods{grid-template-columns:1fr;}.img-upload-grid{grid-template-columns:1fr;}.logos-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
 <div class="bg-fx"></div>
+
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <div class="logo-na">NA</div>
@@ -164,6 +202,8 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
     <button class="btn-primary" onclick="login()">دخول إلى المتجر ←</button>
   </div>
 </div>
+
+<!-- APP -->
 <div id="app">
   <div class="top-nav">
     <div class="nav-brand">
@@ -172,11 +212,13 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
     </div>
     <div class="nav-right">
       <div class="nav-wallet" id="navWallet">🪙 0.00 NC</div>
-      <span class="nav-user" id="navU"></span>
       <button class="btn-out" onclick="logout()">خروج</button>
     </div>
   </div>
+
   <div class="content">
+
+    <!-- ── الشحن ── -->
     <div class="section active" id="secCharge">
       <div class="hero-banner">
         <div class="hero-na">NA</div>
@@ -186,10 +228,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         </div>
       </div>
       <div class="game-card">
-        <div class="game-header ff" id="ffHeader">
-          <img id="ffImg" src="" alt="Free Fire" style="display:none">
-          <div class="no-img" id="ffNoImg">🔥</div>
-        </div>
+        <div class="game-header ff"><img id="ffImg" src="" style="display:none"><div class="no-img" id="ffNoImg">🔥</div></div>
         <div class="game-body">
           <div class="game-title">Free Fire — فري فاير</div>
           <div class="game-sub">اشحن ألماس فري فاير 💎</div>
@@ -208,10 +247,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         </div>
       </div>
       <div class="game-card">
-        <div class="game-header pubg" id="pubgHeader">
-          <img id="pubgImg" src="" alt="PUBG" style="display:none">
-          <div class="no-img" id="pubgNoImg">🐔</div>
-        </div>
+        <div class="game-header pubg"><img id="pubgImg" src="" style="display:none"><div class="no-img" id="pubgNoImg">🐔</div></div>
         <div class="game-body">
           <div class="game-title">PUBG Mobile — ببجي موبايل</div>
           <div class="game-sub">اشحن UC ببجي موبايل 🟡</div>
@@ -230,16 +266,20 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         </div>
       </div>
     </div>
+
+    <!-- ── المحفظة ── -->
     <div class="section" id="secWallet">
       <div class="wallet-card">
         <div class="wallet-label">رصيدك الحالي</div>
         <div class="wallet-amount" id="walletDisplay">0.00</div>
         <div class="wallet-unit">🪙 Nova Coin (NC)</div>
       </div>
+      <!-- ADMIN: إدارة المحافظ -->
       <div class="admin-section" id="adminWalletSection" style="display:none">
         <div class="admin-sec-title">🔑 إدارة محافظ المستخدمين</div>
         <div class="users-list" id="usersList"></div>
       </div>
+      <!-- ADMIN: رفع صور الألعاب -->
       <div class="img-upload-section" id="imgUploadSection" style="display:none">
         <div class="img-upload-title">🖼️ تخصيص صور الألعاب</div>
         <div class="img-upload-grid">
@@ -263,6 +303,19 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
           </div>
         </div>
       </div>
+      <!-- ADMIN: إدارة اللوغوهات -->
+      <div class="admin-logos-section" id="adminLogosSection" style="display:none">
+        <div class="admin-logos-title">🎨 إدارة قسم اللوغوهات</div>
+        <div class="logos-toggle-row">
+          <span class="toggle-label">إظهار قسم اللوغوهات للزبائن</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="logosToggle" onchange="toggleLogosSection()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="admin-logos-grid" id="adminLogosGrid"></div>
+      </div>
+      <!-- طرق الدفع -->
       <div class="recharge-title">💳 شحن المحفظة — اختر طريقة الدفع</div>
       <div class="pay-methods">
         <div class="pay-card">
@@ -282,11 +335,21 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق
       </div>
     </div>
+
+    <!-- ── اللوغوهات ── -->
+    <div class="section" id="secLogos">
+      <div class="sec-title">🎨 اللوغوهات</div>
+      <div class="logos-grid" id="logosGrid"></div>
+    </div>
+
+    <!-- ── الطلبات ── -->
     <div class="section" id="secOrders">
       <div class="sec-title">الطلبات</div>
       <div class="admin-note" id="adminNote">🔑 أنت مسجل كمالك — يمكنك رؤية جميع الطلبات</div>
       <div id="ordersList"></div>
     </div>
+
+    <!-- ── الدعم ── -->
     <div class="section" id="secSupport">
       <div class="sec-title">الدعم الفني</div>
       <a class="support-wa" href="https://wa.me/218926364857" target="_blank">
@@ -302,13 +365,18 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
       <div style="text-align:center;margin-top:24px;color:rgba(255,255,255,0.18);font-size:11px;">© 2026 <span style="color:var(--cyan)">NOVA STORE</span></div>
     </div>
   </div>
-  <div class="tabs">
+
+  <!-- TABS -->
+  <div class="tabs" id="tabsBar">
     <button class="tab active" onclick="goTab(0)" id="tab0"><span class="tab-icon">⚡</span>الشحن</button>
     <button class="tab" onclick="goTab(1)" id="tab1"><span class="tab-icon">🪙</span>المحفظة</button>
-    <button class="tab" onclick="goTab(2)" id="tab2"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
-    <button class="tab" onclick="goTab(3)" id="tab3"><span class="tab-icon">💬</span>الدعم</button>
+    <button class="tab" onclick="goTab(2)" id="tab2" style="display:none"><span class="tab-icon">🎨</span>لوغوهات</button>
+    <button class="tab" onclick="goTab(3)" id="tab3"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
+    <button class="tab" onclick="goTab(4)" id="tab4"><span class="tab-icon">💬</span>الدعم</button>
   </div>
 </div>
+
+<!-- Transfer Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-sheet">
     <button class="modal-close-btn" onclick="closeModal()">✕</button>
@@ -319,58 +387,217 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
     <input class="inp" id="fromPhone" placeholder="مثال: 0912345678" style="margin-bottom:12px;">
     <span class="inp-label">المبلغ المراد تحويله (بالدينار الليبي)</span>
     <input class="inp" id="transferAmount" type="number" placeholder="مثال: 50" style="margin-bottom:12px;" oninput="calcCoins()">
-    <div class="coins-preview" id="coinsPreview">ستحصل على: <strong id="coinsResult">0</strong> 🪙 نوفا كوين</div>
+    <div id="coinsPreview" style="background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:16px;display:none;">ستحصل على: <strong id="coinsResult">0</strong> 🪙 نوفا كوين</div>
     <button class="btn-transfer" id="btnTransfer" onclick="submitTransfer()">إرسال طلب التحويل</button>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
+
 <script>
 const OWNER={user:'NovaAdmin',pass:'Nova@9999'};
 const BOT_TOKEN='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
 const CHAT_ID='8835257002';
-let curUser=null,orders=[],wallets={},gameImages={ff:null,pubg:null},transferMethod='',transferNum='';
-function load(k,def){try{return JSON.parse(localStorage.getItem(k))||def;}catch(e){return def;}}
+const LOGOS_COUNT=10;
+
+let curUser=null,orders=[],wallets={},gameImages={ff:null,pubg:null},logoImages={},logosVisible=false,transferMethod='',transferNum='';
+
+function load(k,def){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):def;}catch(e){return def;}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-orders=load('ns_orders',[]);wallets=load('ns_wallets',{});gameImages=load('ns_imgs',{ff:null,pubg:null});
+
+orders=load('ns_orders',[]);
+wallets=load('ns_wallets',{});
+gameImages=load('ns_imgs',{ff:null,pubg:null});
+logoImages=load('ns_logo_imgs',{});
+logosVisible=load('ns_logos_visible',false);
+
 function getBalance(u){return parseFloat((wallets[u]||0).toFixed(2));}
 function setBalance(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));save('ns_wallets',wallets);}
+
 function login(){
   const u=document.getElementById('uIn').value.trim(),p=document.getElementById('pIn').value;
   const err=document.getElementById('errMsg');
   if(!u||!p){err.classList.add('show');return;}
   err.classList.remove('show');
-  if(wallets[u]===undefined)wallets[u]=0;
-  save('ns_wallets',wallets);
+  if(wallets[u]===undefined){wallets[u]=0;save('ns_wallets',wallets);}
   curUser={name:u,isOwner:(u===OWNER.user&&p===OWNER.pass)};
   document.getElementById('loginPage').classList.add('hidden');
   document.getElementById('app').classList.add('show');
-  document.getElementById('navU').textContent=u;
-  updateNavWallet();applyGameImages();renderOrders();updateBadge();
+  updateNavWallet();applyGameImages();buildLogosGrid();updateTabsBar();renderOrders();updateBadge();
 }
-function logout(){curUser=null;document.getElementById('loginPage').classList.remove('hidden');document.getElementById('app').classList.remove('show');document.getElementById('uIn').value='';document.getElementById('pIn').value='';}
-function updateNavWallet(){if(!curUser)return;const b=getBalance(curUser.name);document.getElementById('navWallet').textContent='🪙 '+b.toFixed(2)+' NC';document.getElementById('walletDisplay').textContent=b.toFixed(2);}
+
+function logout(){
+  curUser=null;
+  document.getElementById('loginPage').classList.remove('hidden');
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('uIn').value='';document.getElementById('pIn').value='';
+}
+
+function updateNavWallet(){
+  if(!curUser)return;
+  const b=getBalance(curUser.name);
+  document.getElementById('navWallet').textContent='🪙 '+b.toFixed(2)+' NC';
+  document.getElementById('walletDisplay').textContent=b.toFixed(2);
+}
+
 function applyGameImages(){
   ['ff','pubg'].forEach(g=>{
     const img=document.getElementById(g+'Img'),icon=document.getElementById(g+'NoImg'),src=gameImages[g];
-    if(src){img.src=src;img.style.display='block';icon.style.display='none';}else{img.style.display='none';icon.style.display='block';}
+    if(src){img.src=src;img.style.display='block';icon.style.display='none';}
+    else{img.style.display='none';icon.style.display='block';}
     const pi=document.getElementById(g+'PreviewImg'),pc=document.getElementById(g+'PreviewIcon');
     if(pi&&pc){if(src){pi.src=src;pi.style.display='block';pc.style.display='none';}else{pi.style.display='none';pc.style.display='block';}}
   });
 }
-const sections=['secCharge','secWallet','secOrders','secSupport'];
-function goTab(i){sections.forEach((s,j)=>{document.getElementById(s).classList.toggle('active',j===i);document.getElementById('tab'+j).classList.toggle('active',j===i);});if(i===1)renderWallet();if(i===2)renderOrders();}
-function renderWallet(){updateNavWallet();const o=curUser&&curUser.isOwner;document.getElementById('adminWalletSection').style.display=o?'block':'none';document.getElementById('imgUploadSection').style.display=o?'block':'none';if(o)renderUsersList();}
-function renderUsersList(){
-  const list=document.getElementById('usersList'),users=Object.keys(wallets).filter(u=>u!==OWNER.user);
-  if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
-  list.innerHTML=users.map(u=>`<div class="user-row"><div class="user-row-top"><div><div class="user-name">👤 ${u}</div><div class="user-bal">🪙 ${getBalance(u).toFixed(2)} NC</div></div><button class="btn-add" onclick="toggleAddForm('${u}')">+ إضافة</button></div><div class="add-form" id="form_${u}"><input class="inp" id="addAmt_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btn-confirm" onclick="addBalance('${u}')">✓</button></div></div>`).join('');
+
+function updateTabsBar(){
+  const show=logosVisible||(curUser&&curUser.isOwner);
+  document.getElementById('tab2').style.display=show?'flex':'none';
 }
-function toggleAddForm(u){document.getElementById('form_'+u).classList.toggle('show');}
-function addBalance(u){const amt=parseFloat(document.getElementById('addAmt_'+u).value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}setBalance(u,getBalance(u)+amt);document.getElementById('addAmt_'+u).value='';document.getElementById('form_'+u).classList.remove('show');renderUsersList();updateNavWallet();showToast('✅ تم إضافة '+amt+' NC لـ '+u);sendTg('💰 إضافة رصيد\nالمستخدم: '+u+'\nالمضاف: '+amt+' NC\nالجديد: '+getBalance(u)+' NC');}
-function uploadImg(game,input){const file=input.files[0];if(!file)return;const r=new FileReader();r.onload=function(e){gameImages[game]=e.target.result;save('ns_imgs',gameImages);applyGameImages();showToast('✅ تم تحديث صورة '+(game==='ff'?'Free Fire':'PUBG'));};r.readAsDataURL(file);}
+
+// sections: 0=charge,1=wallet,2=logos,3=orders,4=support
+const sections=['secCharge','secWallet','secLogos','secOrders','secSupport'];
+function goTab(i){
+  sections.forEach((s,j)=>{
+    document.getElementById(s).classList.toggle('active',j===i);
+    document.getElementById('tab'+j).classList.toggle('active',j===i);
+  });
+  if(i===1)renderWallet();
+  if(i===2)buildLogosGrid();
+  if(i===3)renderOrders();
+}
+
+function renderWallet(){
+  updateNavWallet();
+  const o=curUser&&curUser.isOwner;
+  document.getElementById('adminWalletSection').style.display=o?'block':'none';
+  document.getElementById('imgUploadSection').style.display=o?'block':'none';
+  document.getElementById('adminLogosSection').style.display=o?'block':'none';
+  if(o){renderUsersList();buildAdminLogosGrid();document.getElementById('logosToggle').checked=logosVisible;}
+}
+
+function renderUsersList(){
+  const list=document.getElementById('usersList');
+  const users=Object.keys(wallets).filter(u=>u!==OWNER.user);
+  if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
+  list.innerHTML=users.map(u=>`
+    <div class="user-row">
+      <div class="user-row-top">
+        <div>
+          <div class="user-name-txt">👤 ${u}</div>
+          <div class="user-bal-txt">🪙 ${getBalance(u).toFixed(2)} NC</div>
+        </div>
+        <div class="user-btns">
+          <button class="btn-add" onclick="toggleForm('${u}','add')">+ إضافة</button>
+          <button class="btn-withdraw" onclick="toggleForm('${u}','wd')">- سحب</button>
+        </div>
+      </div>
+      <div class="add-form" id="form_${u}">
+        <input class="inp" id="amt_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01">
+        <button class="btn-confirm-add" id="btnAdd_${u}" onclick="doBalance('${u}','add')">إضافة ✓</button>
+        <button class="btn-confirm-wd" id="btnWd_${u}" onclick="doBalance('${u}','wd')" style="display:none">سحب ✓</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleForm(u,type){
+  const f=document.getElementById('form_'+u);
+  const ba=document.getElementById('btnAdd_'+u);
+  const bw=document.getElementById('btnWd_'+u);
+  const isOpen=f.classList.contains('show');
+  // إذا نفس النوع مفتوح، أغلق
+  if(isOpen&&((type==='add'&&ba.style.display!=='none')||(type==='wd'&&bw.style.display!=='none'))){
+    f.classList.remove('show');return;
+  }
+  f.classList.add('show');
+  if(type==='add'){ba.style.display='block';bw.style.display='none';}
+  else{ba.style.display='none';bw.style.display='block';}
+}
+
+function doBalance(u,type){
+  const amt=parseFloat(document.getElementById('amt_'+u).value);
+  if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}
+  const cur=getBalance(u);
+  if(type==='wd'&&amt>cur){showToast('❌ الرصيد غير كافٍ للسحب');return;}
+  if(type==='add')setBalance(u,cur+amt);
+  else setBalance(u,cur-amt);
+  document.getElementById('amt_'+u).value='';
+  document.getElementById('form_'+u).classList.remove('show');
+  renderUsersList();updateNavWallet();
+  const action=type==='add'?'إضافة':'سحب';
+  showToast('✅ تم '+action+' '+amt+' NC '+(type==='add'?'لـ':'من')+' '+u);
+  sendTg('💰 '+action+' رصيد\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC\nالرصيد الجديد: '+getBalance(u)+' NC');
+}
+
+// صور الألعاب
+function uploadImg(game,input){
+  const file=input.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{gameImages[game]=e.target.result;save('ns_imgs',gameImages);applyGameImages();showToast('✅ تم تحديث صورة '+(game==='ff'?'Free Fire':'PUBG'));};
+  r.readAsDataURL(file);
+}
 function resetImg(game){gameImages[game]=null;save('ns_imgs',gameImages);document.getElementById(game+'File').value='';applyGameImages();showToast('🗑 تم حذف الصورة');}
+
+// اللوغوهات - بناء شبكة الزبون
+function buildLogosGrid(){
+  const grid=document.getElementById('logosGrid');
+  let html='';
+  for(let i=1;i<=LOGOS_COUNT;i++){
+    const src=logoImages[i]||null;
+    if(src){
+      html+=`<div class="logo-slot"><span class="logo-num">${i}</span><img src="${src}" alt="logo ${i}"></div>`;
+    } else {
+      html+=`<div class="logo-slot"><span class="logo-num">${i}</span><div class="logo-empty"><span class="logo-empty-icon">🖼️</span><span class="logo-empty-txt">فارغ</span></div></div>`;
+    }
+  }
+  grid.innerHTML=html;
+}
+
+// اللوغوهات - بناء شبكة الأدمن
+function buildAdminLogosGrid(){
+  const grid=document.getElementById('adminLogosGrid');
+  let html='';
+  for(let i=1;i<=LOGOS_COUNT;i++){
+    const src=logoImages[i]||null;
+    html+=`
+      <div class="admin-logo-item">
+        <div class="admin-logo-preview">
+          ${src?`<img src="${src}" alt="logo ${i}">`:`<div class="no-logo">🖼️</div>`}
+        </div>
+        <div class="admin-logo-info">
+          <div class="admin-logo-num">لوغو ${i}</div>
+          <input type="file" id="logoFile_${i}" accept="image/*" style="display:none" onchange="uploadLogo(${i},this)">
+          <button class="btn-logo-upload" onclick="document.getElementById('logoFile_${i}').click()">📤 رفع</button>
+          ${src?`<button class="btn-logo-del" onclick="deleteLogo(${i})">🗑 حذف</button>`:''}
+        </div>
+      </div>
+    `;
+  }
+  grid.innerHTML=html;
+}
+
+function uploadLogo(num,input){
+  const file=input.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{logoImages[num]=e.target.result;save('ns_logo_imgs',logoImages);buildAdminLogosGrid();buildLogosGrid();showToast('✅ تم رفع اللوغو '+num);};
+  r.readAsDataURL(file);
+}
+function deleteLogo(num){delete logoImages[num];save('ns_logo_imgs',logoImages);buildAdminLogosGrid();buildLogosGrid();showToast('🗑 تم حذف اللوغو '+num);}
+
+function toggleLogosSection(){
+  logosVisible=document.getElementById('logosToggle').checked;
+  save('ns_logos_visible',logosVisible);
+  updateTabsBar();
+  showToast(logosVisible?'✅ قسم اللوغوهات مرئي للزبائن':'🔒 قسم اللوغوهات مخفي');
+}
+
+// الشحن
 const sel={ff:null,pubg:null};
-function selPkg(el,game){document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');sel[game]={amount:el.dataset.a,cost:parseFloat(el.dataset.c)};}
+function selPkg(el,game){
+  document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');sel[game]={amount:el.dataset.a,cost:parseFloat(el.dataset.c)};
+}
 function submitOrder(game){
   if(!sel[game]){showToast('❗ اختر كمية الشحن أولاً');return;}
   const idEl=document.getElementById(game+'Id'),uid=idEl.value.trim();
@@ -385,23 +612,61 @@ function submitOrder(game){
   showToast('✅ تم الشحن! خُصم '+cost+' NC');
   idEl.value='';document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));sel[game]=null;
 }
-function openTransfer(method,num){transferMethod=method;transferNum=num;document.getElementById('modalTitle').textContent='تحويل عبر '+method;document.getElementById('modalNum').textContent='+'+num;const btn=document.getElementById('btnTransfer');btn.className='btn-transfer '+(method==='ليبيانا'?'btn-transfer-blue':'btn-transfer-gold');document.getElementById('fromPhone').value='';document.getElementById('transferAmount').value='';document.getElementById('coinsPreview').style.display='none';document.getElementById('modalOverlay').classList.add('open');}
+
+// التحويل
+function openTransfer(method,num){
+  transferMethod=method;transferNum=num;
+  document.getElementById('modalTitle').textContent='تحويل عبر '+method;
+  document.getElementById('modalNum').textContent='+'+num;
+  const btn=document.getElementById('btnTransfer');
+  btn.className='btn-transfer '+(method==='ليبيانا'?'btn-transfer-blue':'btn-transfer-gold');
+  document.getElementById('fromPhone').value='';
+  document.getElementById('transferAmount').value='';
+  document.getElementById('coinsPreview').style.display='none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
-function calcCoins(){const amt=parseFloat(document.getElementById('transferAmount').value)||0;const p=document.getElementById('coinsPreview');if(amt>0){p.style.display='block';document.getElementById('coinsResult').textContent=(amt/10).toFixed(2);}else{p.style.display='none';}}
-function submitTransfer(){const phone=document.getElementById('fromPhone').value.trim(),amt=parseFloat(document.getElementById('transferAmount').value)||0;if(!phone){showToast('❗ أدخل رقم الهاتف');return;}if(amt<=0){showToast('❗ أدخل المبلغ');return;}sendTg('💳 طلب شحن محفظة\nالزبون: '+curUser.name+'\nالطريقة: '+transferMethod+'\nالرقم: '+phone+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');closeModal();showToast('✅ تم إرسال طلب التحويل! انتظر إضافة الرصيد');}
+function calcCoins(){
+  const amt=parseFloat(document.getElementById('transferAmount').value)||0;
+  const p=document.getElementById('coinsPreview');
+  if(amt>0){p.style.display='block';document.getElementById('coinsResult').textContent=(amt/10).toFixed(2);}
+  else p.style.display='none';
+}
+function submitTransfer(){
+  const phone=document.getElementById('fromPhone').value.trim();
+  const amt=parseFloat(document.getElementById('transferAmount').value)||0;
+  if(!phone){showToast('❗ أدخل رقم الهاتف');return;}
+  if(amt<=0){showToast('❗ أدخل المبلغ');return;}
+  sendTg('💳 طلب شحن محفظة\nالزبون: '+curUser.name+'\nالطريقة: '+transferMethod+'\nالرقم: '+phone+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');
+  closeModal();showToast('✅ تم إرسال طلب التحويل! انتظر إضافة الرصيد');
+}
+
+// الطلبات
 function renderOrders(){
   const list=document.getElementById('ordersList'),note=document.getElementById('adminNote');
   note.style.display=curUser&&curUser.isOwner?'block':'none';
   const visible=curUser&&curUser.isOwner?orders:orders.filter(o=>o.user===curUser.name);
   if(!visible.length){list.innerHTML='<div class="empty-state"><span class="empty-icon">📭</span><p>لا توجد طلبات بعد</p></div>';return;}
-  list.innerHTML=visible.map(o=>`<div class="order-card ${o.status}"><div class="order-top"><div class="order-game">${o.game}</div><div class="o-status ${o.status==='pending'?'o-pending':'o-done'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div></div><div class="order-detail">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>الوقت: <span>${o.time}</span></div>${curUser&&curUser.isOwner?`<div class="order-actions">${o.status==='pending'?`<button class="btn-done" onclick="markDone(${o.id})">✅ تم الشحن</button>`:''}<button class="btn-del" onclick="deleteOrder(${o.id})">🗑 حذف</button></div>`:''}</div>`).join('');
+  list.innerHTML=visible.map(o=>`
+    <div class="order-card ${o.status}">
+      <div class="order-top">
+        <div class="order-game">${o.game}</div>
+        <div class="o-status ${o.status==='pending'?'o-pending':'o-done'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div>
+      </div>
+      <div class="order-detail">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>الوقت: <span>${o.time}</span></div>
+      ${curUser&&curUser.isOwner?`<div class="order-actions">${o.status==='pending'?`<button class="btn-done" onclick="markDone(${o.id})">✅ تم الشحن</button>`:''}<button class="btn-del" onclick="deleteOrder(${o.id})">🗑 حذف</button></div>`:''}
+    </div>
+  `).join('');
 }
 function markDone(id){const o=orders.find(x=>x.id===id);if(o){o.status='done';save('ns_orders',orders);renderOrders();updateBadge();showToast('✅ تم تمييز الطلب كمكتمل');}}
 function deleteOrder(id){orders=orders.filter(x=>x.id!==id);save('ns_orders',orders);renderOrders();updateBadge();showToast('🗑 تم حذف الطلب');}
-function updateBadge(){const p=orders.filter(o=>curUser&&curUser.isOwner?o.status==='pending':o.user===curUser.name&&o.status==='pending').length;const b=document.getElementById('orderBadge');b.textContent=p;b.classList.toggle('show',p>0);}
+function updateBadge(){
+  const p=orders.filter(o=>curUser&&curUser.isOwner?o.status==='pending':o.user===curUser.name&&o.status==='pending').length;
+  const b=document.getElementById('orderBadge');b.textContent=p;b.classList.toggle('show',p>0);
+}
 function sendTg(msg){fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 </script>
 </body>
-  </html>
+        </html>
