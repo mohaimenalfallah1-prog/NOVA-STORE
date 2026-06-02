@@ -9,11 +9,8 @@
 :root{--bg:#05070f;--bg2:#080c18;--card:#0d1228;--blue:#1a4fff;--blue2:#2563ff;--cyan:#00c8ff;--gold:#f5c518;--border:rgba(255,255,255,0.07);--text:rgba(255,255,255,0.85);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-
-/* BG */
 .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;}
 .bg-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(26,79,255,0.18),transparent 70%);}
-.crack{position:absolute;width:100%;height:100%;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cpath d='M200,0 L180,80 L220,100 L160,200 L240,180 L200,400' stroke='%233060ff' stroke-width='1' fill='none'/%3E%3Cpath d='M0,150 L100,160 L80,220 L200,210 L180,300 L400,280' stroke='%233060ff' stroke-width='1' fill='none'/%3E%3Cpath d='M50,0 L70,120 L30,140 L90,250 L40,280 L80,400' stroke='%233060ff' stroke-width='0.5' fill='none'/%3E%3Cpath d='M350,0 L330,100 L370,130 L310,220 L360,240 L340,400' stroke='%233060ff' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");background-size:400px 400px;}
 
 /* LOGIN */
 #loginPage{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:var(--bg);}
@@ -27,15 +24,15 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,79,255,0.15);}
 .inp::placeholder{color:rgba(255,255,255,0.25);}
 .btn-blue{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:12px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:.3s;box-shadow:0 6px 25px rgba(26,79,255,0.4);}
-.btn-blue:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(26,79,255,0.6);}
+.btn-blue:hover{transform:translateY(-2px);}
 .err{background:rgba(255,60,60,0.1);border:1px solid rgba(255,60,60,0.3);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff6060;margin-bottom:14px;display:none;}
 .err.show{display:block;}
 
-/* SHELL */
+/* APP */
 #app{display:none;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
 #app.show{display:flex;}
 
-/* TOP NAV */
+/* NAV */
 .top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;background:rgba(5,7,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
 .nav-brand{display:flex;align-items:center;gap:10px;}
 .nav-na{font-size:22px;font-weight:900;color:#fff;font-style:italic;text-shadow:0 0 20px rgba(26,79,255,0.6);letter-spacing:-1px;}
@@ -43,25 +40,25 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .nav-user-info{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.5);}
 .nav-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:13px;}
 .btn-out{background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;padding:5px 12px;color:rgba(255,255,255,0.5);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;}
-.btn-out:hover{color:#ff6060;border-color:rgba(255,60,60,0.3);}
+.btn-out:hover{color:#ff6060;}
 
-/* BOTTOM TABS */
-.tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;height:68px;background:rgba(5,7,15,0.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:.2s;border:none;background:none;color:rgba(255,255,255,0.4);font-family:'Tajawal',sans-serif;font-size:11px;position:relative;}
+/* TABS */
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;height:65px;background:rgba(5,7,15,0.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:.2s;border:none;background:none;color:rgba(255,255,255,0.4);font-family:'Tajawal',sans-serif;font-size:10px;position:relative;}
 .tab.active{color:var(--cyan);}
 .tab.active::after{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);border-radius:2px;}
-.tab-icon{font-size:22px;}
-.tab-badge{position:absolute;top:8px;right:calc(50% - 18px);background:var(--gold);color:#000;border-radius:10px;padding:1px 6px;font-size:10px;font-weight:800;display:none;}
+.tab-icon{font-size:20px;}
+.tab-badge{position:absolute;top:6px;right:calc(50% - 20px);background:var(--gold);color:#000;border-radius:10px;padding:1px 5px;font-size:10px;font-weight:800;display:none;}
 .tab-badge.show{display:block;}
 
 /* CONTENT */
-.content{flex:1;padding:72px 16px 82px;max-width:700px;margin:0 auto;width:100%;}
+.content{flex:1;padding:72px 16px 80px;max-width:700px;margin:0 auto;width:100%;}
 .section{display:none;animation:fadeUp .4s ease;}
 .section.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* HERO BANNER */
-.hero-banner{background:linear-gradient(135deg,rgba(26,79,255,0.15),rgba(0,200,255,0.08));border:1px solid rgba(26,79,255,0.25);border-radius:20px;padding:24px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;}
+/* HERO */
+.hero-banner{background:linear-gradient(135deg,rgba(26,79,255,0.15),rgba(0,200,255,0.08));border:1px solid rgba(26,79,255,0.25);border-radius:20px;padding:24px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;overflow:hidden;}
 .hero-na-big{font-size:52px;font-weight:900;font-style:italic;color:#fff;text-shadow:0 0 30px rgba(26,79,255,0.9);line-height:1;flex-shrink:0;}
 .hero-text h2{font-size:18px;font-weight:800;}
 .hero-text h2 span{color:var(--cyan);}
@@ -69,11 +66,10 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
 /* GAME CARD */
 .game-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:20px;}
-.game-header{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.game-header.ff{background:linear-gradient(135deg,#0a0020,#1a0040,#3a0080,#6a00cc);}
-.game-header.pubg{background:linear-gradient(135deg,#0f0800,#2a1800,#5a3500,#c07000);}
-.game-img{font-size:70px;position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(255,255,255,0.3));}
-.game-header::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.08),transparent 60%);}
+.game-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.game-header img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.game-header.ff{background:#000;}
+.game-header.pubg{background:#0a1628;}
 .game-body{padding:20px;}
 .game-title{font-size:18px;font-weight:800;margin-bottom:4px;}
 .game-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:16px;}
@@ -85,8 +81,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .pkg-item.sel{background:rgba(26,79,255,0.2);border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,200,255,0.2);}
 .pkg-gem{font-size:11px;font-weight:800;color:var(--gold);display:block;}
 .pkg-price{font-size:12px;color:rgba(255,255,255,0.55);display:block;margin-top:2px;}
-
-/* ID INPUT */
 .id-row{display:flex;gap:10px;align-items:center;margin-bottom:14px;}
 .id-row .inp{margin-bottom:0;flex:1;}
 .btn-charge{flex-shrink:0;padding:13px 20px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:12px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.3s;box-shadow:0 6px 20px rgba(26,79,255,0.4);}
@@ -98,62 +92,70 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .sec-title::before{content:'';width:3px;height:18px;background:linear-gradient(to bottom,var(--blue),var(--cyan));border-radius:2px;}
 .empty-state{text-align:center;padding:50px 20px;color:rgba(255,255,255,0.3);}
 .empty-state .empty-icon{font-size:48px;display:block;margin-bottom:12px;}
-.order-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;position:relative;}
+.order-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px;}
 .order-card.pending{border-color:rgba(245,197,24,0.3);}
 .order-card.done{border-color:rgba(0,200,100,0.3);opacity:0.6;}
 .order-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
 .order-game{font-weight:800;font-size:15px;}
 .order-status{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;}
-.order-status.pending{background:rgba(245,197,24,0.15);color:var(--gold);}
-.order-status.done{background:rgba(0,200,100,0.15);color:#00c864;}
+.status-pending{background:rgba(245,197,24,0.15);color:var(--gold);}
+.status-done{background:rgba(0,200,100,0.15);color:#00c864;}
 .order-detail{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.8;}
 .order-detail span{color:rgba(255,255,255,0.8);font-weight:600;}
 .order-actions{display:flex;gap:8px;margin-top:12px;}
 .btn-done{background:rgba(0,200,100,0.12);border:1px solid rgba(0,200,100,0.3);border-radius:8px;padding:7px 14px;color:#00c864;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
-.btn-done:hover{background:rgba(0,200,100,0.2);}
 .btn-del{background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.2);border-radius:8px;padding:7px 14px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;}
 .admin-note{background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px 14px;font-size:12px;color:rgba(245,197,24,0.8);margin-bottom:16px;text-align:center;}
 
+/* TRANSFER */
+.transfer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.transfer-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 16px;text-align:center;}
+.transfer-icon{font-size:36px;margin-bottom:10px;}
+.transfer-name{font-size:15px;font-weight:800;margin-bottom:6px;color:#fff;}
+.transfer-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:12px;}
+.transfer-num-blue{background:rgba(26,79,255,0.12);border:1px solid rgba(26,79,255,0.3);border-radius:10px;padding:10px;font-family:monospace;font-size:13px;color:var(--cyan);direction:ltr;font-weight:700;}
+.transfer-num-gold{background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.3);border-radius:10px;padding:10px;font-family:monospace;font-size:13px;color:var(--gold);direction:ltr;font-weight:700;}
+.btn-copy-blue{margin-top:10px;width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:10px;padding:9px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-copy-gold{margin-top:10px;width:100%;background:linear-gradient(135deg,#b8860b,#daa520);border:none;border-radius:10px;padding:9px;color:#000;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;}
+
 /* SUPPORT */
 .support-wa{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,rgba(37,211,102,0.1),rgba(37,211,102,0.04));border:1px solid rgba(37,211,102,0.25);border-radius:18px;padding:20px;margin-bottom:16px;cursor:pointer;text-decoration:none;color:inherit;transition:.3s;}
-.support-wa:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(37,211,102,0.2);}
-.wa-icon{width:52px;height:52px;min-width:52px;background:#25d366;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 20px rgba(37,211,102,0.4);}
+.support-wa:hover{transform:translateY(-3px);}
+.wa-icon{width:52px;height:52px;min-width:52px;background:#25d366;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;}
 .wa-info h3{font-size:16px;font-weight:800;margin-bottom:3px;}
 .wa-info p{font-size:12px;color:rgba(255,255,255,0.45);}
-.wa-num{margin-right:auto;font-size:13px;color:#25d366;font-weight:700;direction:ltr;font-family:monospace;}
-.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .info-c{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
 .info-c .ic{font-size:26px;margin-bottom:8px;}
 .info-c p{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;}
 
 /* TOAST */
-.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2540;border:1px solid var(--cyan);border-radius:12px;padding:12px 22px;font-size:14px;font-weight:600;color:var(--cyan);z-index:300;opacity:0;transition:.4s;white-space:nowrap;pointer-events:none;}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a2540;border:1px solid var(--cyan);border-radius:12px;padding:12px 22px;font-size:14px;font-weight:600;color:var(--cyan);z-index:300;opacity:0;transition:.4s;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-@media(max-width:420px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.hero-na-big{font-size:40px;}.wa-num{display:none;}}
+@media(max-width:420px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.hero-na-big{font-size:40px;}.transfer-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<div class="bg-fx"><div class="crack"></div></div>
+<div class="bg-fx"></div>
 
-<!-- ═══ LOGIN ═══ -->
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <div class="login-logo">
       <div class="logo-na">NA</div>
       <div class="logo-name">NOVA STORE</div>
     </div>
-    <div class="err" id="errMsg">اسم المستخدم أو كلمة المرور غير صحيحة</div>
+    <div class="err" id="errMsg">يرجى إدخال اسم المستخدم وكلمة المرور</div>
     <input class="inp" id="uIn" type="text" placeholder="اسم المستخدم">
     <input class="inp" id="pIn" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')login()">
     <button class="btn-blue" onclick="login()">دخول إلى المتجر ←</button>
   </div>
 </div>
 
-<!-- ═══ APP ═══ -->
+<!-- APP -->
 <div id="app">
-  <!-- Top nav -->
   <div class="top-nav">
     <div class="nav-brand">
       <div>
@@ -168,10 +170,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     </div>
   </div>
 
-  <!-- Content -->
   <div class="content">
 
-    <!-- ── SECTION 1: الشحن ── -->
+    <!-- قسم الشحن -->
     <div class="section active" id="secCharge">
       <div class="hero-banner">
         <div class="hero-na-big">NA</div>
@@ -184,7 +185,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
       <!-- FREE FIRE -->
       <div class="game-card">
         <div class="game-header ff">
-          <div class="game-img">🔥</div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Garena_Free_Fire_logo.png/320px-Garena_Free_Fire_logo.png" alt="Free Fire">
         </div>
         <div class="game-body">
           <div class="game-title">Free Fire — فري فاير</div>
@@ -198,7 +199,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             <div class="pkg-item" data-a="5600 ألماس" data-p="$49.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 5600</span><span class="pkg-price">$49.99</span></div>
           </div>
           <div class="id-row">
-            <input class="inp" id="ffId" placeholder="أدخل معرّف حساب Free Fire" type="text">
+            <input class="inp" id="ffId" placeholder="أدخل معرّف حساب Free Fire">
             <button class="btn-charge" onclick="submitOrder('ff')">⚡ شحن</button>
           </div>
         </div>
@@ -207,7 +208,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
       <!-- PUBG -->
       <div class="game-card">
         <div class="game-header pubg">
-          <div class="game-img">🐔</div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/PUBG_Mobile_Logo.png/320px-PUBG_Mobile_Logo.png" alt="PUBG Mobile">
         </div>
         <div class="game-body">
           <div class="game-title">PUBG Mobile — ببجي موبايل</div>
@@ -221,21 +222,52 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             <div class="pkg-item" data-a="6000 UC" data-p="$99.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 6000 UC</span><span class="pkg-price">$99.99</span></div>
           </div>
           <div class="id-row">
-            <input class="inp" id="pubgId" placeholder="أدخل معرّف حساب PUBG" type="text">
+            <input class="inp" id="pubgId" placeholder="أدخل معرّف حساب PUBG">
             <button class="btn-charge pubg-btn" onclick="submitOrder('pubg')">⚡ شحن</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── SECTION 2: الطلبات ── -->
+    <!-- قسم الطلبات -->
     <div class="section" id="secOrders">
       <div class="sec-title">الطلبات المعلقة والجارية</div>
       <div id="adminNote" class="admin-note" style="display:none">🔑 أنت مسجل كمالك — يمكنك رؤية جميع الطلبات وإدارتها</div>
       <div id="ordersList"></div>
     </div>
 
-    <!-- ── SECTION 3: الدعم ── -->
+    <!-- قسم التحويل -->
+    <div class="section" id="secTransfer">
+      <div class="sec-title">طرق التحويل</div>
+      <div style="background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:14px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:rgba(255,255,255,0.5);text-align:center;">
+        📌 حول المبلغ ثم أرسل صورة الإيصال على الواتساب
+      </div>
+      <div class="transfer-grid">
+        <div class="transfer-card">
+          <div class="transfer-icon">📱</div>
+          <div class="transfer-name">ليبيانا</div>
+          <div class="transfer-sub">للتحويل عبر ليبيانا</div>
+          <div class="transfer-num-blue">+218 92 636 4857</div>
+          <button class="btn-copy-blue" onclick="copyNum('+218926364857')">نسخ الرقم 📋</button>
+        </div>
+        <div class="transfer-card">
+          <div class="transfer-icon">📲</div>
+          <div class="transfer-name">المدار</div>
+          <div class="transfer-sub">للتحويل عبر المدار</div>
+          <div class="transfer-num-gold">+218 93 497 9712</div>
+          <button class="btn-copy-gold" onclick="copyNum('+218934979712')">نسخ الرقم 📋</button>
+        </div>
+      </div>
+      <a class="support-wa" href="https://wa.me/218926364857" target="_blank">
+        <div class="wa-icon">💬</div>
+        <div class="wa-info">
+          <h3>أرسل إيصال التحويل</h3>
+          <p>بعد التحويل أرسل الإيصال على واتساب</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- قسم الدعم -->
     <div class="section" id="secSupport">
       <div class="sec-title">الدعم الفني</div>
       <a class="support-wa" href="https://wa.me/218926364857" target="_blank">
@@ -244,7 +276,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
           <h3>الدعم عبر واتساب</h3>
           <p>نرد على استفساراتك في أسرع وقت</p>
         </div>
-        <div class="wa-num">+218 926 364 857</div>
       </a>
       <div class="info-cards">
         <div class="info-c"><div class="ic">⚡</div><p>شحن فوري بعد تأكيد الدفع</p></div>
@@ -259,52 +290,34 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
   </div>
 
-  <!-- Bottom tabs -->
+  <!-- TABS -->
   <div class="tabs">
-    <button class="tab active" onclick="goTab(0)" id="tab0">
-      <span class="tab-icon">⚡</span>الشحن
-    </button>
-    <button class="tab" onclick="goTab(1)" id="tab1">
-      <span class="tab-icon">📋</span>طلباتي
-      <span class="tab-badge" id="orderBadge">0</span>
-    </button>
-    <button class="tab" onclick="goTab(2)" id="tab2">
-      <span class="tab-icon">💬</span>الدعم
-    </button>
+    <button class="tab active" onclick="goTab(0)" id="tab0"><span class="tab-icon">⚡</span>الشحن</button>
+    <button class="tab" onclick="goTab(1)" id="tab1"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
+    <button class="tab" onclick="goTab(2)" id="tab2"><span class="tab-icon">💸</span>التحويل</button>
+    <button class="tab" onclick="goTab(3)" id="tab3"><span class="tab-icon">💬</span>الدعم</button>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── USERS ──
-const USERS = {
-  admin:  {pass:'nova2026', isOwner:true},
-  user:   {pass:'1234',     isOwner:false},
-  player: {pass:'0000',     isOwner:false}
-};
-
+const OWNER = {user:'NovaAdmin', pass:'Nova@9999'};
 let curUser = null;
-let orders = JSON.parse(localStorage.getItem('ns_orders')||'[]');
-
-function saveOrders(){ localStorage.setItem('ns_orders', JSON.stringify(orders)); }
+let orders = [];
+try { orders = JSON.parse(localStorage.getItem('ns_orders')||'[]'); } catch(e){ orders=[]; }
+function saveOrders(){ try{ localStorage.setItem('ns_orders',JSON.stringify(orders)); }catch(e){} }
 
 function login(){
   const u = document.getElementById('uIn').value.trim();
   const p = document.getElementById('pIn').value;
   const err = document.getElementById('errMsg');
-  if(!u || !p){ 
-    err.classList.remove('show');
-    void err.offsetWidth;
+  if(!u || !p){
     err.classList.add('show');
-    err.textContent = 'يرجى إدخال اسم المستخدم وكلمة المرور';
     return;
   }
-  // المالك فقط يحتاج كلمة مرور صحيحة
-  const isOwner = (u === 'NovaAdmin' && p === 'Nova@9999');
-  curUser = {name:u, isOwner};
   err.classList.remove('show');
+  curUser = {name:u, isOwner:(u===OWNER.user && p===OWNER.pass)};
   document.getElementById('loginPage').classList.add('hidden');
   document.getElementById('app').classList.add('show');
   document.getElementById('navU').textContent = 'مرحباً، '+u;
@@ -320,8 +333,7 @@ function logout(){
   document.getElementById('pIn').value='';
 }
 
-// ── TABS ──
-const sections=['secCharge','secOrders','secSupport'];
+const sections=['secCharge','secOrders','secTransfer','secSupport'];
 function goTab(i){
   sections.forEach((s,j)=>{
     document.getElementById(s).classList.toggle('active',j===i);
@@ -330,7 +342,6 @@ function goTab(i){
   if(i===1) renderOrders();
 }
 
-// ── PACKAGES ──
 const sel={ff:null,pubg:null};
 function selPkg(el,game){
   document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));
@@ -338,73 +349,51 @@ function selPkg(el,game){
   sel[game]={amount:el.dataset.a, price:el.dataset.p};
 }
 
-// ── SUBMIT ORDER ──
 function submitOrder(game){
   if(!sel[game]){showToast('❗ اختر كمية الشحن أولاً');return;}
-  const idEl = document.getElementById(game+'Id');
-  const uid = idEl.value.trim();
+  const idEl=document.getElementById(game+'Id');
+  const uid=idEl.value.trim();
   if(!uid){showToast('❗ أدخل معرّف الحساب');return;}
-
-  const gameName = game==='ff'?'Free Fire':'PUBG Mobile';
+  const gameName=game==='ff'?'Free Fire':'PUBG Mobile';
   const {amount,price}=sel[game];
-
-  // Save order
-  const order = {
-    id: Date.now(),
-    user: curUser.name,
-    game: gameName,
-    amount, price, uid,
-    time: new Date().toLocaleString('ar'),
-    status:'pending'
-  };
+  const order={id:Date.now(),user:curUser.name,game:gameName,amount,price,uid,time:new Date().toLocaleString('ar'),status:'pending'};
   orders.push(order);
   saveOrders();
   updateBadge();
 
-  // Telegram auto-send
-  const BOT_TOKEN = '8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
-  const CHAT_ID = '8835257002';
-  const tgMsg = 'طلب شحن جديد - NOVA STORE\n\nاللعبة: ' + gameName + '\nالكمية: ' + amount + '\nالسعر: ' + price + '\nمعرف الحساب: ' + uid + '\nالزبون: ' + curUser.name + '\nالوقت: ' + new Date().toLocaleString('ar');
-  fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '&text=' + encodeURIComponent(tgMsg))
-    .then(r=>r.json()).then(d=>{ if(!d.ok) showToast('⚠️ خطأ في إرسال التيليغرام'); })
-    .catch(()=>showToast('⚠️ تعذر الاتصال بتيليغرام'));
+  const BOT_TOKEN='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
+  const CHAT_ID='8835257002';
+  const tgMsg='طلب شحن جديد - NOVA STORE\n\nاللعبة: '+gameName+'\nالكمية: '+amount+'\nالسعر: '+price+'\nمعرف الحساب: '+uid+'\nالزبون: '+curUser.name+'\nالوقت: '+new Date().toLocaleString('ar');
+  fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+encodeURIComponent(tgMsg))
+    .then(r=>r.json()).then(d=>{ if(d.ok) showToast('✅ تم إرسال الطلب بنجاح!'); else showToast('✅ تم حفظ الطلب'); })
+    .catch(()=>showToast('✅ تم حفظ الطلب'));
 
-  showToast('✅ تم إرسال الطلب! سيتم التواصل معك قريباً');
   idEl.value='';
   document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));
   sel[game]=null;
 }
 
-// ── RENDER ORDERS ──
 function renderOrders(){
-  const list = document.getElementById('ordersList');
-  const note = document.getElementById('adminNote');
-  note.style.display = curUser?.isOwner ? 'block':'none';
-
-  const visible = curUser?.isOwner
-    ? orders
-    : orders.filter(o=>o.user===curUser?.name);
-
-  const pending = visible.filter(o=>o.status==='pending');
-
+  const list=document.getElementById('ordersList');
+  const note=document.getElementById('adminNote');
+  note.style.display=curUser&&curUser.isOwner?'block':'none';
+  const visible=curUser&&curUser.isOwner?orders:orders.filter(o=>o.user===curUser.name);
   if(visible.length===0){
-    list.innerHTML=`<div class="empty-state"><span class="empty-icon">📭</span><p>لا توجد طلبات بعد</p></div>`;
+    list.innerHTML='<div class="empty-state"><span class="empty-icon">📭</span><p>لا توجد طلبات بعد</p></div>';
     return;
   }
-
-  list.innerHTML = visible.map(o=>`
-    <div class="order-card ${o.status}" id="oc_${o.id}">
+  list.innerHTML=visible.map(o=>`
+    <div class="order-card ${o.status}">
       <div class="order-top">
         <div class="order-game">${o.game}</div>
-        <div class="order-status ${o.status}">${o.status==='pending'?'⏳ قيد الانتظار':'✅ مكتمل'}</div>
+        <div class="order-status ${o.status==='pending'?'status-pending':'status-done'}">${o.status==='pending'?'⏳ قيد الانتظار':'✅ مكتمل'}</div>
       </div>
       <div class="order-detail">
         الكمية: <span>${o.amount}</span> — السعر: <span>${o.price}</span><br>
-        معرّف: <span>${o.uid}</span> — طُلب بواسطة: <span>${o.user}</span><br>
+        معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>
         الوقت: <span>${o.time}</span>
       </div>
-      ${curUser?.isOwner ? `
-      <div class="order-actions">
+      ${curUser&&curUser.isOwner?`<div class="order-actions">
         ${o.status==='pending'?`<button class="btn-done" onclick="markDone(${o.id})">✅ تم الشحن</button>`:''}
         <button class="btn-del" onclick="deleteOrder(${o.id})">🗑 حذف</button>
       </div>`:''}
@@ -416,23 +405,19 @@ function markDone(id){
   const o=orders.find(x=>x.id===id);
   if(o){o.status='done';saveOrders();renderOrders();updateBadge();showToast('✅ تم تمييز الطلب كمكتمل');}
 }
-
 function deleteOrder(id){
   orders=orders.filter(x=>x.id!==id);
   saveOrders();renderOrders();updateBadge();showToast('🗑 تم حذف الطلب');
 }
-
 function updateBadge(){
-  const pending = orders.filter(o=>{
-    if(curUser?.isOwner) return o.status==='pending';
-    return o.user===curUser?.name && o.status==='pending';
-  }).length;
+  const pending=orders.filter(o=>curUser&&curUser.isOwner?o.status==='pending':o.user===curUser.name&&o.status==='pending').length;
   const badge=document.getElementById('orderBadge');
   badge.textContent=pending;
   badge.classList.toggle('show',pending>0);
 }
-
-// ── TOAST ──
+function copyNum(num){
+  navigator.clipboard.writeText(num).then(()=>showToast('✅ تم نسخ الرقم')).catch(()=>showToast('الرقم: '+num));
+}
 function showToast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;
@@ -441,4 +426,4 @@ function showToast(msg){
 }
 </script>
 </body>
-</html>
+                                                                                                                                      </html>
