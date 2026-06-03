@@ -20,14 +20,13 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,79,255,0.15);}
 .inp::placeholder{color:rgba(255,255,255,0.25);}
 .btn-primary{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:12px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:.3s;box-shadow:0 6px 25px rgba(26,79,255,0.4);}
-.btn-primary:hover{transform:translateY(-2px);}
 .err{background:rgba(255,60,60,0.1);border:1px solid rgba(255,60,60,0.3);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff6060;margin-bottom:14px;display:none;}
 .err.show{display:block;}
 #app{display:none;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
 #app.show{display:flex;}
 .top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;background:rgba(5,7,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
-.nav-brand .nav-na{font-size:20px;font-weight:900;color:#fff;font-style:italic;text-shadow:0 0 20px rgba(26,79,255,0.6);}
-.nav-brand .nav-sub{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);}
+.nav-na{font-size:20px;font-weight:900;color:#fff;font-style:italic;text-shadow:0 0 20px rgba(26,79,255,0.6);}
+.nav-sub{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);}
 .nav-right{display:flex;align-items:center;gap:8px;}
 .nav-wallet{background:rgba(245,197,24,0.12);border:1px solid rgba(245,197,24,0.3);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--gold);}
 .btn-out{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:rgba(255,255,255,0.4);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
@@ -53,14 +52,14 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .game-header{height:180px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
 .game-header.ff{background:#000;}
 .game-header.pubg{background:#0a1628;}
-.game-header img{width:100%;height:100%;object-fit:contain;object-position:center;}
-.game-header .no-img{font-size:60px;}
+.game-header img{width:100%;height:100%;object-fit:contain;}
+.no-img{font-size:60px;}
 .game-body{padding:18px;}
 .game-title{font-size:17px;font-weight:800;margin-bottom:3px;}
 .game-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:14px;}
 .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px;}
 .pkg-item{background:rgba(255,255,255,0.04);border:1.5px solid var(--border);border-radius:11px;padding:9px 5px;text-align:center;cursor:pointer;transition:.2s;}
-.pkg-item:hover{background:rgba(26,79,255,0.1);border-color:rgba(26,79,255,0.4);}
+.pkg-item:hover{background:rgba(26,79,255,0.1);}
 .pkg-item.sel{background:rgba(26,79,255,0.18);border-color:var(--cyan);}
 .pkg-gem{font-size:11px;font-weight:800;color:var(--gold);display:block;}
 .pkg-coin{font-size:11px;color:var(--cyan);display:block;margin-top:1px;}
@@ -68,24 +67,26 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .id-row .inp{margin-bottom:0;flex:1;}
 .btn-charge{flex-shrink:0;padding:12px 16px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
 .btn-charge.pubg-btn{background:linear-gradient(135deg,#c07000,#e09000);}
-/* WALLET */
 .wallet-card{background:linear-gradient(135deg,rgba(245,197,24,0.12),rgba(245,197,24,0.04));border:1px solid rgba(245,197,24,0.25);border-radius:20px;padding:24px 20px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
 .wallet-card::before{content:'💰';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.05;}
 .wallet-label{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
 .wallet-amount{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
 .wallet-unit{font-size:14px;color:rgba(245,197,24,0.6);margin-top:4px;}
-.recharge-title{font-size:14px;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,0.6);}
-.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;}
-.pay-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;}
-.pay-icon{font-size:30px;margin-bottom:8px;}
-.pay-name{font-size:14px;font-weight:800;margin-bottom:4px;}
-.pay-num{font-size:11px;color:rgba(255,255,255,0.4);direction:ltr;font-family:monospace;}
-.pay-btn{margin-top:10px;width:100%;padding:9px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.pay-btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
-.pay-btn-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
-/* ADMIN */
-.admin-section{background:rgba(0,200,100,0.06);border:1px solid rgba(0,200,100,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
-.admin-sec-title{font-size:14px;font-weight:800;color:var(--green);margin-bottom:14px;}
+.box{border-radius:16px;padding:18px;margin-bottom:16px;}
+.box-green{background:rgba(0,200,100,0.06);border:1px solid rgba(0,200,100,0.2);}
+.box-blue{background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.2);}
+.box-gold{background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);}
+.box-purple{background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.25);}
+.box-orange{background:rgba(200,120,0,0.08);border:1px solid rgba(200,120,0,0.25);}
+.box-title{font-size:14px;font-weight:800;margin-bottom:14px;}
+.box-title.green{color:var(--green);}
+.box-title.blue{color:var(--cyan);}
+.box-title.gold{color:var(--gold);}
+.box-title.purple{color:#a070ff;}
+.box-title.orange{color:#e09000;}
+.self-row{display:flex;gap:8px;align-items:center;}
+.self-row .inp{margin:0;flex:1;padding:11px 14px;}
+.btn-self{padding:11px 18px;background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;}
 .users-list{display:flex;flex-direction:column;gap:8px;}
 .user-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
 .user-row-top{display:flex;align-items:center;gap:10px;}
@@ -93,55 +94,70 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .user-bal-txt{color:var(--gold);font-weight:700;font-size:13px;}
 .user-btns{display:flex;gap:6px;}
 .btn-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
-.btn-withdraw{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
-.add-form{margin-top:10px;display:none;gap:8px;align-items:center;flex-wrap:wrap;}
-.add-form.show{display:flex;}
-.add-form .inp{margin:0;flex:1;min-width:80px;padding:9px 12px;font-size:13px;}
-.btn-confirm-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.btn-confirm-wd{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-/* IMG UPLOAD */
-.img-upload-section{background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
-.img-upload-title{font-size:14px;font-weight:800;color:var(--cyan);margin-bottom:14px;}
+.btn-wd{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.uform{margin-top:10px;display:none;gap:8px;align-items:center;}
+.uform.show{display:flex;}
+.uform .inp{margin:0;flex:1;padding:9px 12px;font-size:13px;}
+.btn-ca{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.btn-cw{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
 .img-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .img-upload-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .img-upload-preview{height:90px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.img-upload-preview.ff-bg{background:#000;}
-.img-upload-preview.pubg-bg{background:#0a1628;}
+.ff-bg{background:#000;}.pubg-bg{background:#0a1628;}
 .img-upload-preview img{width:100%;height:100%;object-fit:contain;}
 .no-img-sm{font-size:36px;}
 .img-upload-info{padding:10px 12px;}
 .img-upload-name{font-size:12px;font-weight:700;margin-bottom:8px;}
-.btn-upload{width:100%;padding:8px;background:rgba(26,79,255,0.2);border:1px solid rgba(26,79,255,0.3);border-radius:8px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;cursor:pointer;}
-.btn-reset-img{width:100%;padding:6px;background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.2);border-radius:8px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;margin-top:4px;}
-/* LOGOS SECTION */
-.logos-section{margin-bottom:20px;}
+.btn-ul{width:100%;padding:8px;background:rgba(26,79,255,0.2);border:1px solid rgba(26,79,255,0.3);border-radius:8px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;}
+.btn-ri{width:100%;padding:6px;background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.2);border-radius:8px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;margin-top:4px;}
+/* LOGOS */
 .logos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.logo-slot{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;aspect-ratio:1;}
-.logo-slot img{width:100%;height:100%;object-fit:contain;background:#000;}
-.logo-slot .logo-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,0.02);cursor:pointer;}
-.logo-slot .logo-empty-icon{font-size:28px;opacity:0.3;}
-.logo-slot .logo-empty-txt{font-size:10px;color:rgba(255,255,255,0.25);}
-.logo-slot .logo-num{position:absolute;top:6px;right:8px;background:rgba(0,0,0,0.6);border-radius:6px;padding:2px 6px;font-size:10px;color:rgba(255,255,255,0.4);}
-/* ADMIN LOGOS CONTROL */
-.admin-logos-section{background:rgba(245,197,24,0.06);border:1px solid rgba(245,197,24,0.2);border-radius:16px;padding:18px;margin-bottom:18px;}
-.admin-logos-title{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:14px;}
-.logos-toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
-.toggle-label{font-size:13px;font-weight:700;}
-.toggle-switch{position:relative;width:48px;height:26px;}
-.toggle-switch input{opacity:0;width:0;height:0;}
-.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.1);border-radius:26px;transition:.3s;}
-.toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
-.toggle-switch input:checked+.toggle-slider{background:var(--green);}
-.toggle-switch input:checked+.toggle-slider:before{transform:translateX(22px);}
-.admin-logos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.admin-logo-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.admin-logo-preview{height:70px;display:flex;align-items:center;justify-content:center;background:#0a0a0a;overflow:hidden;}
-.admin-logo-preview img{width:100%;height:100%;object-fit:contain;}
-.admin-logo-preview .no-logo{font-size:24px;opacity:0.3;}
-.admin-logo-info{padding:8px 10px;}
-.admin-logo-num{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;}
-.btn-logo-upload{width:100%;padding:6px;background:rgba(26,79,255,0.15);border:1px solid rgba(26,79,255,0.25);border-radius:7px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
-.btn-logo-del{width:100%;padding:5px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.15);border-radius:7px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:10px;cursor:pointer;margin-top:3px;}
+.logo-slot{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;}
+.logo-slot-img{width:100%;aspect-ratio:1;object-fit:contain;background:#000;display:block;}
+.logo-slot-empty{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.logo-slot-info{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;}
+.logo-price-normal{font-size:14px;font-weight:800;color:var(--gold);}
+.logo-price-discount{font-size:14px;font-weight:800;color:var(--green);}
+.old-price{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:line-through;display:block;}
+.badge-discount{position:absolute;top:8px;right:8px;background:var(--green);color:#000;border-radius:8px;padding:2px 7px;font-size:10px;font-weight:800;}
+.badge-num{position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.6);color:rgba(255,255,255,0.5);border-radius:6px;padding:2px 6px;font-size:10px;}
+.btn-buy{padding:7px 14px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:8px;color:#fff;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
+.btn-buy.dis{background:linear-gradient(135deg,var(--green),#00a050);}
+/* ADMIN LOGOS */
+.al-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.al-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.al-prev{height:70px;display:flex;align-items:center;justify-content:center;background:#0a0a0a;overflow:hidden;}
+.al-prev img{width:100%;height:100%;object-fit:contain;}
+.al-info{padding:8px 10px;}
+.al-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.al-num{font-size:10px;color:rgba(255,255,255,0.4);}
+.dtoggle{font-size:10px;padding:2px 8px;border:1px solid rgba(0,200,100,0.4);border-radius:6px;background:transparent;color:rgba(0,200,100,0.7);cursor:pointer;font-family:'Tajawal',sans-serif;}
+.dtoggle.on{background:rgba(0,200,100,0.2);color:var(--green);border-color:var(--green);}
+.btn-lu{width:100%;padding:6px;background:rgba(26,79,255,0.15);border:1px solid rgba(26,79,255,0.25);border-radius:7px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+.btn-ld{width:100%;padding:5px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.15);border-radius:7px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:10px;cursor:pointer;margin-top:3px;}
+/* SETTINGS */
+.setting-box{border-radius:16px;padding:18px;margin-bottom:16px;}
+.price-row-s{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.price-row-s label{font-size:12px;color:rgba(255,255,255,0.5);flex:1;}
+.pinp{width:75px;background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:8px;padding:7px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;}
+.pinp:focus{border-color:var(--gold);}
+.btn-save{width:100%;padding:10px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;margin-top:8px;}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.tsw{position:relative;width:48px;height:26px;}
+.tsw input{opacity:0;width:0;height:0;}
+.tsl{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.1);border-radius:26px;transition:.3s;}
+.tsl:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
+.tsw input:checked+.tsl{background:var(--green);}
+.tsw input:checked+.tsl:before{transform:translateX(22px);}
+/* PAY */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;}
+.pay-icon{font-size:30px;margin-bottom:8px;}
+.pay-name{font-size:14px;font-weight:800;margin-bottom:4px;}
+.pay-num{font-size:11px;color:rgba(255,255,255,0.4);direction:ltr;font-family:monospace;}
+.pay-btn{margin-top:10px;width:100%;padding:9px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.pb-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
+.pb-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
 /* ORDERS */
 .order-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;}
 .order-card.pending{border-color:rgba(245,197,24,0.25);}
@@ -149,8 +165,8 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .order-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
 .order-game{font-weight:800;font-size:14px;}
 .o-status{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
-.o-pending{background:rgba(245,197,24,0.12);color:var(--gold);}
-.o-done{background:rgba(0,200,100,0.12);color:var(--green);}
+.o-p{background:rgba(245,197,24,0.12);color:var(--gold);}
+.o-d{background:rgba(0,200,100,0.12);color:var(--green);}
 .order-detail{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.8;}
 .order-detail span{color:rgba(255,255,255,0.8);font-weight:600;}
 .order-actions{display:flex;gap:7px;margin-top:10px;}
@@ -159,9 +175,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.25);}
 .empty-icon{font-size:44px;display:block;margin-bottom:10px;}
 .admin-note{background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.18);border-radius:10px;padding:9px 13px;font-size:12px;color:rgba(245,197,24,0.7);margin-bottom:14px;text-align:center;display:none;}
-/* SUPPORT */
 .support-wa{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(37,211,102,0.1),rgba(37,211,102,0.03));border:1px solid rgba(37,211,102,0.22);border-radius:16px;padding:18px;margin-bottom:14px;text-decoration:none;color:inherit;transition:.3s;}
-.support-wa:hover{transform:translateY(-2px);}
 .wa-icon{width:48px;height:48px;min-width:48px;background:#25d366;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;}
 .wa-info h3{font-size:15px;font-weight:800;margin-bottom:2px;}
 .wa-info p{font-size:11px;color:rgba(255,255,255,0.4);}
@@ -169,23 +183,20 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .info-c{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center;}
 .info-c .ic{font-size:24px;margin-bottom:6px;}
 .info-c p{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;}
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;}
-.modal-overlay.open{display:flex;animation:fadeIn .3s ease;}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-sheet{background:#0d1228;border:1px solid var(--border);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:500px;animation:slideUp .3s ease;position:relative;}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-close-btn{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;width:30px;height:30px;color:#fff;cursor:pointer;font-size:14px;}
+.modal-overlay.open{display:flex;}
+.modal-sheet{background:#0d1228;border:1px solid var(--border);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:500px;position:relative;}
+.mcb{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;width:30px;height:30px;color:#fff;cursor:pointer;font-size:14px;}
 .modal-title{font-size:17px;font-weight:800;margin-bottom:4px;}
 .modal-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:18px;}
-.transfer-info-box{background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;}
+.tib{background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;}
 .inp-label{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px;display:block;}
-.btn-transfer{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
-.btn-transfer-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
-.btn-transfer-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+.btn-tr{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+.btn-tr-b{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
+.btn-tr-g{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
 .toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(16px);background:#111d35;border:1px solid var(--cyan);border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;color:var(--cyan);z-index:400;opacity:0;transition:.35s;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-@media(max-width:400px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.pay-methods{grid-template-columns:1fr;}.img-upload-grid{grid-template-columns:1fr;}.logos-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:400px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.pay-methods{grid-template-columns:1fr;}.logos-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
@@ -206,10 +217,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 <!-- APP -->
 <div id="app">
   <div class="top-nav">
-    <div class="nav-brand">
-      <div class="nav-na">NA</div>
-      <div class="nav-sub">NOVA STORE</div>
-    </div>
+    <div><div class="nav-na">NA</div><div class="nav-sub">NOVA STORE</div></div>
     <div class="nav-right">
       <div class="nav-wallet" id="navWallet">🪙 0.00 NC</div>
       <button class="btn-out" onclick="logout()">خروج</button>
@@ -218,32 +226,19 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 
   <div class="content">
 
-    <!-- ── الشحن ── -->
-    <div class="section active" id="secCharge">
+    <!-- الشحن -->
+    <div class="section active" id="s0">
       <div class="hero-banner">
         <div class="hero-na">NA</div>
-        <div class="hero-text">
-          <h2>شحن <span>فوري</span> بأفضل الأسعار</h2>
-          <p>فري فاير • ببجي موبايل | بالنوفا كوين</p>
-        </div>
+        <div class="hero-text"><h2>شحن <span>فوري</span> بأفضل الأسعار</h2><p>فري فاير • ببجي موبايل | بالنوفا كوين</p></div>
       </div>
       <div class="game-card">
         <div class="game-header ff"><img id="ffImg" src="" style="display:none"><div class="no-img" id="ffNoImg">🔥</div></div>
         <div class="game-body">
           <div class="game-title">Free Fire — فري فاير</div>
           <div class="game-sub">اشحن ألماس فري فاير 💎</div>
-          <div class="pkg-grid" id="ffPkgs">
-            <div class="pkg-item" data-a="100 ألماس" data-c="0.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 100</span><span class="pkg-coin">0.99 NC</span></div>
-            <div class="pkg-item" data-a="200 ألماس" data-c="1.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 200</span><span class="pkg-coin">1.99 NC</span></div>
-            <div class="pkg-item" data-a="500 ألماس" data-c="4.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 500</span><span class="pkg-coin">4.99 NC</span></div>
-            <div class="pkg-item" data-a="1000 ألماس" data-c="9.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 1000</span><span class="pkg-coin">9.99 NC</span></div>
-            <div class="pkg-item" data-a="2000 ألماس" data-c="19.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 2000</span><span class="pkg-coin">19.99 NC</span></div>
-            <div class="pkg-item" data-a="5600 ألماس" data-c="49.99" onclick="selPkg(this,'ff')"><span class="pkg-gem">💎 5600</span><span class="pkg-coin">49.99 NC</span></div>
-          </div>
-          <div class="id-row">
-            <input class="inp" id="ffId" placeholder="أدخل معرّف حساب Free Fire">
-            <button class="btn-charge" onclick="submitOrder('ff')">⚡ شحن</button>
-          </div>
+          <div class="pkg-grid" id="ffPkgs"></div>
+          <div class="id-row"><input class="inp" id="ffId" placeholder="أدخل معرّف حساب Free Fire"><button class="btn-charge" onclick="doOrder('ff')">⚡ شحن</button></div>
         </div>
       </div>
       <div class="game-card">
@@ -251,422 +246,387 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         <div class="game-body">
           <div class="game-title">PUBG Mobile — ببجي موبايل</div>
           <div class="game-sub">اشحن UC ببجي موبايل 🟡</div>
-          <div class="pkg-grid" id="pubgPkgs">
-            <div class="pkg-item" data-a="60 UC" data-c="0.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 60</span><span class="pkg-coin">0.99 NC</span></div>
-            <div class="pkg-item" data-a="300 UC" data-c="4.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 300</span><span class="pkg-coin">4.99 NC</span></div>
-            <div class="pkg-item" data-a="600 UC" data-c="9.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 600</span><span class="pkg-coin">9.99 NC</span></div>
-            <div class="pkg-item" data-a="1500 UC" data-c="24.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 1500</span><span class="pkg-coin">24.99 NC</span></div>
-            <div class="pkg-item" data-a="3000 UC" data-c="49.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 3000</span><span class="pkg-coin">49.99 NC</span></div>
-            <div class="pkg-item" data-a="6000 UC" data-c="99.99" onclick="selPkg(this,'pubg')"><span class="pkg-gem">🟡 6000</span><span class="pkg-coin">99.99 NC</span></div>
-          </div>
-          <div class="id-row">
-            <input class="inp" id="pubgId" placeholder="أدخل معرّف حساب PUBG">
-            <button class="btn-charge pubg-btn" onclick="submitOrder('pubg')">⚡ شحن</button>
-          </div>
+          <div class="pkg-grid" id="pubgPkgs"></div>
+          <div class="id-row"><input class="inp" id="pubgId" placeholder="أدخل معرّف حساب PUBG"><button class="btn-charge pubg-btn" onclick="doOrder('pubg')">⚡ شحن</button></div>
         </div>
       </div>
     </div>
 
-    <!-- ── المحفظة ── -->
-    <div class="section" id="secWallet">
+    <!-- المحفظة -->
+    <div class="section" id="s1">
       <div class="wallet-card">
         <div class="wallet-label">رصيدك الحالي</div>
         <div class="wallet-amount" id="walletDisplay">0.00</div>
         <div class="wallet-unit">🪙 Nova Coin (NC)</div>
       </div>
-      <!-- ADMIN: إدارة المحافظ -->
-      <div class="admin-section" id="adminWalletSection" style="display:none">
-        <div class="admin-sec-title">🔑 إدارة محافظ المستخدمين</div>
+      <div class="box box-green" id="adminSelfBox" style="display:none">
+        <div class="box-title green">🔑 شحن رصيدك الخاص</div>
+        <div class="self-row"><input class="inp" id="selfAmt" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btn-self" onclick="selfAdd()">+ إضافة</button></div>
+      </div>
+      <div class="box box-green" id="adminUsersBox" style="display:none">
+        <div class="box-title green">👥 إدارة محافظ المستخدمين</div>
         <div class="users-list" id="usersList"></div>
       </div>
-      <!-- ADMIN: رفع صور الألعاب -->
-      <div class="img-upload-section" id="imgUploadSection" style="display:none">
-        <div class="img-upload-title">🖼️ تخصيص صور الألعاب</div>
+      <div class="box box-blue" id="adminImgBox" style="display:none">
+        <div class="box-title blue">🖼️ تخصيص صور الألعاب</div>
         <div class="img-upload-grid">
           <div class="img-upload-card">
-            <div class="img-upload-preview ff-bg"><img id="ffPreviewImg" src="" style="display:none"><div class="no-img-sm" id="ffPreviewIcon">🔥</div></div>
-            <div class="img-upload-info">
-              <div class="img-upload-name">Free Fire</div>
-              <input type="file" id="ffFile" accept="image/*" style="display:none" onchange="uploadImg('ff',this)">
-              <button class="btn-upload" onclick="document.getElementById('ffFile').click()">📤 رفع صورة</button>
-              <button class="btn-reset-img" onclick="resetImg('ff')">🗑 حذف</button>
+            <div class="img-upload-preview ff-bg"><img id="ffPrev" src="" style="display:none"><div class="no-img-sm" id="ffPrevIcon">🔥</div></div>
+            <div class="img-upload-info"><div class="img-upload-name">Free Fire</div>
+              <input type="file" id="ffFile" accept="image/*" style="display:none" onchange="upImg('ff',this)">
+              <button class="btn-ul" onclick="document.getElementById('ffFile').click()">📤 رفع</button>
+              <button class="btn-ri" onclick="resetImg('ff')">🗑 حذف</button>
             </div>
           </div>
           <div class="img-upload-card">
-            <div class="img-upload-preview pubg-bg"><img id="pubgPreviewImg" src="" style="display:none"><div class="no-img-sm" id="pubgPreviewIcon">🐔</div></div>
-            <div class="img-upload-info">
-              <div class="img-upload-name">PUBG Mobile</div>
-              <input type="file" id="pubgFile" accept="image/*" style="display:none" onchange="uploadImg('pubg',this)">
-              <button class="btn-upload" onclick="document.getElementById('pubgFile').click()">📤 رفع صورة</button>
-              <button class="btn-reset-img" onclick="resetImg('pubg')">🗑 حذف</button>
+            <div class="img-upload-preview pubg-bg"><img id="pubgPrev" src="" style="display:none"><div class="no-img-sm" id="pubgPrevIcon">🐔</div></div>
+            <div class="img-upload-info"><div class="img-upload-name">PUBG Mobile</div>
+              <input type="file" id="pubgFile" accept="image/*" style="display:none" onchange="upImg('pubg',this)">
+              <button class="btn-ul" onclick="document.getElementById('pubgFile').click()">📤 رفع</button>
+              <button class="btn-ri" onclick="resetImg('pubg')">🗑 حذف</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- ADMIN: إدارة اللوغوهات -->
-      <div class="admin-logos-section" id="adminLogosSection" style="display:none">
-        <div class="admin-logos-title">🎨 إدارة قسم اللوغوهات</div>
-        <div class="logos-toggle-row">
-          <span class="toggle-label">إظهار قسم اللوغوهات للزبائن</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="logosToggle" onchange="toggleLogosSection()">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-        <div class="admin-logos-grid" id="adminLogosGrid"></div>
+      <div class="box box-gold" id="adminLogosBox" style="display:none">
+        <div class="box-title gold">🎨 إدارة اللوغوهات</div>
+        <div class="toggle-row"><span style="font-size:13px;font-weight:700;">إظهار قسم اللوغوهات للزبائن</span><label class="tsw"><input type="checkbox" id="lgToggle" onchange="toggleLG()"><span class="tsl"></span></label></div>
+        <div class="al-grid" id="adminLGGrid"></div>
       </div>
-      <!-- طرق الدفع -->
-      <div class="recharge-title">💳 شحن المحفظة — اختر طريقة الدفع</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,0.6);">💳 شحن المحفظة</div>
       <div class="pay-methods">
-        <div class="pay-card">
-          <div class="pay-icon">📱</div>
-          <div class="pay-name">ليبيانا</div>
-          <div class="pay-num">+218 92 636 4857</div>
-          <button class="pay-btn pay-btn-blue" onclick="openTransfer('ليبيانا','218926364857')">تحويل ليبيانا</button>
-        </div>
-        <div class="pay-card">
-          <div class="pay-icon">📲</div>
-          <div class="pay-name">المدار</div>
-          <div class="pay-num">+218 93 497 9712</div>
-          <button class="pay-btn pay-btn-gold" onclick="openTransfer('المدار','218934979712')">تحويل المدار</button>
-        </div>
+        <div class="pay-card"><div class="pay-icon">📱</div><div class="pay-name">ليبيانا</div><div class="pay-num">+218 92 636 4857</div><button class="pay-btn pb-blue" onclick="openTr('ليبيانا','218926364857')">تحويل</button></div>
+        <div class="pay-card"><div class="pay-icon">📲</div><div class="pay-name">المدار</div><div class="pay-num">+218 93 497 9712</div><button class="pay-btn pb-gold" onclick="openTr('المدار','218934979712')">تحويل</button></div>
       </div>
-      <div style="background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.15);border-radius:12px;padding:11px 14px;margin-top:14px;font-size:12px;color:rgba(255,255,255,0.4);text-align:center;">
-        💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق
-      </div>
+      <div style="background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.15);border-radius:12px;padding:11px 14px;font-size:12px;color:rgba(255,255,255,0.4);text-align:center;">💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق</div>
     </div>
 
-    <!-- ── اللوغوهات ── -->
-    <div class="section" id="secLogos">
+    <!-- اللوغوهات -->
+    <div class="section" id="s2">
       <div class="sec-title">🎨 اللوغوهات</div>
       <div class="logos-grid" id="logosGrid"></div>
     </div>
 
-    <!-- ── الطلبات ── -->
-    <div class="section" id="secOrders">
+    <!-- الطلبات -->
+    <div class="section" id="s3">
       <div class="sec-title">الطلبات</div>
       <div class="admin-note" id="adminNote">🔑 أنت مسجل كمالك — يمكنك رؤية جميع الطلبات</div>
       <div id="ordersList"></div>
     </div>
 
-    <!-- ── الدعم ── -->
-    <div class="section" id="secSupport">
+    <!-- الإعدادات - للأدمن فقط -->
+    <div class="section" id="s4">
+      <div class="sec-title">⚙️ الإعدادات</div>
+
+      <!-- أسعار فري فاير -->
+      <div class="setting-box box-purple">
+        <div class="box-title purple">🔥 أسعار فري فاير (NC)</div>
+        <div id="ffPriceEd"></div>
+        <button class="btn-save" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#7b2fff,#4f1bb5);color:#fff;">💾 حفظ أسعار فري فاير</button>
+      </div>
+
+      <!-- أسعار ببجي -->
+      <div class="setting-box box-orange">
+        <div class="box-title orange">🐔 أسعار ببجي موبايل (NC)</div>
+        <div id="pubgPriceEd"></div>
+        <button class="btn-save" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#c07000,#e09000);color:#000;">💾 حفظ أسعار ببجي</button>
+      </div>
+
+      <!-- أسعار اللوغوهات -->
+      <div class="setting-box box-gold">
+        <div class="box-title gold">🎨 أسعار اللوغوهات (دينار)</div>
+        <div class="price-row-s"><label>السعر العادي</label><input class="pinp" id="lpN" type="number" min="0" step="0.5"><span style="font-size:12px;color:rgba(255,255,255,0.4);">د.ل</span></div>
+        <div class="price-row-s"><label>سعر الخصم</label><input class="pinp" id="lpD" type="number" min="0" step="0.5"><span style="font-size:12px;color:rgba(255,255,255,0.4);">د.ل</span></div>
+        <button class="btn-save" onclick="saveLP()" style="background:linear-gradient(135deg,var(--gold),#e0aa00);color:#000;">💾 حفظ أسعار اللوغوهات</button>
+      </div>
+
+      <!-- إظهار اللوغوهات -->
+      <div class="setting-box box-green">
+        <div class="box-title green">👁️ إعدادات الأقسام</div>
+        <div class="toggle-row"><span style="font-size:13px;font-weight:700;">إظهار قسم اللوغوهات للزبائن</span><label class="tsw"><input type="checkbox" id="lgToggle2" onchange="toggleLG2()"><span class="tsl"></span></label></div>
+      </div>
+    </div>
+
+    <!-- الدعم -->
+    <div class="section" id="s5">
       <div class="sec-title">الدعم الفني</div>
-      <a class="support-wa" href="https://wa.me/218926364857" target="_blank">
-        <div class="wa-icon">💬</div>
-        <div class="wa-info"><h3>الدعم عبر واتساب</h3><p>نرد على استفساراتك في أسرع وقت</p></div>
-      </a>
+      <a class="support-wa" href="https://wa.me/218926364857" target="_blank"><div class="wa-icon">💬</div><div class="wa-info"><h3>الدعم عبر واتساب</h3><p>نرد في أسرع وقت</p></div></a>
       <div class="info-grid">
-        <div class="info-c"><div class="ic">⚡</div><p>شحن فوري بعد تأكيد الرصيد</p></div>
-        <div class="info-c"><div class="ic">🔒</div><p>معاملاتك آمنة 100%</p></div>
-        <div class="info-c"><div class="ic">🪙</div><p>ادفع بالنوفا كوين بسهولة</p></div>
-        <div class="info-c"><div class="ic">🕐</div><p>دعم فني على مدار اليوم</p></div>
+        <div class="info-c"><div class="ic">⚡</div><p>شحن فوري</p></div>
+        <div class="info-c"><div class="ic">🔒</div><p>معاملات آمنة</p></div>
+        <div class="info-c"><div class="ic">🪙</div><p>نوفا كوين</p></div>
+        <div class="info-c"><div class="ic">🕐</div><p>دعم 24/7</p></div>
       </div>
       <div style="text-align:center;margin-top:24px;color:rgba(255,255,255,0.18);font-size:11px;">© 2026 <span style="color:var(--cyan)">NOVA STORE</span></div>
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs" id="tabsBar">
-    <button class="tab active" onclick="goTab(0)" id="tab0"><span class="tab-icon">⚡</span>الشحن</button>
-    <button class="tab" onclick="goTab(1)" id="tab1"><span class="tab-icon">🪙</span>المحفظة</button>
-    <button class="tab" onclick="goTab(2)" id="tab2" style="display:none"><span class="tab-icon">🎨</span>لوغوهات</button>
-    <button class="tab" onclick="goTab(3)" id="tab3"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
-    <button class="tab" onclick="goTab(4)" id="tab4"><span class="tab-icon">💬</span>الدعم</button>
+  <div class="tabs">
+    <button class="tab active" onclick="goTab(0)" id="t0"><span class="tab-icon">⚡</span>الشحن</button>
+    <button class="tab" onclick="goTab(1)" id="t1"><span class="tab-icon">🪙</span>المحفظة</button>
+    <button class="tab" onclick="goTab(2)" id="t2" style="display:none"><span class="tab-icon">🎨</span>لوغوهات</button>
+    <button class="tab" onclick="goTab(3)" id="t3"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
+    <button class="tab" onclick="goTab(4)" id="t4" style="display:none"><span class="tab-icon">⚙️</span>إعدادات</button>
+    <button class="tab" onclick="goTab(5)" id="t5"><span class="tab-icon">💬</span>الدعم</button>
   </div>
 </div>
 
-<!-- Transfer Modal -->
-<div class="modal-overlay" id="modalOverlay">
+<!-- Modal -->
+<div class="modal-overlay" id="modalOv">
   <div class="modal-sheet">
-    <button class="modal-close-btn" onclick="closeModal()">✕</button>
-    <div class="modal-title" id="modalTitle">تحويل</div>
+    <button class="mcb" onclick="closeTr()">✕</button>
+    <div class="modal-title" id="mTitle">تحويل</div>
     <div class="modal-sub">أدخل تفاصيل التحويل لشحن محفظتك</div>
-    <div class="transfer-info-box">حوّل إلى: <strong id="modalNum" style="color:var(--cyan)"></strong><br><span style="font-size:11px;">1 نوفا كوين = $1 = 10 دينار ليبي</span></div>
+    <div class="tib">حوّل إلى: <strong id="mNum" style="color:var(--cyan)"></strong><br><span style="font-size:11px;">1 نوفا كوين = $1 = 10 دينار ليبي</span></div>
     <span class="inp-label">رقم الهاتف المحوَّل منه</span>
-    <input class="inp" id="fromPhone" placeholder="مثال: 0912345678" style="margin-bottom:12px;">
-    <span class="inp-label">المبلغ المراد تحويله (بالدينار الليبي)</span>
-    <input class="inp" id="transferAmount" type="number" placeholder="مثال: 50" style="margin-bottom:12px;" oninput="calcCoins()">
-    <div id="coinsPreview" style="background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:16px;display:none;">ستحصل على: <strong id="coinsResult">0</strong> 🪙 نوفا كوين</div>
-    <button class="btn-transfer" id="btnTransfer" onclick="submitTransfer()">إرسال طلب التحويل</button>
+    <input class="inp" id="trPhone" placeholder="مثال: 0912345678" style="margin-bottom:12px;">
+    <span class="inp-label">المبلغ بالدينار الليبي</span>
+    <input class="inp" id="trAmt" type="number" placeholder="مثال: 50" style="margin-bottom:12px;" oninput="calcNC()">
+    <div id="ncPrev" style="background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:16px;display:none;">ستحصل على: <strong id="ncRes">0</strong> 🪙 نوفا كوين</div>
+    <button class="btn-tr" id="btnTr" onclick="submitTr()">إرسال طلب التحويل</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const OWNER={user:'NovaAdmin',pass:'Nova@9999'};
-const BOT_TOKEN='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
-const CHAT_ID='8835257002';
-const LOGOS_COUNT=10;
+const OWN={u:'NovaAdmin',p:'Nova@9999'};
+const BOT='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
+const CID='8835257002';
+const LC=10;
 
-let curUser=null,orders=[],wallets={},gameImages={ff:null,pubg:null},logoImages={},logosVisible=false,transferMethod='',transferNum='';
+let me=null,orders=[],wallets={},gImgs={ff:null,pubg:null},lImgs={},lDisc={},lgVis=false,trM='',trN='';
+let lPrices={normal:3,discount:1};
+let gPrices={
+  ff:[{a:'100 ألماس',c:0.99},{a:'200 ألماس',c:1.99},{a:'500 ألماس',c:4.99},{a:'1000 ألماس',c:9.99},{a:'2000 ألماس',c:19.99},{a:'5600 ألماس',c:49.99}],
+  pubg:[{a:'60 UC',c:0.99},{a:'300 UC',c:4.99},{a:'600 UC',c:9.99},{a:'1500 UC',c:24.99},{a:'3000 UC',c:49.99},{a:'6000 UC',c:99.99}]
+};
 
-function load(k,def){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):def;}catch(e){return def;}}
-function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function ld(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
-orders=load('ns_orders',[]);
-wallets=load('ns_wallets',{});
-gameImages=load('ns_imgs',{ff:null,pubg:null});
-logoImages=load('ns_logo_imgs',{});
-logosVisible=load('ns_logos_visible',false);
+orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});
+lImgs=ld('li',{});lDisc=ld('ld',{});lgVis=ld('lv',false);
+lPrices=ld('lp',{normal:3,discount:1});
+gPrices=ld('gp',gPrices);
 
-function getBalance(u){return parseFloat((wallets[u]||0).toFixed(2));}
-function setBalance(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));save('ns_wallets',wallets);}
+function getBal(u){return parseFloat((wallets[u]||0).toFixed(2));}
+function setBal(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));sv('w',wallets);}
 
 function login(){
   const u=document.getElementById('uIn').value.trim(),p=document.getElementById('pIn').value;
   const err=document.getElementById('errMsg');
   if(!u||!p){err.classList.add('show');return;}
   err.classList.remove('show');
-  if(wallets[u]===undefined){wallets[u]=0;save('ns_wallets',wallets);}
-  curUser={name:u,isOwner:(u===OWNER.user&&p===OWNER.pass)};
+  if(wallets[u]===undefined){wallets[u]=0;sv('w',wallets);}
+  me={n:u,own:(u===OWN.u&&p===OWN.p)};
   document.getElementById('loginPage').classList.add('hidden');
   document.getElementById('app').classList.add('show');
-  updateNavWallet();applyGameImages();buildLogosGrid();updateTabsBar();renderOrders();updateBadge();
+  updNav();applyGImgs();renderPkgs();updateTabs();renderOrders();updBadge();
 }
+function logout(){me=null;document.getElementById('loginPage').classList.remove('hidden');document.getElementById('app').classList.remove('show');document.getElementById('uIn').value='';document.getElementById('pIn').value='';}
 
-function logout(){
-  curUser=null;
-  document.getElementById('loginPage').classList.remove('hidden');
-  document.getElementById('app').classList.remove('show');
-  document.getElementById('uIn').value='';document.getElementById('pIn').value='';
-}
-
-function updateNavWallet(){
-  if(!curUser)return;
-  const b=getBalance(curUser.name);
+function updNav(){
+  if(!me)return;
+  const b=getBal(me.n);
   document.getElementById('navWallet').textContent='🪙 '+b.toFixed(2)+' NC';
   document.getElementById('walletDisplay').textContent=b.toFixed(2);
 }
 
-function applyGameImages(){
+function applyGImgs(){
   ['ff','pubg'].forEach(g=>{
-    const img=document.getElementById(g+'Img'),icon=document.getElementById(g+'NoImg'),src=gameImages[g];
-    if(src){img.src=src;img.style.display='block';icon.style.display='none';}
-    else{img.style.display='none';icon.style.display='block';}
-    const pi=document.getElementById(g+'PreviewImg'),pc=document.getElementById(g+'PreviewIcon');
+    const img=document.getElementById(g+'Img'),ic=document.getElementById(g+'NoImg'),src=gImgs[g];
+    if(src){img.src=src;img.style.display='block';ic.style.display='none';}else{img.style.display='none';ic.style.display='block';}
+    const pi=document.getElementById(g+'Prev'),pc=document.getElementById(g+'PrevIcon');
     if(pi&&pc){if(src){pi.src=src;pi.style.display='block';pc.style.display='none';}else{pi.style.display='none';pc.style.display='block';}}
   });
 }
 
-function updateTabsBar(){
-  const show=logosVisible||(curUser&&curUser.isOwner);
-  document.getElementById('tab2').style.display=show?'flex':'none';
-}
-
-// sections: 0=charge,1=wallet,2=logos,3=orders,4=support
-const sections=['secCharge','secWallet','secLogos','secOrders','secSupport'];
-function goTab(i){
-  sections.forEach((s,j)=>{
-    document.getElementById(s).classList.toggle('active',j===i);
-    document.getElementById('tab'+j).classList.toggle('active',j===i);
+function renderPkgs(){
+  ['ff','pubg'].forEach(g=>{
+    const em=g==='ff'?'💎':'🟡';
+    document.getElementById(g+'Pkgs').innerHTML=gPrices[g].map((p,i)=>`
+      <div class="pkg-item" data-i="${i}" data-g="${g}" onclick="selP(this,'${g}')">
+        <span class="pkg-gem">${em} ${p.a}</span>
+        <span class="pkg-coin">${p.c} NC</span>
+      </div>`).join('');
   });
-  if(i===1)renderWallet();
-  if(i===2)buildLogosGrid();
+}
+
+function updateTabs(){
+  const isOwn=me&&me.own;
+  document.getElementById('t2').style.display=(lgVis||isOwn)?'flex':'none';
+  document.getElementById('t4').style.display=isOwn?'flex':'none';
+}
+
+const secs=['s0','s1','s2','s3','s4','s5'];
+function goTab(i){
+  secs.forEach((s,j)=>{document.getElementById(s).classList.toggle('active',j===i);document.getElementById('t'+j).classList.toggle('active',j===i);});
+  if(i===1)rendWallet();
+  if(i===2)buildLG();
   if(i===3)renderOrders();
+  if(i===4)openSettings();
 }
 
-function renderWallet(){
-  updateNavWallet();
-  const o=curUser&&curUser.isOwner;
-  document.getElementById('adminWalletSection').style.display=o?'block':'none';
-  document.getElementById('imgUploadSection').style.display=o?'block':'none';
-  document.getElementById('adminLogosSection').style.display=o?'block':'none';
-  if(o){renderUsersList();buildAdminLogosGrid();document.getElementById('logosToggle').checked=logosVisible;}
+function rendWallet(){
+  updNav();
+  const o=me&&me.own;
+  document.getElementById('adminSelfBox').style.display=o?'block':'none';
+  document.getElementById('adminUsersBox').style.display=o?'block':'none';
+  document.getElementById('adminImgBox').style.display=o?'block':'none';
+  document.getElementById('adminLogosBox').style.display=o?'block':'none';
+  if(o){rendUsers();buildALG();document.getElementById('lgToggle').checked=lgVis;}
 }
 
-function renderUsersList(){
+function openSettings(){
+  // أسعار الألعاب
+  ['ff','pubg'].forEach(g=>{
+    const ed=document.getElementById(g+'PriceEd');
+    const em=g==='ff'?'💎':'🟡';
+    ed.innerHTML=gPrices[g].map((p,i)=>`
+      <div class="price-row-s">
+        <label>${em} ${p.a}</label>
+        <input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01">
+        <span style="font-size:11px;color:rgba(255,255,255,0.35);">NC</span>
+      </div>`).join('');
+  });
+  document.getElementById('lpN').value=lPrices.normal;
+  document.getElementById('lpD').value=lPrices.discount;
+  document.getElementById('lgToggle2').checked=lgVis;
+}
+
+function saveGP(g){
+  gPrices[g].forEach((p,i)=>{const v=parseFloat(document.getElementById(g+'pe'+i).value);if(v>0)gPrices[g][i].c=v;});
+  sv('gp',gPrices);renderPkgs();
+  showToast('✅ تم حفظ أسعار '+(g==='ff'?'فري فاير':'ببجي'));
+}
+
+function saveLP(){
+  const n=parseFloat(document.getElementById('lpN').value)||3;
+  const d=parseFloat(document.getElementById('lpD').value)||1;
+  lPrices={normal:n,discount:d};sv('lp',lPrices);
+  buildLG();showToast('✅ تم حفظ أسعار اللوغوهات');
+}
+
+function toggleLG(){lgVis=document.getElementById('lgToggle').checked;sv('lv',lgVis);updateTabs();document.getElementById('lgToggle2').checked=lgVis;showToast(lgVis?'✅ قسم اللوغوهات مرئي':'🔒 قسم اللوغوهات مخفي');}
+function toggleLG2(){lgVis=document.getElementById('lgToggle2').checked;sv('lv',lgVis);updateTabs();document.getElementById('lgToggle').checked=lgVis;showToast(lgVis?'✅ قسم اللوغوهات مرئي':'🔒 قسم اللوغوهات مخفي');}
+
+// صور الألعاب
+function upImg(g,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{gImgs[g]=e.target.result;sv('gi',gImgs);applyGImgs();showToast('✅ تم تحديث صورة '+(g==='ff'?'Free Fire':'PUBG'));};r.readAsDataURL(f);}
+function resetImg(g){gImgs[g]=null;sv('gi',gImgs);document.getElementById(g+'File').value='';applyGImgs();showToast('🗑 تم حذف الصورة');}
+
+// اللوغوهات
+function buildLG(){
+  const gr=document.getElementById('logosGrid');
+  let h='';
+  for(let i=1;i<=LC;i++){
+    const src=lImgs[i]||null,dis=lDisc[i]||false;
+    const pr=dis?lPrices.discount:lPrices.normal;
+    h+=`<div class="logo-slot"><span class="badge-num">${i}</span>`;
+    if(dis)h+=`<span class="badge-discount">🔥 خصم</span>`;
+    if(src){
+      h+=`<img class="logo-slot-img" src="${src}">
+      <div class="logo-slot-info">
+        <div class="${dis?'logo-price-discount':'logo-price-normal'}">${dis?`<span class="old-price">${lPrices.normal} د.ل</span>`:''} ${pr} د.ل</div>
+        <button class="btn-buy ${dis?'dis':''}" onclick="buyLG(${i},${pr})">شراء</button>
+      </div>`;
+    } else {
+      h+=`<div class="logo-slot-empty"><span style="font-size:28px;opacity:0.25">🖼️</span><span style="font-size:10px;color:rgba(255,255,255,0.2)">فارغ</span></div>
+      <div class="logo-slot-info"><div class="logo-price-normal">${pr} د.ل</div><button class="btn-buy" disabled style="opacity:0.3">فارغ</button></div>`;
+    }
+    h+='</div>';
+  }
+  gr.innerHTML=h;
+}
+
+function buildALG(){
+  const gr=document.getElementById('adminLGGrid');
+  let h='';
+  for(let i=1;i<=LC;i++){
+    const src=lImgs[i]||null,dis=lDisc[i]||false;
+    h+=`<div class="al-item">
+      <div class="al-prev">${src?`<img src="${src}">`:`<div style="font-size:24px;opacity:0.3">🖼️</div>`}</div>
+      <div class="al-info">
+        <div class="al-meta"><span class="al-num">لوغو ${i}</span><button class="dtoggle ${dis?'on':''}" onclick="togDisc(${i})">${dis?'🔥 خصم':'خصم؟'}</button></div>
+        <input type="file" id="lf${i}" accept="image/*" style="display:none" onchange="upLG(${i},this)">
+        <button class="btn-lu" onclick="document.getElementById('lf${i}').click()">📤 رفع</button>
+        ${src?`<button class="btn-ld" onclick="delLG(${i})">🗑 حذف</button>`:''}
+      </div>
+    </div>`;
+  }
+  gr.innerHTML=h;
+}
+
+function upLG(n,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{lImgs[n]=e.target.result;sv('li',lImgs);buildALG();buildLG();showToast('✅ تم رفع اللوغو '+n);};r.readAsDataURL(f);}
+function delLG(n){delete lImgs[n];sv('li',lImgs);buildALG();buildLG();showToast('🗑 تم حذف اللوغو '+n);}
+function togDisc(n){lDisc[n]=!lDisc[n];sv('ld',lDisc);buildALG();buildLG();showToast(lDisc[n]?'🔥 تم تفعيل خصم لوغو '+n:'تم إلغاء خصم لوغو '+n);}
+function buyLG(n,p){showToast('💬 تواصل مع الدعم لشراء لوغو '+n+' بسعر '+p+' د.ل');}
+
+// الشحن
+const sel={ff:null,pubg:null};
+function selP(el,g){document.querySelectorAll('#'+g+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');const i=parseInt(el.dataset.i);sel[g]={a:gPrices[g][i].a,c:gPrices[g][i].c};}
+function doOrder(g){
+  if(!sel[g]){showToast('❗ اختر كمية الشحن أولاً');return;}
+  const idEl=document.getElementById(g+'Id'),uid=idEl.value.trim();
+  if(!uid){showToast('❗ أدخل معرّف الحساب');return;}
+  const{a,c}=sel[g],bal=getBal(me.n);
+  if(bal<c){showToast('❌ رصيدك غير كافٍ! رصيدك: '+bal.toFixed(2)+' NC');return;}
+  setBal(me.n,bal-c);updNav();
+  const gn=g==='ff'?'Free Fire':'PUBG Mobile';
+  orders.push({id:Date.now(),user:me.n,game:gn,amount:a,cost:c,uid,time:new Date().toLocaleString('ar'),status:'pending'});
+  sv('o',orders);updBadge();
+  sendTG('🛒 طلب شحن جديد\nاللعبة: '+gn+'\nالكمية: '+a+'\nالتكلفة: '+c+' NC\nمعرف: '+uid+'\nالزبون: '+me.n);
+  showToast('✅ تم الشحن! خُصم '+c+' NC');
+  idEl.value='';document.querySelectorAll('#'+g+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));sel[g]=null;
+}
+
+// الأدمن
+function rendUsers(){
   const list=document.getElementById('usersList');
-  const users=Object.keys(wallets).filter(u=>u!==OWNER.user);
+  const users=Object.keys(wallets).filter(u=>u!==OWN.u);
   if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
   list.innerHTML=users.map(u=>`
     <div class="user-row">
       <div class="user-row-top">
-        <div>
-          <div class="user-name-txt">👤 ${u}</div>
-          <div class="user-bal-txt">🪙 ${getBalance(u).toFixed(2)} NC</div>
-        </div>
-        <div class="user-btns">
-          <button class="btn-add" onclick="toggleForm('${u}','add')">+ إضافة</button>
-          <button class="btn-withdraw" onclick="toggleForm('${u}','wd')">- سحب</button>
-        </div>
+        <div><div class="user-name-txt">👤 ${u}</div><div class="user-bal-txt">🪙 ${getBal(u).toFixed(2)} NC</div></div>
+        <div class="user-btns"><button class="btn-add" onclick="togF('${u}','a')">+ إضافة</button><button class="btn-wd" onclick="togF('${u}','w')">- سحب</button></div>
       </div>
-      <div class="add-form" id="form_${u}">
-        <input class="inp" id="amt_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01">
-        <button class="btn-confirm-add" id="btnAdd_${u}" onclick="doBalance('${u}','add')">إضافة ✓</button>
-        <button class="btn-confirm-wd" id="btnWd_${u}" onclick="doBalance('${u}','wd')" style="display:none">سحب ✓</button>
+      <div class="uform" id="uf_${u}">
+        <input class="inp" id="ua_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01">
+        <button class="btn-ca" id="bca_${u}" onclick="doB('${u}','a')">إضافة ✓</button>
+        <button class="btn-cw" id="bcw_${u}" onclick="doB('${u}','w')" style="display:none">سحب ✓</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
-
-function toggleForm(u,type){
-  const f=document.getElementById('form_'+u);
-  const ba=document.getElementById('btnAdd_'+u);
-  const bw=document.getElementById('btnWd_'+u);
-  const isOpen=f.classList.contains('show');
-  // إذا نفس النوع مفتوح، أغلق
-  if(isOpen&&((type==='add'&&ba.style.display!=='none')||(type==='wd'&&bw.style.display!=='none'))){
-    f.classList.remove('show');return;
-  }
-  f.classList.add('show');
-  if(type==='add'){ba.style.display='block';bw.style.display='none';}
-  else{ba.style.display='none';bw.style.display='block';}
-}
-
-function doBalance(u,type){
-  const amt=parseFloat(document.getElementById('amt_'+u).value);
-  if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}
-  const cur=getBalance(u);
-  if(type==='wd'&&amt>cur){showToast('❌ الرصيد غير كافٍ للسحب');return;}
-  if(type==='add')setBalance(u,cur+amt);
-  else setBalance(u,cur-amt);
-  document.getElementById('amt_'+u).value='';
-  document.getElementById('form_'+u).classList.remove('show');
-  renderUsersList();updateNavWallet();
-  const action=type==='add'?'إضافة':'سحب';
-  showToast('✅ تم '+action+' '+amt+' NC '+(type==='add'?'لـ':'من')+' '+u);
-  sendTg('💰 '+action+' رصيد\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC\nالرصيد الجديد: '+getBalance(u)+' NC');
-}
-
-// صور الألعاب
-function uploadImg(game,input){
-  const file=input.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{gameImages[game]=e.target.result;save('ns_imgs',gameImages);applyGameImages();showToast('✅ تم تحديث صورة '+(game==='ff'?'Free Fire':'PUBG'));};
-  r.readAsDataURL(file);
-}
-function resetImg(game){gameImages[game]=null;save('ns_imgs',gameImages);document.getElementById(game+'File').value='';applyGameImages();showToast('🗑 تم حذف الصورة');}
-
-// اللوغوهات - بناء شبكة الزبون
-function buildLogosGrid(){
-  const grid=document.getElementById('logosGrid');
-  let html='';
-  for(let i=1;i<=LOGOS_COUNT;i++){
-    const src=logoImages[i]||null;
-    if(src){
-      html+=`<div class="logo-slot"><span class="logo-num">${i}</span><img src="${src}" alt="logo ${i}"></div>`;
-    } else {
-      html+=`<div class="logo-slot"><span class="logo-num">${i}</span><div class="logo-empty"><span class="logo-empty-icon">🖼️</span><span class="logo-empty-txt">فارغ</span></div></div>`;
-    }
-  }
-  grid.innerHTML=html;
-}
-
-// اللوغوهات - بناء شبكة الأدمن
-function buildAdminLogosGrid(){
-  const grid=document.getElementById('adminLogosGrid');
-  let html='';
-  for(let i=1;i<=LOGOS_COUNT;i++){
-    const src=logoImages[i]||null;
-    html+=`
-      <div class="admin-logo-item">
-        <div class="admin-logo-preview">
-          ${src?`<img src="${src}" alt="logo ${i}">`:`<div class="no-logo">🖼️</div>`}
-        </div>
-        <div class="admin-logo-info">
-          <div class="admin-logo-num">لوغو ${i}</div>
-          <input type="file" id="logoFile_${i}" accept="image/*" style="display:none" onchange="uploadLogo(${i},this)">
-          <button class="btn-logo-upload" onclick="document.getElementById('logoFile_${i}').click()">📤 رفع</button>
-          ${src?`<button class="btn-logo-del" onclick="deleteLogo(${i})">🗑 حذف</button>`:''}
-        </div>
-      </div>
-    `;
-  }
-  grid.innerHTML=html;
-}
-
-function uploadLogo(num,input){
-  const file=input.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{logoImages[num]=e.target.result;save('ns_logo_imgs',logoImages);buildAdminLogosGrid();buildLogosGrid();showToast('✅ تم رفع اللوغو '+num);};
-  r.readAsDataURL(file);
-}
-function deleteLogo(num){delete logoImages[num];save('ns_logo_imgs',logoImages);buildAdminLogosGrid();buildLogosGrid();showToast('🗑 تم حذف اللوغو '+num);}
-
-function toggleLogosSection(){
-  logosVisible=document.getElementById('logosToggle').checked;
-  save('ns_logos_visible',logosVisible);
-  updateTabsBar();
-  showToast(logosVisible?'✅ قسم اللوغوهات مرئي للزبائن':'🔒 قسم اللوغوهات مخفي');
-}
-
-// الشحن
-const sel={ff:null,pubg:null};
-function selPkg(el,game){
-  document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));
-  el.classList.add('sel');sel[game]={amount:el.dataset.a,cost:parseFloat(el.dataset.c)};
-}
-function submitOrder(game){
-  if(!sel[game]){showToast('❗ اختر كمية الشحن أولاً');return;}
-  const idEl=document.getElementById(game+'Id'),uid=idEl.value.trim();
-  if(!uid){showToast('❗ أدخل معرّف الحساب');return;}
-  const{amount,cost}=sel[game],bal=getBalance(curUser.name);
-  if(bal<cost){showToast('❌ رصيدك غير كافٍ! رصيدك: '+bal.toFixed(2)+' NC');return;}
-  setBalance(curUser.name,bal-cost);updateNavWallet();
-  const gName=game==='ff'?'Free Fire':'PUBG Mobile';
-  const order={id:Date.now(),user:curUser.name,game:gName,amount,cost,uid,time:new Date().toLocaleString('ar'),status:'pending'};
-  orders.push(order);save('ns_orders',orders);updateBadge();
-  sendTg('🛒 طلب شحن جديد\nاللعبة: '+gName+'\nالكمية: '+amount+'\nالتكلفة: '+cost+' NC\nمعرف: '+uid+'\nالزبون: '+curUser.name);
-  showToast('✅ تم الشحن! خُصم '+cost+' NC');
-  idEl.value='';document.querySelectorAll('#'+game+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));sel[game]=null;
-}
+function togF(u,t){const f=document.getElementById('uf_'+u),ba=document.getElementById('bca_'+u),bw=document.getElementById('bcw_'+u);const op=f.classList.contains('show');if(op&&((t==='a'&&ba.style.display!=='none')||(t==='w'&&bw.style.display!=='none'))){f.classList.remove('show');return;}f.classList.add('show');if(t==='a'){ba.style.display='block';bw.style.display='none';}else{ba.style.display='none';bw.style.display='block';}}
+function doB(u,t){const amt=parseFloat(document.getElementById('ua_'+u).value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}const cur=getBal(u);if(t==='w'&&amt>cur){showToast('❌ الرصيد غير كافٍ');return;}t==='a'?setBal(u,cur+amt):setBal(u,cur-amt);document.getElementById('ua_'+u).value='';document.getElementById('uf_'+u).classList.remove('show');rendUsers();updNav();showToast('✅ تم '+(t==='a'?'إضافة':'سحب')+' '+amt+' NC '+(t==='a'?'لـ':'من')+' '+u);sendTG('💰 '+(t==='a'?'إضافة':'سحب')+' رصيد\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC\nالجديد: '+getBal(u)+' NC');}
+function selfAdd(){const amt=parseFloat(document.getElementById('selfAmt').value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}setBal(me.n,getBal(me.n)+amt);document.getElementById('selfAmt').value='';updNav();showToast('✅ تم إضافة '+amt+' NC لرصيدك');}
 
 // التحويل
-function openTransfer(method,num){
-  transferMethod=method;transferNum=num;
-  document.getElementById('modalTitle').textContent='تحويل عبر '+method;
-  document.getElementById('modalNum').textContent='+'+num;
-  const btn=document.getElementById('btnTransfer');
-  btn.className='btn-transfer '+(method==='ليبيانا'?'btn-transfer-blue':'btn-transfer-gold');
-  document.getElementById('fromPhone').value='';
-  document.getElementById('transferAmount').value='';
-  document.getElementById('coinsPreview').style.display='none';
-  document.getElementById('modalOverlay').classList.add('open');
-}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
-function calcCoins(){
-  const amt=parseFloat(document.getElementById('transferAmount').value)||0;
-  const p=document.getElementById('coinsPreview');
-  if(amt>0){p.style.display='block';document.getElementById('coinsResult').textContent=(amt/10).toFixed(2);}
-  else p.style.display='none';
-}
-function submitTransfer(){
-  const phone=document.getElementById('fromPhone').value.trim();
-  const amt=parseFloat(document.getElementById('transferAmount').value)||0;
-  if(!phone){showToast('❗ أدخل رقم الهاتف');return;}
-  if(amt<=0){showToast('❗ أدخل المبلغ');return;}
-  sendTg('💳 طلب شحن محفظة\nالزبون: '+curUser.name+'\nالطريقة: '+transferMethod+'\nالرقم: '+phone+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');
-  closeModal();showToast('✅ تم إرسال طلب التحويل! انتظر إضافة الرصيد');
-}
+function openTr(m,n){trM=m;trN=n;document.getElementById('mTitle').textContent='تحويل عبر '+m;document.getElementById('mNum').textContent='+'+n;const b=document.getElementById('btnTr');b.className='btn-tr '+(m==='ليبيانا'?'btn-tr-b':'btn-tr-g');document.getElementById('trPhone').value='';document.getElementById('trAmt').value='';document.getElementById('ncPrev').style.display='none';document.getElementById('modalOv').classList.add('open');}
+function closeTr(){document.getElementById('modalOv').classList.remove('open');}
+function calcNC(){const a=parseFloat(document.getElementById('trAmt').value)||0;const p=document.getElementById('ncPrev');if(a>0){p.style.display='block';document.getElementById('ncRes').textContent=(a/10).toFixed(2);}else p.style.display='none';}
+function submitTr(){const ph=document.getElementById('trPhone').value.trim(),amt=parseFloat(document.getElementById('trAmt').value)||0;if(!ph){showToast('❗ أدخل رقم الهاتف');return;}if(amt<=0){showToast('❗ أدخل المبلغ');return;}sendTG('💳 طلب شحن محفظة\nالزبون: '+me.n+'\nالطريقة: '+trM+'\nالرقم: '+ph+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');closeTr();showToast('✅ تم إرسال طلب التحويل!');}
 
 // الطلبات
 function renderOrders(){
   const list=document.getElementById('ordersList'),note=document.getElementById('adminNote');
-  note.style.display=curUser&&curUser.isOwner?'block':'none';
-  const visible=curUser&&curUser.isOwner?orders:orders.filter(o=>o.user===curUser.name);
-  if(!visible.length){list.innerHTML='<div class="empty-state"><span class="empty-icon">📭</span><p>لا توجد طلبات بعد</p></div>';return;}
-  list.innerHTML=visible.map(o=>`
+  note.style.display=me&&me.own?'block':'none';
+  const vis=me&&me.own?orders:orders.filter(o=>o.user===me.n);
+  if(!vis.length){list.innerHTML='<div class="empty-state"><span class="empty-icon">📭</span><p>لا توجد طلبات بعد</p></div>';return;}
+  list.innerHTML=vis.map(o=>`
     <div class="order-card ${o.status}">
-      <div class="order-top">
-        <div class="order-game">${o.game}</div>
-        <div class="o-status ${o.status==='pending'?'o-pending':'o-done'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div>
-      </div>
+      <div class="order-top"><div class="order-game">${o.game}</div><div class="o-status ${o.status==='pending'?'o-p':'o-d'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div></div>
       <div class="order-detail">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>الوقت: <span>${o.time}</span></div>
-      ${curUser&&curUser.isOwner?`<div class="order-actions">${o.status==='pending'?`<button class="btn-done" onclick="markDone(${o.id})">✅ تم الشحن</button>`:''}<button class="btn-del" onclick="deleteOrder(${o.id})">🗑 حذف</button></div>`:''}
-    </div>
-  `).join('');
+      ${me&&me.own?`<div class="order-actions">${o.status==='pending'?`<button class="btn-done" onclick="markD(${o.id})">✅ تم الشحن</button>`:''}<button class="btn-del" onclick="delO(${o.id})">🗑 حذف</button></div>`:''}
+    </div>`).join('');
 }
-function markDone(id){const o=orders.find(x=>x.id===id);if(o){o.status='done';save('ns_orders',orders);renderOrders();updateBadge();showToast('✅ تم تمييز الطلب كمكتمل');}}
-function deleteOrder(id){orders=orders.filter(x=>x.id!==id);save('ns_orders',orders);renderOrders();updateBadge();showToast('🗑 تم حذف الطلب');}
-function updateBadge(){
-  const p=orders.filter(o=>curUser&&curUser.isOwner?o.status==='pending':o.user===curUser.name&&o.status==='pending').length;
-  const b=document.getElementById('orderBadge');b.textContent=p;b.classList.toggle('show',p>0);
-}
-function sendTg(msg){fetch('https://api.telegram.org/bot'+BOT_TOKEN+'/sendMessage?chat_id='+CHAT_ID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
+function markD(id){const o=orders.find(x=>x.id===id);if(o){o.status='done';sv('o',orders);renderOrders();updBadge();showToast('✅ تم تمييز الطلب كمكتمل');}}
+function delO(id){orders=orders.filter(x=>x.id!==id);sv('o',orders);renderOrders();updBadge();showToast('🗑 تم حذف الطلب');}
+function updBadge(){const p=orders.filter(o=>me&&me.own?o.status==='pending':o.user===me.n&&o.status==='pending').length;const b=document.getElementById('orderBadge');b.textContent=p;b.classList.toggle('show',p>0);}
+function sendTG(msg){fetch('https://api.telegram.org/bot'+BOT+'/sendMessage?chat_id='+CID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
-document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.getElementById('modalOv').addEventListener('click',function(e){if(e.target===this)closeTr();});
 </script>
 </body>
-        </html>
+                </html>
