@@ -4,420 +4,380 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVA STORE</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05070f;--card:#0d1228;--blue:#1a4fff;--blue2:#2563ff;--cyan:#00c8ff;--gold:#f5c518;--green:#00c864;--red:#ff4444;--border:rgba(255,255,255,0.07);}
+:root{--bg:#03050e;--card:#080d1e;--card2:#0c1228;--blue:#2060ff;--cyan:#00d4ff;--gold:#ffc830;--green:#00e87a;--red:#ff3d3d;--border:rgba(255,255,255,0.06);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,255,0.85);min-height:100vh;overflow-x:hidden;}
-.bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(26,79,255,0.15),transparent 70%);}
-#loginPage{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:var(--bg);}
-#loginPage.hidden{display:none;}
-.login-box{width:100%;max-width:400px;margin:20px;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;position:relative;overflow:hidden;}
-.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);}
-.logo-na{font-size:64px;font-weight:900;color:#fff;text-shadow:0 0 40px rgba(26,79,255,0.8);letter-spacing:-2px;line-height:1;font-style:italic;text-align:center;}
-.logo-name{font-size:13px;letter-spacing:6px;color:rgba(255,255,255,0.4);margin-top:6px;text-align:center;margin-bottom:28px;}
-.inp{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:#fff;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;margin-bottom:14px;direction:rtl;transition:.3s;}
-.inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,79,255,0.15);}
-.inp::placeholder{color:rgba(255,255,255,0.25);}
-.btn-primary{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:12px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:.3s;}
-.err{background:rgba(255,60,60,0.1);border:1px solid rgba(255,60,60,0.3);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff6060;margin-bottom:14px;display:none;}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,255,.88);min-height:100vh;overflow-x:hidden;}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bgc{position:absolute;border-radius:50%;filter:blur(100px);}
+.bgc1{width:500px;height:500px;background:#1a40cc;opacity:.12;top:-150px;right:-100px;}
+.bgc2{width:350px;height:350px;background:#6010cc;opacity:.1;bottom:-80px;left:-80px;}
+.bgg{position:absolute;inset:0;background-image:linear-gradient(rgba(32,96,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(32,96,255,.03) 1px,transparent 1px);background-size:48px 48px;}
+
+/* LOGIN */
+#lp{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:var(--bg);}
+#lp.h{display:none;}
+.lw{width:100%;max-width:380px;margin:20px;position:relative;z-index:1;}
+.ll{text-align:center;margin-bottom:28px;}
+.lring{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 0 40px rgba(32,96,255,.5);}
+.lna{font-size:28px;font-weight:900;font-style:italic;color:#fff;}
+.ll h2{font-size:18px;font-weight:900;letter-spacing:4px;color:var(--cyan);}
+.ll p{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;}
+.lc{background:rgba(8,13,30,.9);border:1px solid var(--border);border-radius:22px;padding:30px 26px;backdrop-filter:blur(20px);position:relative;overflow:hidden;}
+.lc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:13px;padding:13px 16px;color:#fff;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;margin-bottom:12px;direction:rtl;transition:.3s;}
+.inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(32,96,255,.1);}
+.inp::placeholder{color:rgba(255,255,255,.2);}
+.btnlogin{width:100%;background:linear-gradient(135deg,var(--blue),#4080ff);border:none;border-radius:13px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 28px rgba(32,96,255,.4);margin-top:4px;}
+.err{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.22);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff7070;margin-bottom:12px;display:none;}
 .err.show{display:block;}
+
+/* APP */
 #app{display:none;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
 #app.show{display:flex;}
-.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;background:rgba(5,7,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
-.nav-na{font-size:20px;font-weight:900;color:#fff;font-style:italic;text-shadow:0 0 20px rgba(26,79,255,0.6);}
-.nav-sub{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.3);}
-.nav-right{display:flex;align-items:center;gap:8px;}
-.nav-wallet{background:rgba(245,197,24,0.12);border:1px solid rgba(245,197,24,0.3);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--gold);}
-.btn-out{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:rgba(255,255,255,0.4);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
-.tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;height:65px;background:rgba(5,7,15,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;border:none;background:none;color:rgba(255,255,255,0.35);font-family:'Tajawal',sans-serif;font-size:9px;position:relative;transition:.2s;}
-.tab.active{color:var(--cyan);}
-.tab.active::after{content:'';position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);border-radius:2px;}
-.tab-icon{font-size:18px;}
-.tab-badge{position:absolute;top:4px;right:calc(50% - 22px);background:var(--gold);color:#000;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;display:none;}
-.tab-badge.show{display:block;}
-.content{flex:1;padding:72px 14px 78px;max-width:680px;margin:0 auto;width:100%;}
-.section{display:none;animation:fadeUp .35s ease;}
-.section.active{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.sec-title{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.sec-title::before{content:'';width:3px;height:18px;background:linear-gradient(to bottom,var(--blue),var(--cyan));border-radius:2px;}
-.hero-banner{background:linear-gradient(135deg,rgba(26,79,255,0.15),rgba(0,200,255,0.06));border:1px solid rgba(26,79,255,0.2);border-radius:18px;padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:14px;}
-.hero-na{font-size:48px;font-weight:900;font-style:italic;color:#fff;text-shadow:0 0 30px rgba(26,79,255,0.9);line-height:1;flex-shrink:0;}
-.hero-text h2{font-size:17px;font-weight:800;}
-.hero-text h2 span{color:var(--cyan);}
-.hero-text p{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px;}
-.game-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;}
-.game-header{height:180px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
-.game-header.ff{background:#000;}
-.game-header.pubg{background:#0a1628;}
-.game-header img{width:100%;height:100%;object-fit:contain;}
-.no-img{font-size:60px;}
-.game-body{padding:18px;}
-.game-title{font-size:17px;font-weight:800;margin-bottom:3px;}
-.game-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:14px;}
-.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px;}
-.pkg-item{background:rgba(255,255,255,0.04);border:1.5px solid var(--border);border-radius:11px;padding:9px 5px;text-align:center;cursor:pointer;transition:.2s;}
-.pkg-item:hover{background:rgba(26,79,255,0.1);}
-.pkg-item.sel{background:rgba(26,79,255,0.18);border-color:var(--cyan);}
-.pkg-gem{font-size:11px;font-weight:800;color:var(--gold);display:block;}
-.pkg-coin{font-size:11px;color:var(--cyan);display:block;margin-top:1px;}
-.id-row{display:flex;gap:8px;align-items:center;}
-.id-row .inp{margin-bottom:0;flex:1;}
-.btn-charge{flex-shrink:0;padding:12px 16px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
-.btn-charge.pubg-btn{background:linear-gradient(135deg,#c07000,#e09000);}
-.wallet-card{background:linear-gradient(135deg,rgba(245,197,24,0.12),rgba(245,197,24,0.04));border:1px solid rgba(245,197,24,0.25);border-radius:20px;padding:24px 20px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.wallet-card::before{content:'💰';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.05;}
-.wallet-label{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
-.wallet-amount{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
-.wallet-unit{font-size:14px;color:rgba(245,197,24,0.6);margin-top:4px;}
-.box{border-radius:16px;padding:18px;margin-bottom:16px;}
-.box-green{background:rgba(0,200,100,0.06);border:1px solid rgba(0,200,100,0.2);}
-.box-blue{background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.2);}
-.box-gold{background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);}
-.box-purple{background:rgba(123,47,255,0.08);border:1px solid rgba(123,47,255,0.25);}
-.box-orange{background:rgba(200,120,0,0.08);border:1px solid rgba(200,120,0,0.25);}
-.box-title{font-size:14px;font-weight:800;margin-bottom:14px;}
-.box-title.green{color:var(--green);}
-.box-title.blue{color:var(--cyan);}
-.box-title.gold{color:var(--gold);}
-.box-title.purple{color:#a070ff;}
-.box-title.orange{color:#e09000;}
-.self-row{display:flex;gap:8px;align-items:center;}
-.self-row .inp{margin:0;flex:1;padding:11px 14px;}
-.btn-self{padding:11px 18px;background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;}
-.users-list{display:flex;flex-direction:column;gap:8px;}
-.user-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
-.user-row-top{display:flex;align-items:center;gap:10px;}
-.user-name-txt{font-weight:700;font-size:14px;flex:1;}
-.user-bal-txt{color:var(--gold);font-weight:700;font-size:13px;}
-.user-btns{display:flex;gap:6px;}
-.btn-add{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
-.btn-wd{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:6px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
-.uform{margin-top:10px;display:none;gap:8px;align-items:center;}
-.uform.show{display:flex;}
-.uform .inp{margin:0;flex:1;padding:9px 12px;font-size:13px;}
-.btn-ca{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.btn-cw{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:8px;padding:9px 14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.img-upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.img-upload-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.img-upload-preview{height:90px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.ff-bg{background:#000;}.pubg-bg{background:#0a1628;}
-.img-upload-preview img{width:100%;height:100%;object-fit:contain;}
-.no-img-sm{font-size:36px;}
-.img-upload-info{padding:10px 12px;}
-.img-upload-name{font-size:12px;font-weight:700;margin-bottom:8px;}
-.btn-ul{width:100%;padding:8px;background:rgba(26,79,255,0.2);border:1px solid rgba(26,79,255,0.3);border-radius:8px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;}
-.btn-ri{width:100%;padding:6px;background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.2);border-radius:8px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;margin-top:4px;}
-.logos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.logo-slot{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;}
-.logo-slot-img{width:100%;aspect-ratio:1;object-fit:contain;background:#000;display:block;}
-.logo-slot-empty{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
-.logo-slot-info{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;}
-.logo-price-n{font-size:14px;font-weight:800;color:var(--gold);}
-.logo-price-d{font-size:14px;font-weight:800;color:var(--green);}
-.old-price{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:line-through;display:block;}
-.badge-discount{position:absolute;top:8px;right:8px;background:var(--green);color:#000;border-radius:8px;padding:2px 7px;font-size:10px;font-weight:800;}
-.badge-num{position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.6);color:rgba(255,255,255,0.5);border-radius:6px;padding:2px 6px;font-size:10px;}
-.btn-buy{padding:7px 14px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:8px;color:#fff;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
-.btn-buy.dis{background:linear-gradient(135deg,var(--green),#00a050);}
-.al-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.al-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.al-prev{height:70px;display:flex;align-items:center;justify-content:center;background:#0a0a0a;overflow:hidden;}
-.al-prev img{width:100%;height:100%;object-fit:contain;}
-.al-info{padding:8px 10px;}
-.al-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.al-num{font-size:10px;color:rgba(255,255,255,0.4);}
-.dtoggle{font-size:10px;padding:2px 8px;border:1px solid rgba(0,200,100,0.4);border-radius:6px;background:transparent;color:rgba(0,200,100,0.7);cursor:pointer;font-family:'Tajawal',sans-serif;}
-.dtoggle.on{background:rgba(0,200,100,0.2);color:var(--green);border-color:var(--green);}
-.btn-lu{width:100%;padding:6px;background:rgba(26,79,255,0.15);border:1px solid rgba(26,79,255,0.25);border-radius:7px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
-.btn-ld{width:100%;padding:5px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.15);border-radius:7px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:10px;cursor:pointer;margin-top:3px;}
-.setting-box{border-radius:16px;padding:18px;margin-bottom:16px;}
-.price-row-s{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.price-row-s label{font-size:12px;color:rgba(255,255,255,0.5);flex:1;}
-.pinp{width:75px;background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:8px;padding:7px 10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;background:rgba(3,5,14,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.nbrand{display:flex;align-items:center;gap:8px;}
+.ndot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nname{font-size:16px;font-weight:900;font-style:italic;color:var(--cyan);}
+.nright{display:flex;align-items:center;gap:8px;}
+.nwallet{background:rgba(255,200,48,.1);border:1px solid rgba(255,200,48,.22);border-radius:18px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--gold);}
+.nuser{font-size:11px;color:rgba(255,255,255,.4);}
+.btnout{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:rgba(255,255,255,.4);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;height:64px;background:rgba(3,5,14,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:0 4px;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;border:none;background:none;color:rgba(255,255,255,.3);font-family:'Tajawal',sans-serif;font-size:9px;position:relative;transition:.2s;border-radius:10px;margin:5px 2px;}
+.tab.active{color:var(--cyan);background:rgba(0,212,255,.07);}
+.tabi{font-size:19px;}
+.tbdg{position:absolute;top:4px;right:calc(50% - 20px);background:var(--red);color:#fff;border-radius:10px;padding:1px 5px;font-size:9px;font-weight:800;display:none;}
+.tbdg.show{display:block;}
+.content{flex:1;padding:72px 14px 76px;max-width:700px;margin:0 auto;width:100%;}
+.sec{display:none;animation:fu .3s ease;}
+.sec.active{display:block;}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.stitle{font-size:17px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.stitle::before{content:'';width:3px;height:20px;background:linear-gradient(var(--blue),var(--cyan));border-radius:2px;}
+
+/* CHARGE */
+.chero{border-radius:20px;margin-bottom:18px;overflow:hidden;background:linear-gradient(135deg,#05091e,#0a1030,#0d1540);position:relative;}
+.chero-bg{position:absolute;inset:0;background:radial-gradient(circle at 25% 50%,rgba(32,96,255,.18),transparent 55%),radial-gradient(circle at 80% 20%,rgba(0,212,255,.1),transparent 50%);}
+.chero-in{position:relative;z-index:1;padding:22px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.chero-txt h1{font-size:21px;font-weight:900;line-height:1.3;margin-bottom:5px;}
+.chero-txt h1 em{color:var(--cyan);font-style:normal;}
+.chero-txt p{font-size:12px;color:rgba(255,255,255,.4);}
+.hbadge{flex-shrink:0;background:rgba(255,200,48,.1);border:1px solid rgba(255,200,48,.25);border-radius:14px;padding:12px 14px;text-align:center;}
+.hbadge span{font-size:26px;display:block;}
+.hbadge small{font-size:10px;color:var(--gold);font-weight:700;}
+.chero-line{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);}
+.gsel{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.gsb{border-radius:16px;padding:14px 12px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;transition:.3s;display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;}
+.gsb.gsff.active{border-color:rgba(100,32,200,.6);background:rgba(100,32,200,.1);}
+.gsb.gspubg.active{border-color:rgba(200,120,0,.5);background:rgba(200,120,0,.08);}
+.gsb .gck{position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#000;opacity:0;transition:.2s;}
+.gsb.active .gck{opacity:1;}
+.gsi{font-size:30px;}
+.gsn{font-size:13px;font-weight:800;}
+.gss{font-size:11px;color:rgba(255,255,255,.4);}
+.cpanel{display:none;}
+.cpanel.active{display:block;animation:fu .3s ease;}
+.gbanner{border-radius:16px;height:160px;position:relative;overflow:hidden;margin-bottom:18px;display:flex;align-items:center;justify-content:center;}
+.gbff{background:linear-gradient(135deg,#060014,#12003a,#1e0070);}
+.gbpubg{background:linear-gradient(135deg,#080500,#1a0d00,#3a1a00);}
+.gbanner img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;}
+.gbov{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,5,14,.85),transparent 55%);}
+.gblabel{position:absolute;bottom:12px;right:14px;z-index:2;}
+.gblabel h3{font-size:18px;font-weight:900;}
+.gblabel p{font-size:11px;color:rgba(255,255,255,.4);}
+.gbem{position:absolute;bottom:12px;left:14px;font-size:34px;z-index:2;}
+.noimg{font-size:68px;}
+.plabel{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.pcard{background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:11px 6px;text-align:center;cursor:pointer;transition:.25s;position:relative;}
+.pcard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.14);}
+.pcard.sel{border-color:var(--cyan);background:rgba(0,212,255,.07);}
+.pck{position:absolute;top:5px;left:7px;font-size:10px;color:var(--cyan);font-weight:900;opacity:0;}
+.pcard.sel .pck{opacity:1;}
+.pem{font-size:15px;display:block;margin-bottom:3px;}
+.pamt{font-size:12px;font-weight:800;color:var(--gold);display:block;}
+.ppr{font-size:11px;color:var(--cyan);display:block;margin-top:2px;}
+.idbox{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;}
+.idtitle{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.idrow{display:flex;gap:8px;}
+.idrow .inp{margin:0;flex:1;}
+.btnff{padding:12px 18px;background:linear-gradient(135deg,#5018b0,#7030e0);border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.btnpubg{padding:12px 18px;background:linear-gradient(135deg,#904000,#c06000);border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+
+/* WALLET */
+.whero{border-radius:20px;padding:24px 20px;margin-bottom:18px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0d0e00,#1c1a00,#242000);}
+.whero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(255,200,48,.1),transparent 55%);}
+.whin{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;}
+.whlabel{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:5px;}
+.whamount{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.whunit{font-size:13px;color:rgba(255,200,48,.45);margin-top:4px;}
+.whicon{font-size:50px;opacity:.6;}
+.wline{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,48,.35),transparent);}
+.box{border-radius:15px;padding:16px;margin-bottom:12px;}
+.boxg{background:rgba(0,232,122,.04);border:1px solid rgba(0,232,122,.13);}
+.boxb{background:rgba(32,96,255,.04);border:1px solid rgba(32,96,255,.13);}
+.boxt{font-size:14px;font-weight:800;margin-bottom:12px;}
+.boxt.green{color:var(--green);}
+.boxt.blue{color:var(--cyan);}
+.srow{display:flex;gap:8px;}
+.srow .inp{margin:0;flex:1;}
+.btng{padding:12px 16px;background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:11px;color:#000;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.ul{display:flex;flex-direction:column;gap:7px;}
+.ur{background:var(--card2);border:1px solid var(--border);border-radius:11px;padding:11px 13px;}
+.urt{display:flex;align-items:center;gap:8px;}
+.un{font-weight:700;font-size:13px;flex:1;}
+.ub{color:var(--gold);font-weight:700;font-size:12px;}
+.ubtns{display:flex;gap:5px;}
+.ba{background:rgba(0,232,122,.1);border:1px solid rgba(0,232,122,.22);border-radius:7px;padding:5px 9px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.bw{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.18);border-radius:7px;padding:5px 9px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.uf{margin-top:8px;display:none;gap:7px;align-items:center;}
+.uf.show{display:flex;}
+.uf .inp{margin:0;flex:1;padding:8px 12px;font-size:13px;}
+.bca{background:linear-gradient(135deg,var(--green),#00a050);border:none;border-radius:7px;padding:8px 12px;color:#000;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:800;cursor:pointer;}
+.bcw{background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:7px;padding:8px 12px;color:#fff;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ic{background:var(--card2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.ip{height:78px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.ffbg{background:#000;}.pubgbg{background:#0a1628;}
+.ip img{width:100%;height:100%;object-fit:contain;}
+.ii{padding:9px 11px;}
+.in{font-size:12px;font-weight:700;margin-bottom:7px;}
+.bul{width:100%;padding:7px;background:rgba(32,96,255,.14);border:1px solid rgba(32,96,255,.22);border-radius:7px;color:var(--cyan);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+.bri{width:100%;padding:6px;background:rgba(255,61,61,.07);border:1px solid rgba(255,61,61,.15);border-radius:7px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:10px;cursor:pointer;margin-top:3px;}
+.pgmethods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.pm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;}
+.pmi{font-size:26px;margin-bottom:7px;}
+.pmn{font-size:13px;font-weight:800;margin-bottom:3px;}
+.pmnum{font-size:10px;color:rgba(255,255,255,.35);direction:ltr;font-family:monospace;}
+.pmb{margin-top:9px;width:100%;padding:9px;border:none;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.pmblu{background:linear-gradient(135deg,var(--blue),#4080ff);color:#fff;}
+.pmbgo{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+
+/* ORDERS */
+.otabs{display:flex;gap:6px;margin-bottom:14px;background:var(--card);border-radius:12px;padding:4px;}
+.otab{flex:1;padding:9px;border-radius:9px;border:none;background:transparent;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.4);transition:.2s;text-align:center;}
+.otab.op{background:rgba(255,200,48,.1);color:var(--gold);}
+.otab.od{background:rgba(0,232,122,.1);color:var(--green);}
+.olw{display:none;}
+.olw.show{display:block;}
+.ocard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:9px;}
+.ocard.pending{border-right:3px solid var(--gold);}
+.ocard.done{border-right:3px solid var(--green);opacity:.65;}
+.otop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.og{font-weight:800;font-size:14px;}
+.ost{font-size:10px;padding:3px 8px;border-radius:18px;font-weight:700;}
+.opst{background:rgba(255,200,48,.1);color:var(--gold);}
+.odst{background:rgba(0,232,122,.1);color:var(--green);}
+.od{font-size:12px;color:rgba(255,255,255,.45);line-height:1.85;}
+.od span{color:rgba(255,255,255,.85);font-weight:600;}
+.oac{display:flex;gap:6px;margin-top:10px;}
+.btndone{background:rgba(0,232,122,.08);border:1px solid rgba(0,232,122,.18);border-radius:7px;padding:6px 12px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.btndel{background:rgba(255,61,61,.06);border:1px solid rgba(255,61,61,.16);border-radius:7px;padding:6px 12px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+.empty{text-align:center;padding:48px 20px;color:rgba(255,255,255,.2);}
+.eic{font-size:46px;display:block;margin-bottom:10px;}
+.anote{background:rgba(255,200,48,.05);border:1px solid rgba(255,200,48,.13);border-radius:9px;padding:9px 12px;font-size:12px;color:rgba(255,200,48,.65);margin-bottom:12px;text-align:center;display:none;}
+
+/* SETTINGS */
+.sbox{border-radius:14px;padding:16px;margin-bottom:12px;}
+.sbp{background:rgba(100,32,200,.07);border:1px solid rgba(100,32,200,.18);}
+.sbo{background:rgba(200,120,0,.07);border:1px solid rgba(200,120,0,.18);}
+.sbr{background:rgba(255,61,61,.05);border:1px solid rgba(255,61,61,.18);}
+.sbt{font-size:14px;font-weight:800;margin-bottom:12px;}
+.sbt.purple{color:#a060ff;}.sbt.orange{color:#e09000;}.sbt.red{color:#ff7070;}
+.prow{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.prow label{font-size:12px;color:rgba(255,255,255,.45);flex:1;}
+.pinp{width:72px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;padding:6px 9px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;}
 .pinp:focus{border-color:var(--gold);}
-.btn-save{width:100%;padding:10px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;margin-top:8px;}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
-.tsw{position:relative;width:48px;height:26px;}
-.tsw input{opacity:0;width:0;height:0;}
-.tsl{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.1);border-radius:26px;transition:.3s;}
-.tsl:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
-.tsw input:checked+.tsl{background:var(--green);}
-.tsw input:checked+.tsl:before{transform:translateX(22px);}
-.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.pay-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;}
-.pay-icon{font-size:30px;margin-bottom:8px;}
-.pay-name{font-size:14px;font-weight:800;margin-bottom:4px;}
-.pay-num{font-size:11px;color:rgba(255,255,255,0.4);direction:ltr;font-family:monospace;}
-.pay-btn{margin-top:10px;width:100%;padding:9px;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.pb-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
-.pb-gold{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
-.order-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;}
-.order-card.pending{border-color:rgba(245,197,24,0.25);}
-.order-card.done{opacity:0.55;}
-.order-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
-.order-game{font-weight:800;font-size:14px;}
-.o-status{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700;}
-.o-p{background:rgba(245,197,24,0.12);color:var(--gold);}
-.o-d{background:rgba(0,200,100,0.12);color:var(--green);}
-.order-detail{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.8;}
-.order-detail span{color:rgba(255,255,255,0.8);font-weight:600;}
-.order-actions{display:flex;gap:7px;margin-top:10px;}
-.btn-done{background:rgba(0,200,100,0.1);border:1px solid rgba(0,200,100,0.25);border-radius:7px;padding:6px 12px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
-.btn-del{background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.2);border-radius:7px;padding:6px 12px;color:#ff6060;font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
-.empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.25);}
-.empty-icon{font-size:44px;display:block;margin-bottom:10px;}
-.admin-note{background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.18);border-radius:10px;padding:9px 13px;font-size:12px;color:rgba(245,197,24,0.7);margin-bottom:14px;text-align:center;display:none;}
+.btsave{width:100%;padding:10px;border:none;border-radius:11px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;margin-top:6px;}
+.banrow{display:flex;gap:7px;margin-bottom:10px;}
+.banrow .inp{margin:0;flex:1;padding:10px 13px;}
+.btnban{padding:10px 14px;background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:11px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.bitem{display:flex;align-items:center;justify-content:space-between;background:rgba(255,61,61,.06);border:1px solid rgba(255,61,61,.13);border-radius:9px;padding:9px 11px;margin-bottom:5px;}
+.btnunban{background:rgba(0,232,122,.08);border:1px solid rgba(0,232,122,.2);border-radius:6px;padding:4px 10px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
+
 /* CHAT */
-.chat-wrap{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;}
-.chat-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-.chat-av{width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.chat-title{font-size:14px;font-weight:800;}
-.chat-status{font-size:11px;color:var(--green);}
-.chat-msgs{height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
-.chat-foot{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;}
-.chat-foot .inp{margin:0;flex:1;padding:10px 14px;font-size:14px;}
-.btn-send{padding:10px 16px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:10px;color:#fff;font-size:18px;cursor:pointer;}
-.msg-bubble{display:flex;flex-direction:column;}
-.msg-bubble.mine{align-items:flex-start;}
-.msg-bubble.other{align-items:flex-end;}
-.msg-text{max-width:75%;padding:9px 13px;font-size:13px;line-height:1.5;border-radius:14px;}
-.msg-text.mine{background:rgba(26,79,255,0.25);border:1px solid rgba(26,79,255,0.4);border-radius:4px 14px 14px 14px;}
-.msg-text.other{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:14px 4px 14px 14px;}
-.msg-time{font-size:10px;color:rgba(255,255,255,0.25);margin-top:3px;}
-.chat-user-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;margin-bottom:6px;border:1px solid transparent;transition:.2s;}
-.chat-user-item:hover{background:rgba(255,255,255,0.04);}
-.chat-user-item.active{background:rgba(26,79,255,0.15);border-color:rgba(26,79,255,0.3);}
-.chat-unread{background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;}
+.cwrap{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:14px;}
+.cheader{padding:13px 15px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:rgba(32,96,255,.04);}
+.cav{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ctit{font-size:14px;font-weight:800;}
+.csta{font-size:11px;color:var(--green);}
+.cmsgs{height:290px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;}
+.cfoot{padding:11px 13px;border-top:1px solid var(--border);display:flex;gap:7px;}
+.cfoot .inp{margin:0;flex:1;padding:10px 13px;font-size:14px;border-radius:13px;}
+.btnsend{padding:10px 16px;background:linear-gradient(135deg,var(--blue),#4080ff);border:none;border-radius:13px;color:#fff;font-size:19px;cursor:pointer;}
+.mb{display:flex;flex-direction:column;}
+.mb.mine{align-items:flex-start;}
+.mb.other{align-items:flex-end;}
+.mt{max-width:76%;padding:9px 13px;font-size:13px;line-height:1.5;border-radius:14px;}
+.mt.mine{background:rgba(32,96,255,.25);border:1px solid rgba(32,96,255,.28);border-radius:4px 14px 14px 14px;}
+.mt.other{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:14px 4px 14px 14px;}
+.mtime{font-size:10px;color:rgba(255,255,255,.2);margin-top:3px;}
+.cuitem{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;cursor:pointer;margin-bottom:5px;border:1px solid transparent;transition:.2s;}
+.cuitem:hover{background:rgba(255,255,255,.03);}
+.cuitem.active{background:rgba(32,96,255,.1);border-color:rgba(32,96,255,.22);}
+.curd{background:var(--red);color:#fff;border-radius:50%;width:19px;height:19px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;}
+.swa{display:flex;align-items:center;gap:12px;background:rgba(37,211,102,.05);border:1px solid rgba(37,211,102,.15);border-radius:16px;padding:16px;margin-bottom:12px;text-decoration:none;color:inherit;}
+.wai{width:46px;height:46px;min-width:46px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.wai2 h3{font-size:14px;font-weight:800;margin-bottom:2px;}
+.wai2 p{font-size:11px;color:rgba(255,255,255,.4);}
+
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal-sheet{background:#0d1228;border:1px solid var(--border);border-radius:24px 24px 0 0;padding:28px 20px 36px;width:100%;max-width:500px;position:relative;}
-.mcb{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;width:30px;height:30px;color:#fff;cursor:pointer;font-size:14px;}
-.modal-title{font-size:17px;font-weight:800;margin-bottom:4px;}
-.modal-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:18px;}
-.tib{background:rgba(26,79,255,0.08);border:1px solid rgba(26,79,255,0.2);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;}
-.inp-label{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px;display:block;}
-.btn-tr{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
-.btn-tr-b{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
-.btn-tr-g{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
-.support-wa{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(37,211,102,0.1),rgba(37,211,102,0.03));border:1px solid rgba(37,211,102,0.22);border-radius:16px;padding:18px;margin-bottom:14px;text-decoration:none;color:inherit;}
-.wa-icon{width:48px;height:48px;min-width:48px;background:#25d366;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;}
-.wa-info h3{font-size:15px;font-weight:800;margin-bottom:2px;}
-.wa-info p{font-size:11px;color:rgba(255,255,255,0.4);}
-.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(16px);background:#111d35;border:1px solid var(--cyan);border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;color:var(--cyan);z-index:400;opacity:0;transition:.35s;white-space:nowrap;pointer-events:none;}
+.mov{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center;}
+.mov.open{display:flex;}
+.msh{background:#060b18;border:1px solid var(--border);border-top:1px solid rgba(32,96,255,.28);border-radius:22px 22px 0 0;padding:26px 20px 34px;width:100%;max-width:500px;position:relative;}
+.mcb{position:absolute;top:13px;left:13px;background:rgba(255,255,255,.05);border:none;border-radius:7px;width:28px;height:28px;color:#fff;cursor:pointer;font-size:13px;}
+.mtit{font-size:17px;font-weight:800;margin-bottom:4px;}
+.msub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px;}
+.tib{background:rgba(32,96,255,.06);border:1px solid rgba(32,96,255,.18);border-radius:11px;padding:11px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.45);text-align:center;}
+.il{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:5px;display:block;}
+.btntr{width:100%;padding:14px;border:none;border-radius:13px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:800;cursor:pointer;}
+.bttb{background:linear-gradient(135deg,var(--blue),#4080ff);color:#fff;}
+.bttg{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(14px);background:rgba(6,11,24,.96);border:1px solid var(--cyan);border-radius:13px;padding:11px 20px;font-size:13px;font-weight:600;color:var(--cyan);z-index:400;opacity:0;transition:.3s;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-@media(max-width:400px){.pkg-grid{grid-template-columns:repeat(2,1fr);}.pay-methods{grid-template-columns:1fr;}.logos-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:400px){.pgrid{grid-template-columns:repeat(2,1fr);}.pgmethods{grid-template-columns:1fr;}.gsel{gap:8px;}}
 </style>
 </head>
 <body>
-<div class="bg-fx"></div>
+<div class="bg"><div class="bgg"></div><div class="bgc bgc1"></div><div class="bgc bgc2"></div></div>
 
 <!-- LOGIN -->
-<div id="loginPage">
-  <div class="login-box">
-    <div class="logo-na">NA</div>
-    <div class="logo-name">NOVA STORE</div>
-    <div class="err" id="errMsg">يرجى إدخال اسم المستخدم وكلمة المرور</div>
-    <input class="inp" id="uIn" type="text" placeholder="اسم المستخدم">
-    <input class="inp" id="pIn" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')login()">
-    <button class="btn-primary" onclick="login()">دخول إلى المتجر ←</button>
+<div id="lp">
+  <div class="lw">
+    <div class="ll">
+      <div class="lring"><div class="lna">NA</div></div>
+      <h2>NOVA STORE</h2>
+      <p>متجر شحن الألعاب</p>
+    </div>
+    <div class="lc">
+      <div class="err" id="errMsg">يرجى إدخال اسم المستخدم وكلمة المرور</div>
+      <input class="inp" id="uIn" type="text" placeholder="👤 اسم المستخدم">
+      <input class="inp" id="pIn" type="password" placeholder="🔑 كلمة المرور" onkeydown="if(event.key==='Enter')login()">
+      <button class="btnlogin" onclick="login()">دخول إلى المتجر ←</button>
+    </div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
-  <div class="top-nav">
-    <div><div class="nav-na">NA</div><div class="nav-sub">NOVA STORE</div></div>
-    <div class="nav-right">
-      <div class="nav-wallet" id="navWallet">🪙 0.00 NC</div>
-      <button class="btn-out" onclick="logout()">خروج</button>
+  <div class="nav">
+    <div class="nbrand"><div class="ndot"></div><div class="nname">NOVA STORE</div></div>
+    <div class="nright">
+      <div class="nwallet" id="nw">🪙 0.00 NC</div>
+      <span class="nuser" id="nu"></span>
+      <button class="btnout" onclick="logout()">خروج</button>
     </div>
   </div>
 
   <div class="content">
 
-    <!-- s0: الشحن -->
-    <div class="section active" id="s0">
-      <div class="hero-banner">
-        <div class="hero-na">NA</div>
-        <div class="hero-text"><h2>شحن <span>فوري</span> بأفضل الأسعار</h2><p>فري فاير • ببجي موبايل | بالنوفا كوين</p></div>
-      </div>
-      <div class="game-card">
-        <div class="game-header ff"><img id="ffImg" src="" style="display:none"><div class="no-img" id="ffNoImg">🔥</div></div>
-        <div class="game-body">
-          <div class="game-title">Free Fire — فري فاير</div>
-          <div class="game-sub">اشحن ألماس فري فاير 💎</div>
-          <div class="pkg-grid" id="ffPkgs"></div>
-          <div class="id-row"><input class="inp" id="ffId" placeholder="أدخل معرّف حساب Free Fire"><button class="btn-charge" onclick="doOrder('ff')">⚡ شحن</button></div>
+    <!-- الشحن -->
+    <div class="sec active" id="s0">
+      <div class="chero">
+        <div class="chero-bg"></div>
+        <div class="chero-in">
+          <div class="chero-txt"><h1>شحن <em>فوري</em><br>بأفضل الأسعار</h1><p>فري فاير • ببجي موبايل</p></div>
+          <div class="hbadge"><span>🪙</span><small>Nova Coin</small></div>
         </div>
+        <div class="chero-line"></div>
       </div>
-      <div class="game-card">
-        <div class="game-header pubg"><img id="pubgImg" src="" style="display:none"><div class="no-img" id="pubgNoImg">🐔</div></div>
-        <div class="game-body">
-          <div class="game-title">PUBG Mobile — ببجي موبايل</div>
-          <div class="game-sub">اشحن UC ببجي موبايل 🟡</div>
-          <div class="pkg-grid" id="pubgPkgs"></div>
-          <div class="id-row"><input class="inp" id="pubgId" placeholder="أدخل معرّف حساب PUBG"><button class="btn-charge pubg-btn" onclick="doOrder('pubg')">⚡ شحن</button></div>
-        </div>
+      <div class="gsel">
+        <div class="gsb gsff active" id="gff" onclick="sg('ff')"><div class="gck">✓</div><div class="gsi">🔥</div><div><div class="gsn">Free Fire</div><div class="gss">💎 ألماس</div></div></div>
+        <div class="gsb gspubg" id="gpubg" onclick="sg('pubg')"><div class="gck">✓</div><div class="gsi">🐔</div><div><div class="gsn">PUBG Mobile</div><div class="gss">🟡 UC</div></div></div>
+      </div>
+      <div class="cpanel active" id="pff">
+        <div class="gbanner gbff"><img id="ffi" src="" style="display:none"><div class="noimg" id="ffni">🔥</div><div class="gbov"></div><div class="gblabel"><h3>Free Fire</h3><p>اشحن ألماسك الآن</p></div><div class="gbem">💎</div></div>
+        <div class="plabel">اختر الكمية</div>
+        <div class="pgrid" id="ffp"></div>
+        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="fid" placeholder="أدخل معرّف Free Fire"><button class="btnff" onclick="doOrd('ff')">⚡ شحن</button></div></div>
+      </div>
+      <div class="cpanel" id="ppubg">
+        <div class="gbanner gbpubg"><img id="pubgi" src="" style="display:none"><div class="noimg" id="pubgni">🐔</div><div class="gbov"></div><div class="gblabel"><h3>PUBG Mobile</h3><p>اشحن UC الآن</p></div><div class="gbem">🟡</div></div>
+        <div class="plabel">اختر الكمية</div>
+        <div class="pgrid" id="pubgp"></div>
+        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="pid" placeholder="أدخل معرّف PUBG"><button class="btnpubg" onclick="doOrd('pubg')">⚡ شحن</button></div></div>
       </div>
     </div>
 
-    <!-- s1: المحفظة -->
-    <div class="section" id="s1">
-      <div class="wallet-card">
-        <div class="wallet-label">رصيدك الحالي</div>
-        <div class="wallet-amount" id="walletDisplay">0.00</div>
-        <div class="wallet-unit">🪙 Nova Coin (NC)</div>
+    <!-- المحفظة -->
+    <div class="sec" id="s1">
+      <div class="whero">
+        <div class="whin"><div><div class="whlabel">رصيدك الحالي</div><div class="whamount" id="wd">0.00</div><div class="whunit">🪙 Nova Coin (NC)</div></div><div class="whicon">💰</div></div>
+        <div class="wline"></div>
       </div>
-      <div class="box box-green" id="adminSelfBox" style="display:none">
-        <div class="box-title green">🔑 شحن رصيدك الخاص</div>
-        <div class="self-row"><input class="inp" id="selfAmt" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btn-self" onclick="selfAdd()">+ إضافة</button></div>
-      </div>
-      <div class="box box-green" id="adminUsersBox" style="display:none">
-        <div class="box-title green">👥 إدارة محافظ المستخدمين</div>
-        <div class="users-list" id="usersList"></div>
-      </div>
-      <div class="box box-blue" id="adminImgBox" style="display:none">
-        <div class="box-title blue">🖼️ تخصيص صور الألعاب</div>
-        <div class="img-upload-grid">
-          <div class="img-upload-card">
-            <div class="img-upload-preview ff-bg"><img id="ffPrev" src="" style="display:none"><div class="no-img-sm" id="ffPrevIcon">🔥</div></div>
-            <div class="img-upload-info"><div class="img-upload-name">Free Fire</div>
-              <input type="file" id="ffFile" accept="image/*" style="display:none" onchange="upImg('ff',this)">
-              <button class="btn-ul" onclick="document.getElementById('ffFile').click()">📤 رفع</button>
-              <button class="btn-ri" onclick="resetImg('ff')">🗑 حذف</button>
-            </div>
-          </div>
-          <div class="img-upload-card">
-            <div class="img-upload-preview pubg-bg"><img id="pubgPrev" src="" style="display:none"><div class="no-img-sm" id="pubgPrevIcon">🐔</div></div>
-            <div class="img-upload-info"><div class="img-upload-name">PUBG Mobile</div>
-              <input type="file" id="pubgFile" accept="image/*" style="display:none" onchange="upImg('pubg',this)">
-              <button class="btn-ul" onclick="document.getElementById('pubgFile').click()">📤 رفع</button>
-              <button class="btn-ri" onclick="resetImg('pubg')">🗑 حذف</button>
-            </div>
-          </div>
+      <div class="box boxg" id="aself" style="display:none"><div class="boxt green">🔑 شحن رصيدك الخاص</div><div class="srow"><input class="inp" id="samt" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btng" onclick="selfAdd()">+ إضافة</button></div></div>
+      <div class="box boxg" id="ausers" style="display:none"><div class="boxt green">👥 إدارة محافظ المستخدمين</div><div class="ul" id="ulist"></div></div>
+      <div class="box boxb" id="aimgs" style="display:none">
+        <div class="boxt blue">🖼️ تخصيص صور الألعاب</div>
+        <div class="igrid">
+          <div class="ic"><div class="ip ffbg"><img id="ffprev" src="" style="display:none"><span id="ffpic" style="font-size:30px">🔥</span></div><div class="ii"><div class="in">Free Fire</div><input type="file" id="fff" accept="image/*" style="display:none" onchange="upImg('ff',this)"><button class="bul" onclick="document.getElementById('fff').click()">📤 رفع</button><button class="bri" onclick="resetImg('ff')">🗑 حذف</button></div></div>
+          <div class="ic"><div class="ip pubgbg"><img id="pubgprev" src="" style="display:none"><span id="pubgpic" style="font-size:30px">🐔</span></div><div class="ii"><div class="in">PUBG Mobile</div><input type="file" id="pubgf" accept="image/*" style="display:none" onchange="upImg('pubg',this)"><button class="bul" onclick="document.getElementById('pubgf').click()">📤 رفع</button><button class="bri" onclick="resetImg('pubg')">🗑 حذف</button></div></div>
         </div>
       </div>
-      <div class="box box-gold" id="adminLogosBox" style="display:none">
-        <div class="box-title gold">🎨 إدارة اللوغوهات</div>
-        <div class="toggle-row"><span style="font-size:13px;font-weight:700;">إظهار قسم اللوغوهات للزبائن</span><label class="tsw"><input type="checkbox" id="lgToggle" onchange="toggleLG()"><span class="tsl"></span></label></div>
-        <div class="al-grid" id="adminLGGrid"></div>
+      <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:11px;">💳 شحن المحفظة</div>
+      <div class="pgmethods">
+        <div class="pm"><div class="pmi">📱</div><div class="pmn">ليبيانا</div><div class="pmnum">+218 92 636 4857</div><button class="pmb pmblu" onclick="openTr('ليبيانا','218926364857')">تحويل</button></div>
+        <div class="pm"><div class="pmi">📲</div><div class="pmn">المدار</div><div class="pmnum">+218 93 497 9712</div><button class="pmb pmbgo" onclick="openTr('المدار','218934979712')">تحويل</button></div>
       </div>
-      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,0.6);">💳 شحن المحفظة</div>
-      <div class="pay-methods">
-        <div class="pay-card"><div class="pay-icon">📱</div><div class="pay-name">ليبيانا</div><div class="pay-num">+218 92 636 4857</div><button class="pay-btn pb-blue" onclick="openTr('ليبيانا','218926364857')">تحويل</button></div>
-        <div class="pay-card"><div class="pay-icon">📲</div><div class="pay-name">المدار</div><div class="pay-num">+218 93 497 9712</div><button class="pay-btn pb-gold" onclick="openTr('المدار','218934979712')">تحويل</button></div>
-      </div>
-      <div style="background:rgba(26,79,255,0.07);border:1px solid rgba(26,79,255,0.15);border-radius:12px;padding:11px 14px;font-size:12px;color:rgba(255,255,255,0.4);text-align:center;">💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق</div>
+      <div style="background:rgba(32,96,255,.05);border:1px solid rgba(32,96,255,.13);border-radius:11px;padding:11px;font-size:12px;color:rgba(255,255,255,.38);text-align:center;">💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق</div>
     </div>
 
-    <!-- s2: اللوغوهات -->
-    <div class="section" id="s2">
-      <div class="sec-title">🎨 اللوغوهات</div>
-      <div class="logos-grid" id="logosGrid"></div>
+    <!-- الطلبات -->
+    <div class="sec" id="s2">
+      <div class="stitle">الطلبات</div>
+      <div class="anote" id="anote">🔑 أنت مسجل كمالك — ترى جميع الطلبات</div>
+      <div class="otabs"><button class="otab op" id="otp" onclick="switchOT('p')">⏳ المعلقة <span id="pc"></span></button><button class="otab" id="otd" onclick="switchOT('d')">✅ المكتملة <span id="dc"></span></button></div>
+      <div class="olw show" id="pl"></div>
+      <div class="olw" id="dl"></div>
     </div>
 
-    <!-- s3: الطلبات -->
-    <div class="section" id="s3">
-      <div class="sec-title">الطلبات</div>
-      <div class="admin-note" id="adminNote">🔑 أنت مسجل كمالك — يمكنك رؤية جميع الطلبات</div>
-      <div id="ordersList"></div>
+    <!-- الإعدادات -->
+    <div class="sec" id="s3">
+      <div class="stitle">⚙️ الإعدادات</div>
+      <div class="sbox sbp"><div class="sbt purple">🔥 أسعار فري فاير (NC)</div><div id="ffed"></div><button class="btsave" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#5018b0,#7030e0);color:#fff;">💾 حفظ فري فاير</button></div>
+      <div class="sbox sbo"><div class="sbt orange">🐔 أسعار ببجي موبايل (NC)</div><div id="pubged"></div><button class="btsave" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#904000,#c06000);color:#fff;">💾 حفظ ببجي</button></div>
+      <div class="sbox sbr"><div class="sbt red">🛡️ الجدار الناري</div><div style="font-size:12px;color:rgba(255,255,255,.38);margin-bottom:10px;">حظر مستخدمين من الدخول</div><div class="banrow"><input class="inp" id="bani" placeholder="اسم المستخدم"><button class="btnban" onclick="banUser()">🚫 حظر</button></div><div id="blist"></div></div>
     </div>
 
-    <!-- s4: الإعدادات -->
-    <div class="section" id="s4">
-      <div class="sec-title">⚙️ الإعدادات</div>
-      <div class="setting-box box-purple">
-        <div class="box-title purple">🔥 أسعار فري فاير (NC)</div>
-        <div id="ffPriceEd"></div>
-        <button class="btn-save" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#7b2fff,#4f1bb5);color:#fff;">💾 حفظ أسعار فري فاير</button>
+    <!-- الدعم -->
+    <div class="sec" id="s4">
+      <div class="stitle">💬 الدعم والشات</div>
+      <div id="achatbox" style="display:none;margin-bottom:12px;"><div class="box boxg"><div class="boxt green">📋 محادثات الزبائن</div><div id="culist"></div></div></div>
+      <div class="cwrap">
+        <div class="cheader"><div class="cav">🎧</div><div><div class="ctit" id="ctit">دعم Nova Store</div><div class="csta">متصل</div></div></div>
+        <div class="cmsgs" id="cmsgs"><div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div></div>
+        <div class="cfoot"><input class="inp" id="cinp" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter')sendMsg()"><button class="btnsend" onclick="sendMsg()">➤</button></div>
       </div>
-      <div class="setting-box box-orange">
-        <div class="box-title orange">🐔 أسعار ببجي موبايل (NC)</div>
-        <div id="pubgPriceEd"></div>
-        <button class="btn-save" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#c07000,#e09000);color:#000;">💾 حفظ أسعار ببجي</button>
-      </div>
-      <div class="setting-box box-gold">
-        <div class="box-title gold">🎨 أسعار اللوغوهات (دينار)</div>
-        <div class="price-row-s"><label>السعر العادي</label><input class="pinp" id="lpN" type="number" min="0" step="0.5"><span style="font-size:12px;color:rgba(255,255,255,0.4);">د.ل</span></div>
-        <div class="price-row-s"><label>سعر الخصم</label><input class="pinp" id="lpD" type="number" min="0" step="0.5"><span style="font-size:12px;color:rgba(255,255,255,0.4);">د.ل</span></div>
-        <button class="btn-save" onclick="saveLP()" style="background:linear-gradient(135deg,var(--gold),#e0aa00);color:#000;">💾 حفظ أسعار اللوغوهات</button>
-      </div>
-      <div class="setting-box box-green">
-        <div class="box-title green">👁️ إعدادات الأقسام</div>
-        <div class="toggle-row"><span style="font-size:13px;font-weight:700;">إظهار قسم اللوغوهات للزبائن</span><label class="tsw"><input type="checkbox" id="lgToggle2" onchange="toggleLG2()"><span class="tsl"></span></label></div>
-      </div>
-
-      <!-- الجدار الناري -->
-      <div class="setting-box" style="background:rgba(255,68,68,0.07);border:1px solid rgba(255,68,68,0.25);">
-        <div class="box-title" style="color:#ff6060;">🛡️ الجدار الناري — حظر المستخدمين</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:12px;">المستخدمون المحظورون لا يستطيعون الدخول للموقع</div>
-        <div style="display:flex;gap:8px;margin-bottom:14px;">
-          <input class="inp" id="banUserInp" placeholder="اسم المستخدم المراد حظره" style="margin:0;flex:1;padding:10px 14px;">
-          <button onclick="banUser()" style="padding:10px 16px;background:linear-gradient(135deg,var(--red),#cc2222);border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">🚫 حظر</button>
-        </div>
-        <div id="bannedList"></div>
-      </div>
-    </div>
-
-    <!-- s5: الدعم والشات -->
-    <div class="section" id="s5">
-      <div class="sec-title">💬 الدعم والشات</div>
-
-      <!-- قائمة محادثات الأدمن -->
-      <div id="adminChatBox" style="display:none;margin-bottom:14px;">
-        <div class="box box-green">
-          <div class="box-title green">📋 محادثات الزبائن</div>
-          <div id="chatUsersList"></div>
-        </div>
-      </div>
-
-      <!-- نافذة الشات -->
-      <div class="chat-wrap">
-        <div class="chat-header">
-          <div class="chat-av">🎧</div>
-          <div><div class="chat-title" id="chatTitle">دعم Nova Store</div><div class="chat-status">● متصل</div></div>
-        </div>
-        <div class="chat-msgs" id="chatMsgs">
-          <div style="text-align:center;font-size:12px;color:rgba(255,255,255,0.25);padding:20px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div>
-        </div>
-        <div class="chat-foot">
-          <input class="inp" id="chatInp" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter')sendMsg()">
-          <button class="btn-send" onclick="sendMsg()">➤</button>
-        </div>
-      </div>
-
-      <a class="support-wa" href="https://wa.me/218926364857" target="_blank"><div class="wa-icon">💬</div><div class="wa-info"><h3>واتساب</h3><p>تواصل مباشر على واتساب</p></div></a>
-      <div style="text-align:center;margin-top:16px;color:rgba(255,255,255,0.18);font-size:11px;">© 2026 <span style="color:var(--cyan)">NOVA STORE</span></div>
+      <a class="swa" href="https://wa.me/218926364857" target="_blank"><div class="wai">💬</div><div class="wai2"><h3>واتساب</h3><p>تواصل مباشر</p></div></a>
+      <div style="text-align:center;margin-top:14px;color:rgba(255,255,255,.15);font-size:11px;">© 2026 <span style="color:var(--cyan)">NOVA STORE</span></div>
     </div>
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="goTab(0)" id="t0"><span class="tab-icon">⚡</span>الشحن</button>
-    <button class="tab" onclick="goTab(1)" id="t1"><span class="tab-icon">🪙</span>المحفظة</button>
-    <button class="tab" onclick="goTab(2)" id="t2" style="display:none"><span class="tab-icon">🎨</span>لوغوهات</button>
-    <button class="tab" onclick="goTab(3)" id="t3"><span class="tab-icon">📋</span>طلباتي<span class="tab-badge" id="orderBadge">0</span></button>
-    <button class="tab" onclick="goTab(4)" id="t4" style="display:none"><span class="tab-icon">⚙️</span>إعدادات</button>
-    <button class="tab" onclick="goTab(5)" id="t5"><span class="tab-icon">💬</span>الدعم<span class="tab-badge" id="chatBadge">0</span></button>
+    <button class="tab active" onclick="goTab(0)" id="t0"><span class="tabi">⚡</span>الشحن</button>
+    <button class="tab" onclick="goTab(1)" id="t1"><span class="tabi">🪙</span>المحفظة</button>
+    <button class="tab" onclick="goTab(2)" id="t2"><span class="tabi">📋</span>الطلبات<span class="tbdg" id="obdg">0</span></button>
+    <button class="tab" onclick="goTab(3)" id="t3" style="display:none"><span class="tabi">⚙️</span>إعدادات</button>
+    <button class="tab" onclick="goTab(4)" id="t4"><span class="tabi">💬</span>الدعم<span class="tbdg" id="cbdg">0</span></button>
   </div>
 </div>
 
-<!-- Modal تحويل -->
-<div class="modal-overlay" id="modalOv">
-  <div class="modal-sheet">
+<!-- Modal -->
+<div class="mov" id="mov">
+  <div class="msh">
     <button class="mcb" onclick="closeTr()">✕</button>
-    <div class="modal-title" id="mTitle">تحويل</div>
-    <div class="modal-sub">أدخل تفاصيل التحويل لشحن محفظتك</div>
-    <div class="tib">حوّل إلى: <strong id="mNum" style="color:var(--cyan)"></strong><br><span style="font-size:11px;">1 نوفا كوين = $1 = 10 دينار ليبي</span></div>
-    <span class="inp-label">رقم الهاتف المحوَّل منه</span>
-    <input class="inp" id="trPhone" placeholder="مثال: 0912345678" style="margin-bottom:12px;">
-    <span class="inp-label">المبلغ بالدينار الليبي</span>
-    <input class="inp" id="trAmt" type="number" placeholder="مثال: 50" style="margin-bottom:12px;" oninput="calcNC()">
-    <div id="ncPrev" style="background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:16px;display:none;">ستحصل على: <strong id="ncRes">0</strong> 🪙 نوفا كوين</div>
-    <button class="btn-tr" id="btnTr" onclick="submitTr()">إرسال طلب التحويل</button>
+    <div class="mtit" id="mtit">تحويل</div>
+    <div class="msub">أدخل تفاصيل التحويل لشحن محفظتك</div>
+    <div class="tib">حوّل إلى: <strong id="mnum" style="color:var(--cyan)"></strong><br><span style="font-size:11px;">1 نوفا كوين = $1 = 10 دينار ليبي</span></div>
+    <span class="il">رقم الهاتف المحوَّل منه</span>
+    <input class="inp" id="trph" placeholder="0912345678" style="margin-bottom:11px;">
+    <span class="il">المبلغ بالدينار الليبي</span>
+    <input class="inp" id="tramt" type="number" placeholder="50" style="margin-bottom:11px;" oninput="calcNC()">
+    <div id="ncprev" style="background:rgba(255,200,48,.07);border:1px solid rgba(255,200,48,.18);border-radius:9px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:14px;display:none;">ستحصل على: <strong id="ncres">0</strong> 🪙 نوفا كوين</div>
+    <button class="btntr" id="btntr" onclick="submitTr()">إرسال طلب التحويل</button>
   </div>
 </div>
 
@@ -427,315 +387,195 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 const OWN={u:'NovaAdmin',p:'Nova@9999'};
 const BOT='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
 const CID='8835257002';
-const LC=10;
+const BW=['قواد','قحبة','شرموط','شرموطة','بعبوص','زبي','مسكسك','مزبر','زبور'];
 
-let me=null,orders=[],wallets={},gImgs={ff:null,pubg:null},lImgs={},lDisc={},lgVis=false,trM='',trN='';
-let lPrices={normal:3,discount:1};
-let gPrices={
+let me=null,orders=[],wallets={},gImgs={ff:null,pubg:null},trM='',trN='';
+let gP={
   ff:[{a:'100 ألماس',c:0.99},{a:'200 ألماس',c:1.99},{a:'500 ألماس',c:4.99},{a:'1000 ألماس',c:9.99},{a:'2000 ألماس',c:19.99},{a:'5600 ألماس',c:49.99}],
   pubg:[{a:'60 UC',c:0.99},{a:'300 UC',c:4.99},{a:'600 UC',c:9.99},{a:'1500 UC',c:24.99},{a:'3000 UC',c:49.99},{a:'6000 UC',c:99.99}]
 };
-let chats={};
-let activeChatUser=null;
-let chatTimer=null;
+let chats={},acu=null,ctmr=null,cot='p';
 
 function ld(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-
-function loadAll(){
-  orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});
-  lImgs=ld('li',{});lDisc=ld('ld',{});lgVis=ld('lv',false);
-  lPrices=ld('lp',{normal:3,discount:1});
-  gPrices=ld('gp',gPrices);
-  chats=ld('chats',{});
-}
-
-function getBal(u){return parseFloat((wallets[u]||0).toFixed(2));}
-function setBal(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));sv('w',wallets);}
-
-// ═══ FIREWALL ═══
-const BANNED_WORDS=['قواد','قحبة','شرموط','شرموطة','بعبوص','زبي','مسكسك','مزبر','زبور'];
-const MAX_LOGIN_ATTEMPTS=5;
-const BLOCK_DURATION=15*60*1000; // 15 دقيقة
-
-function isBannedName(name){
-  const lower=name.toLowerCase();
-  return BANNED_WORDS.some(w=>lower.includes(w.toLowerCase()));
-}
-
-function isBlocked(){
-  const data=ld('fw_block',null);
-  if(!data)return false;
-  if(Date.now()<data.until){return true;}
-  localStorage.removeItem('fw_block');
-  localStorage.removeItem('fw_attempts');
-  return false;
-}
-
-function registerFailedAttempt(){
-  let attempts=ld('fw_attempts',0)+1;
-  sv('fw_attempts',attempts);
-  if(attempts>=MAX_LOGIN_ATTEMPTS){
-    sv('fw_block',{until:Date.now()+BLOCK_DURATION});
-    localStorage.removeItem('fw_attempts');
-  }
-  return MAX_LOGIN_ATTEMPTS-attempts;
-}
-
-function resetAttempts(){
-  localStorage.removeItem('fw_attempts');
-  localStorage.removeItem('fw_block');
-}
-
-function sanitizeInput(str){
-  return str.replace(/[<>'";&]/g,'').trim().substring(0,50);
-}
+function la(){orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});gP=ld('gp',gP);chats=ld('chats',{});}
+function gb(u){return parseFloat((wallets[u]||0).toFixed(2));}
+function sb(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));sv('w',wallets);}
+function san(s){return s.replace(/[<>'";&]/g,'').trim().substring(0,50);}
+function ibn(n){return BW.some(w=>n.includes(w));}
+function ibl(){const d=ld('fwb',null);if(!d)return false;if(Date.now()<d.u)return true;localStorage.removeItem('fwb');localStorage.removeItem('fwa');return false;}
+function rsta(){localStorage.removeItem('fwa');localStorage.removeItem('fwb');}
 
 function login(){
-  const rawU=document.getElementById('uIn').value.trim();
-  const rawP=document.getElementById('pIn').value;
+  const ru=document.getElementById('uIn').value.trim(),rp=document.getElementById('pIn').value;
   const err=document.getElementById('errMsg');
-
-  // فحص الحظر
-  if(isBlocked()){
-    const data=ld('fw_block',null);
-    const mins=Math.ceil((data.until-Date.now())/60000);
-    err.textContent='🚫 تم حظرك مؤقتاً بسبب محاولات متعددة. انتظر '+mins+' دقيقة';
-    err.classList.add('show');return;
-  }
-
-  if(!rawU||!rawP){
-    err.textContent='يرجى إدخال اسم المستخدم وكلمة المرور';
-    err.classList.add('show');return;
-  }
-
-  // تنظيف المدخلات
-  const u=sanitizeInput(rawU);
-  const p=rawP.substring(0,100);
-
-  // فحص الاسم المحظور
-  if(isBannedName(u)){
-    err.textContent='🚫 هذا الاسم غير مسموح به';
-    err.classList.add('show');return;
-  }
-
-  // فحص طول الاسم
-  if(u.length<2){
-    err.textContent='❗ الاسم قصير جداً';
-    err.classList.add('show');return;
-  }
-
+  if(ibl()){const d=ld('fwb',null);const m=Math.ceil((d.u-Date.now())/60000);err.textContent='🚫 محظور مؤقتاً. انتظر '+m+' دقيقة';err.classList.add('show');return;}
+  if(!ru||!rp){err.textContent='يرجى إدخال اسم المستخدم وكلمة المرور';err.classList.add('show');return;}
+  const u=san(ru),p=rp.substring(0,100);
+  if(ibn(u)){err.textContent='🚫 هذا الاسم غير مسموح به';err.classList.add('show');return;}
+  if(u.length<2){err.textContent='❗ الاسم قصير جداً';err.classList.add('show');return;}
   err.classList.remove('show');
-  err.textContent='يرجى إدخال اسم المستخدم وكلمة المرور';
-  loadAll();
-
-  // فحص الحظر الإداري
-  const bannedUsers=ld('fw_banned_users',[]);
-  if(bannedUsers.includes(u.toLowerCase())&&u!==OWN.u){
-    err.textContent='🚫 هذا الحساب محظور. تواصل مع الدعم';
-    err.classList.add('show');return;
-  }
-
-  resetAttempts();
+  la();
+  const banned=ld('fwbu',[]);
+  if(banned.includes(u.toLowerCase())&&u!==OWN.u){err.textContent='🚫 هذا الحساب محظور';err.classList.add('show');return;}
+  rsta();
   if(wallets[u]===undefined){wallets[u]=0;sv('w',wallets);}
   me={n:u,own:(u===OWN.u&&p===OWN.p)};
-  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('lp').classList.add('h');
   document.getElementById('app').classList.add('show');
-  updNav();applyGImgs();renderPkgs();updateTabs();renderOrders();updBadge();
+  document.getElementById('nu').textContent=u;
+  updN();applyI();renderP();updTabs();renderO();updB();
 }
 
 function logout(){
   me=null;
-  if(chatTimer){clearInterval(chatTimer);chatTimer=null;}
-  document.getElementById('loginPage').classList.remove('hidden');
+  if(ctmr){clearInterval(ctmr);ctmr=null;}
+  document.getElementById('lp').classList.remove('h');
   document.getElementById('app').classList.remove('show');
-  document.getElementById('uIn').value='';document.getElementById('pIn').value='';
+  document.getElementById('uIn').value='';
+  document.getElementById('pIn').value='';
 }
 
-function updNav(){
-  if(!me)return;
-  const b=getBal(me.n);
-  document.getElementById('navWallet').textContent='🪙 '+b.toFixed(2)+' NC';
-  document.getElementById('walletDisplay').textContent=b.toFixed(2);
-}
+function updN(){if(!me)return;const b=gb(me.n);document.getElementById('nw').textContent='🪙 '+b.toFixed(2)+' NC';document.getElementById('wd').textContent=b.toFixed(2);}
 
-function applyGImgs(){
+function applyI(){
   ['ff','pubg'].forEach(g=>{
-    const img=document.getElementById(g+'Img'),ic=document.getElementById(g+'NoImg'),src=gImgs[g];
+    const src=gImgs[g];
+    const img=document.getElementById(g==='ff'?'ffi':'pubgi');
+    const ic=document.getElementById(g==='ff'?'ffni':'pubgni');
     if(src){img.src=src;img.style.display='block';ic.style.display='none';}else{img.style.display='none';ic.style.display='block';}
-    const pi=document.getElementById(g+'Prev'),pc=document.getElementById(g+'PrevIcon');
+    const pi=document.getElementById(g+'prev'),pc=document.getElementById(g+'pic');
     if(pi&&pc){if(src){pi.src=src;pi.style.display='block';pc.style.display='none';}else{pi.style.display='none';pc.style.display='block';}}
   });
 }
 
-function renderPkgs(){
+function renderP(){
   ['ff','pubg'].forEach(g=>{
     const em=g==='ff'?'💎':'🟡';
-    document.getElementById(g+'Pkgs').innerHTML=gPrices[g].map((p,i)=>`
-      <div class="pkg-item" data-i="${i}" onclick="selP(this,'${g}')">
-        <span class="pkg-gem">${em} ${p.a}</span>
-        <span class="pkg-coin">${p.c} NC</span>
+    document.getElementById(g+'p').innerHTML=gP[g].map((p,i)=>`
+      <div class="pcard" data-i="${i}" onclick="selP(this,'${g}')">
+        <span class="pck">✓</span><span class="pem">${em}</span>
+        <span class="pamt">${p.a}</span><span class="ppr">${p.c} NC</span>
       </div>`).join('');
   });
 }
 
-function updateTabs(){
-  const o=me&&me.own;
-  document.getElementById('t2').style.display=(lgVis||o)?'flex':'none';
-  document.getElementById('t4').style.display=o?'flex':'none';
+function sg(g){
+  document.getElementById('gff').classList.toggle('active',g==='ff');
+  document.getElementById('gpubg').classList.toggle('active',g==='pubg');
+  document.getElementById('pff').classList.toggle('active',g==='ff');
+  document.getElementById('ppubg').classList.toggle('active',g==='pubg');
 }
 
-const secs=['s0','s1','s2','s3','s4','s5'];
+function updTabs(){document.getElementById('t3').style.display=me&&me.own?'flex':'none';}
+
+const secs=['s0','s1','s2','s3','s4'];
 function goTab(i){
   secs.forEach((s,j)=>{document.getElementById(s).classList.toggle('active',j===i);document.getElementById('t'+j).classList.toggle('active',j===i);});
-  if(i===1)rendWallet();
-  if(i===2)buildLG();
-  if(i===3)renderOrders();
-  if(i===4)openSettings();
-  if(i===5)initChat();
+  if(i===1)rendW();if(i===2)renderO();if(i===3)openS();if(i===4)initChat();
 }
 
-function rendWallet(){
-  updNav();
-  const o=me&&me.own;
-  document.getElementById('adminSelfBox').style.display=o?'block':'none';
-  document.getElementById('adminUsersBox').style.display=o?'block':'none';
-  document.getElementById('adminImgBox').style.display=o?'block':'none';
-  document.getElementById('adminLogosBox').style.display=o?'block':'none';
-  if(o){rendUsers();buildALG();document.getElementById('lgToggle').checked=lgVis;}
+function rendW(){
+  updN();const o=me&&me.own;
+  document.getElementById('aself').style.display=o?'block':'none';
+  document.getElementById('ausers').style.display=o?'block':'none';
+  document.getElementById('aimgs').style.display=o?'block':'none';
+  if(o)rendU();
 }
 
-function openSettings(){
+function openS(){
   ['ff','pubg'].forEach(g=>{
-    const ed=document.getElementById(g+'PriceEd');
-    const em=g==='ff'?'💎':'🟡';
-    ed.innerHTML=gPrices[g].map((p,i)=>`
-      <div class="price-row-s">
-        <label>${em} ${p.a}</label>
-        <input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01">
-        <span style="font-size:11px;color:rgba(255,255,255,0.35);">NC</span>
-      </div>`).join('');
+    const ed=document.getElementById(g+'ed'),em=g==='ff'?'💎':'🟡';
+    ed.innerHTML=gP[g].map((p,i)=>`<div class="prow"><label>${em} ${p.a}</label><input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01"><span style="font-size:11px;color:rgba(255,255,255,.3)">NC</span></div>`).join('');
   });
-  document.getElementById('lpN').value=lPrices.normal;
-  document.getElementById('lpD').value=lPrices.discount;
-  document.getElementById('lgToggle2').checked=lgVis;
-  renderBannedList();
-}
-
-function banUser(){
-  const inp=document.getElementById('banUserInp');
-  const name=sanitizeInput(inp.value);
-  if(!name){showToast('❗ أدخل اسم المستخدم');return;}
-  if(name.toLowerCase()===OWN.u.toLowerCase()){showToast('❌ لا يمكن حظر المالك');return;}
-  let banned=ld('fw_banned_users',[]);
-  if(banned.includes(name.toLowerCase())){showToast('⚠️ هذا المستخدم محظور مسبقاً');return;}
-  banned.push(name.toLowerCase());
-  sv('fw_banned_users',banned);
-  inp.value='';
-  renderBannedList();
-  showToast('🚫 تم حظر المستخدم: '+name);
-}
-
-function unbanUser(name){
-  let banned=ld('fw_banned_users',[]);
-  banned=banned.filter(u=>u!==name);
-  sv('fw_banned_users',banned);
-  renderBannedList();
-  showToast('✅ تم رفع الحظر عن: '+name);
-}
-
-function renderBannedList(){
-  const el=document.getElementById('bannedList');
-  if(!el)return;
-  const banned=ld('fw_banned_users',[]);
-  if(!banned.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;padding:8px;">لا يوجد مستخدمون محظورون</div>';return;}
-  el.innerHTML=banned.map(u=>`
-    <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.2);border-radius:10px;padding:10px 12px;margin-bottom:6px;">
-      <span style="font-size:13px;font-weight:700;">🚫 ${u}</span>
-      <button onclick="unbanUser('${u}')" style="background:rgba(0,200,100,0.15);border:1px solid rgba(0,200,100,0.3);border-radius:7px;padding:5px 12px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;">رفع الحظر</button>
-    </div>`).join('');
+  renderBL();
 }
 
 function saveGP(g){
-  gPrices[g].forEach((p,i)=>{const v=parseFloat(document.getElementById(g+'pe'+i).value);if(v>0)gPrices[g][i].c=v;});
-  sv('gp',gPrices);renderPkgs();
-  showToast('✅ تم حفظ أسعار '+(g==='ff'?'فري فاير':'ببجي'));
+  gP[g].forEach((p,i)=>{const v=parseFloat(document.getElementById(g+'pe'+i).value);if(v>0)gP[g][i].c=v;});
+  sv('gp',gP);renderP();showToast('✅ تم حفظ الأسعار');
 }
 
-function saveLP(){
-  const n=parseFloat(document.getElementById('lpN').value)||3;
-  const d=parseFloat(document.getElementById('lpD').value)||1;
-  lPrices={normal:n,discount:d};sv('lp',lPrices);buildLG();
-  showToast('✅ تم حفظ أسعار اللوغوهات');
-}
+function upImg(g,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{gImgs[g]=e.target.result;sv('gi',gImgs);applyI();showToast('✅ تم تحديث الصورة');};r.readAsDataURL(f);}
+function resetImg(g){gImgs[g]=null;sv('gi',gImgs);document.getElementById(g==='ff'?'fff':'pubgf').value='';applyI();showToast('🗑 تم حذف الصورة');}
 
-function toggleLG(){lgVis=document.getElementById('lgToggle').checked;sv('lv',lgVis);updateTabs();if(document.getElementById('lgToggle2'))document.getElementById('lgToggle2').checked=lgVis;showToast(lgVis?'✅ مرئي':'🔒 مخفي');}
-function toggleLG2(){lgVis=document.getElementById('lgToggle2').checked;sv('lv',lgVis);updateTabs();if(document.getElementById('lgToggle'))document.getElementById('lgToggle').checked=lgVis;showToast(lgVis?'✅ مرئي':'🔒 مخفي');}
-
-function upImg(g,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{gImgs[g]=e.target.result;sv('gi',gImgs);applyGImgs();showToast('✅ تم تحديث صورة '+(g==='ff'?'Free Fire':'PUBG'));};r.readAsDataURL(f);}
-function resetImg(g){gImgs[g]=null;sv('gi',gImgs);document.getElementById(g+'File').value='';applyGImgs();showToast('🗑 تم حذف الصورة');}
-
-function buildLG(){
-  const gr=document.getElementById('logosGrid');let h='';
-  for(let i=1;i<=LC;i++){
-    const src=lImgs[i]||null,dis=lDisc[i]||false,pr=dis?lPrices.discount:lPrices.normal;
-    h+=`<div class="logo-slot"><span class="badge-num">${i}</span>${dis?'<span class="badge-discount">🔥 خصم</span>':''}`;
-    if(src){h+=`<img class="logo-slot-img" src="${src}"><div class="logo-slot-info"><div class="${dis?'logo-price-d':'logo-price-n'}">${dis?`<span class="old-price">${lPrices.normal} د.ل</span>`:''} ${pr} د.ل</div><button class="btn-buy ${dis?'dis':''}" onclick="buyLG(${i},${pr})">شراء</button></div>`;}
-    else{h+=`<div class="logo-slot-empty"><span style="font-size:28px;opacity:0.25">🖼️</span><span style="font-size:10px;color:rgba(255,255,255,0.2)">فارغ</span></div><div class="logo-slot-info"><div class="logo-price-n">${pr} د.ل</div><button class="btn-buy" disabled style="opacity:0.3">فارغ</button></div>`;}
-    h+='</div>';
-  }
-  gr.innerHTML=h;
-}
-
-function buildALG(){
-  const gr=document.getElementById('adminLGGrid');let h='';
-  for(let i=1;i<=LC;i++){
-    const src=lImgs[i]||null,dis=lDisc[i]||false;
-    h+=`<div class="al-item"><div class="al-prev">${src?`<img src="${src}">`:`<div style="font-size:24px;opacity:0.3">🖼️</div>`}</div><div class="al-info"><div class="al-meta"><span class="al-num">لوغو ${i}</span><button class="dtoggle ${dis?'on':''}" onclick="togDisc(${i})">${dis?'🔥 خصم':'خصم؟'}</button></div><input type="file" id="lf${i}" accept="image/*" style="display:none" onchange="upLG(${i},this)"><button class="btn-lu" onclick="document.getElementById('lf${i}').click()">📤 رفع</button>${src?`<button class="btn-ld" onclick="delLG(${i})">🗑 حذف</button>`:''}</div></div>`;
-  }
-  gr.innerHTML=h;
-}
-
-function upLG(n,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{lImgs[n]=e.target.result;sv('li',lImgs);buildALG();buildLG();showToast('✅ تم رفع اللوغو '+n);};r.readAsDataURL(f);}
-function delLG(n){delete lImgs[n];sv('li',lImgs);buildALG();buildLG();showToast('🗑 تم حذف اللوغو '+n);}
-function togDisc(n){lDisc[n]=!lDisc[n];sv('ld',lDisc);buildALG();buildLG();showToast(lDisc[n]?'🔥 تم تفعيل خصم لوغو '+n:'تم إلغاء خصم لوغو '+n);}
-function buyLG(n,p){showToast('💬 تواصل مع الدعم لشراء لوغو '+n+' بسعر '+p+' د.ل');}
-
-// الشحن
 const sel={ff:null,pubg:null};
-function selP(el,g){document.querySelectorAll('#'+g+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');const i=parseInt(el.dataset.i);sel[g]={a:gPrices[g][i].a,c:gPrices[g][i].c};}
-function doOrder(g){
+function selP(el,g){document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');const i=parseInt(el.dataset.i);sel[g]={a:gP[g][i].a,c:gP[g][i].c};}
+
+function doOrd(g){
   if(!sel[g]){showToast('❗ اختر كمية الشحن أولاً');return;}
-  const idEl=document.getElementById(g+'Id'),uid=idEl.value.trim();
+  const idEl=document.getElementById(g==='ff'?'fid':'pid'),uid=idEl.value.trim();
   if(!uid){showToast('❗ أدخل معرّف الحساب');return;}
-  const{a,c}=sel[g],bal=getBal(me.n);
+  const{a,c}=sel[g],bal=gb(me.n);
   if(bal<c){showToast('❌ رصيدك غير كافٍ! رصيدك: '+bal.toFixed(2)+' NC');return;}
-  setBal(me.n,bal-c);updNav();
+  sb(me.n,bal-c);updN();
   const gn=g==='ff'?'Free Fire':'PUBG Mobile';
   orders.push({id:Date.now(),user:me.n,game:gn,amount:a,cost:c,uid,time:new Date().toLocaleString('ar'),status:'pending'});
-  sv('o',orders);updBadge();
+  sv('o',orders);updB();
   sendTG('🛒 طلب شحن جديد\nاللعبة: '+gn+'\nالكمية: '+a+'\nالتكلفة: '+c+' NC\nمعرف: '+uid+'\nالزبون: '+me.n);
   showToast('✅ تم الشحن! خُصم '+c+' NC');
-  idEl.value='';document.querySelectorAll('#'+g+'Pkgs .pkg-item').forEach(p=>p.classList.remove('sel'));sel[g]=null;
+  idEl.value='';document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));sel[g]=null;
 }
 
-// الأدمن
-function rendUsers(){
-  const list=document.getElementById('usersList');
-  const users=Object.keys(wallets).filter(u=>u!==OWN.u);
-  if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
-  list.innerHTML=users.map(u=>`<div class="user-row"><div class="user-row-top"><div><div class="user-name-txt">👤 ${u}</div><div class="user-bal-txt">🪙 ${getBal(u).toFixed(2)} NC</div></div><div class="user-btns"><button class="btn-add" onclick="togF('${u}','a')">+ إضافة</button><button class="btn-wd" onclick="togF('${u}','w')">- سحب</button></div></div><div class="uform" id="uf_${u}"><input class="inp" id="ua_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btn-ca" id="bca_${u}" onclick="doB('${u}','a')">إضافة ✓</button><button class="btn-cw" id="bcw_${u}" onclick="doB('${u}','w')" style="display:none">سحب ✓</button></div></div>`).join('');
+function rendU(){
+  const list=document.getElementById('ulist'),users=Object.keys(wallets).filter(u=>u!==OWN.u);
+  if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.35);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
+  list.innerHTML=users.map(u=>`<div class="ur"><div class="urt"><div><div class="un">👤 ${u}</div><div class="ub">🪙 ${gb(u).toFixed(2)} NC</div></div><div class="ubtns"><button class="ba" onclick="togF('${u}','a')">+ إضافة</button><button class="bw" onclick="togF('${u}','w')">- سحب</button></div></div><div class="uf" id="uf_${u}"><input class="inp" id="ua_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="bca" id="bca_${u}" onclick="doB('${u}','a')">✓</button><button class="bcw" id="bcw_${u}" onclick="doB('${u}','w')" style="display:none">✓</button></div></div>`).join('');
 }
 function togF(u,t){const f=document.getElementById('uf_'+u),ba=document.getElementById('bca_'+u),bw=document.getElementById('bcw_'+u);const op=f.classList.contains('show');if(op&&((t==='a'&&ba.style.display!=='none')||(t==='w'&&bw.style.display!=='none'))){f.classList.remove('show');return;}f.classList.add('show');if(t==='a'){ba.style.display='block';bw.style.display='none';}else{ba.style.display='none';bw.style.display='block';}}
-function doB(u,t){const amt=parseFloat(document.getElementById('ua_'+u).value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}const cur=getBal(u);if(t==='w'&&amt>cur){showToast('❌ الرصيد غير كافٍ');return;}t==='a'?setBal(u,cur+amt):setBal(u,cur-amt);document.getElementById('ua_'+u).value='';document.getElementById('uf_'+u).classList.remove('show');rendUsers();updNav();showToast('✅ تم '+(t==='a'?'إضافة':'سحب')+' '+amt+' NC '+(t==='a'?'لـ':'من')+' '+u);sendTG('💰 '+(t==='a'?'إضافة':'سحب')+' رصيد\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC\nالجديد: '+getBal(u)+' NC');}
-function selfAdd(){const amt=parseFloat(document.getElementById('selfAmt').value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}setBal(me.n,getBal(me.n)+amt);document.getElementById('selfAmt').value='';updNav();showToast('✅ تم إضافة '+amt+' NC لرصيدك');}
+function doB(u,t){const amt=parseFloat(document.getElementById('ua_'+u).value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}const cur=gb(u);if(t==='w'&&amt>cur){showToast('❌ الرصيد غير كافٍ');return;}t==='a'?sb(u,cur+amt):sb(u,cur-amt);document.getElementById('ua_'+u).value='';document.getElementById('uf_'+u).classList.remove('show');rendU();updN();showToast('✅ تم '+(t==='a'?'إضافة':'سحب')+' '+amt+' NC '+(t==='a'?'لـ':'من')+' '+u);sendTG('💰 '+(t==='a'?'إضافة':'سحب')+'\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC');}
+function selfAdd(){const amt=parseFloat(document.getElementById('samt').value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}sb(me.n,gb(me.n)+amt);document.getElementById('samt').value='';updN();showToast('✅ تم إضافة '+amt+' NC');}
 
-// التحويل
-function openTr(m,n){trM=m;trN=n;document.getElementById('mTitle').textContent='تحويل عبر '+m;document.getElementById('mNum').textContent='+'+n;const b=document.getElementById('btnTr');b.className='btn-tr '+(m==='ليبيانا'?'btn-tr-b':'btn-tr-g');document.getElementById('trPhone').value='';document.getElementById('trAmt').value='';document.getElementById('ncPrev').style.display='none';document.getElementById('modalOv').classList.add('open');}
-function closeTr(){document.getElementById('modalOv').classList.remove('open');}
-function calcNC(){const a=parseFloat(document.getElementById('trAmt').value)||0;const p=document.getElementById('ncPrev');if(a>0){p.style.display='block';document.getElementById('ncRes').textContent=(a/10).toFixed(2);}else p.style.display='none';}
-function submitTr(){const ph=document.getElementById('trPhone').value.trim(),amt=parseFloat(document.getElementById('trAmt').value)||0;if(!ph){showToast('❗ أدخل رقم الهاتف');return;}if(amt<=0){showToast('❗ أدخل المبلغ');return;}sendTG('💳 طلب شحن محفظة\nالزبون: '+me.n+'\nالطريقة: '+trM+'\nالرقم: '+ph+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');closeTr();showToast('✅ تم إرسال طلب التحويل!');}
+function banUser(){const inp=document.getElementById('bani');const name=san(inp.value);if(!name){showToast('❗ أدخل اسم المستخدم');return;}if(name.toLowerCase()===OWN.u.toLowerCase()){showToast('❌ لا يمكن حظر المالك');return;}let b=ld('fwbu',[]);if(b.includes(name.toLowerCase())){showToast('⚠️ محظور مسبقاً');return;}b.push(name.toLowerCase());sv('fwbu',b);inp.value='';renderBL();showToast('🚫 تم حظر: '+name);}
+function unbanUser(name){let b=ld('fwbu',[]);b=b.filter(u=>u!==name);sv('fwbu',b);renderBL();showToast('✅ تم رفع الحظر عن: '+name);}
+function renderBL(){const el=document.getElementById('blist');if(!el)return;const b=ld('fwbu',[]);if(!b.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا يوجد مستخدمون محظورون</div>';return;}el.innerHTML=b.map(u=>`<div class="bitem"><span style="font-size:13px;font-weight:700;">🚫 ${u}</span><button class="btnunban" onclick="unbanUser('${u}')">رفع الحظر</button></div>`).join('');}
 
-// الطلبات
-function renderOrders(){
-  const list=document
+function openTr(m,n){trM=m;trN=n;document.getElementById('mtit').textContent='تحويل عبر '+m;document.getElementById('mnum').textContent='+'+n;document.getElementById('btntr').className='btntr '+(m==='ليبيانا'?'bttb':'bttg');document.getElementById('trph').value='';document.getElementById('tramt').value='';document.getElementById('ncprev').style.display='none';document.getElementById('mov').classList.add('open');}
+function closeTr(){document.getElementById('mov').classList.remove('open');}
+function calcNC(){const a=parseFloat(document.getElementById('tramt').value)||0;const p=document.getElementById('ncprev');if(a>0){p.style.display='block';document.getElementById('ncres').textContent=(a/10).toFixed(2);}else p.style.display='none';}
+function submitTr(){const ph=document.getElementById('trph').value.trim(),amt=parseFloat(document.getElementById('tramt').value)||0;if(!ph){showToast('❗ أدخل رقم الهاتف');return;}if(amt<=0){showToast('❗ أدخل المبلغ');return;}sendTG('💳 طلب شحن محفظة\nالزبون: '+me.n+'\nالطريقة: '+trM+'\nالرقم: '+ph+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');closeTr();showToast('✅ تم إرسال طلب التحويل!');}
+
+function switchOT(t){
+  cot=t;
+  document.getElementById('otp').className='otab '+(t==='p'?'op':'');
+  document.getElementById('otd').className='otab '+(t==='d'?'od':'');
+  document.getElementById('pl').classList.toggle('show',t==='p');
+  document.getElementById('dl').classList.toggle('show',t==='d');
+}
+
+function renderO(){
+  document.getElementById('anote').style.display=me&&me.own?'block':'none';
+  const all=me&&me.own?orders:orders.filter(o=>o.user===me.n);
+  const pend=all.filter(o=>o.status==='pending'),done=all.filter(o=>o.status==='done');
+  document.getElementById('pc').textContent=pend.length?'('+pend.length+')':'';
+  document.getElementById('dc').textContent=done.length?'('+done.length+')':'';
+  const rl=(list,el)=>{
+    if(!list.length){el.innerHTML='<div class="empty"><span class="eic">📭</span><p>لا توجد طلبات</p></div>';return;}
+    el.innerHTML=list.map(o=>`<div class="ocard ${o.status}"><div class="otop"><div class="og">${o.game}</div><div class="ost ${o.status==='pending'?'opst':'odst'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div></div><div class="od">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>الوقت: <span>${o.time}</span></div>${me&&me.own?`<div class="oac">${o.status==='pending'?`<button class="btndone" onclick="markD(${o.id})">✅ تم الشحن</button>`:''}<button class="btndel" onclick="delO(${o.id})">🗑 حذف</button></div>`:''}</div>`).join('');
+  };
+  rl(pend,document.getElementById('pl'));rl(done,document.getElementById('dl'));
+}
+function markD(id){const o=orders.find(x=>x.id===id);if(o){o.status='done';sv('o',orders);renderO();updB();showToast('✅ تم تمييز الطلب كمكتمل');}}
+function delO(id){orders=orders.filter(x=>x.id!==id);sv('o',orders);renderO();updB();showToast('🗑 تم حذف الطلب');}
+function updB(){const p=orders.filter(o=>me&&me.own?o.status==='pending':o.user===me.n&&o.status==='pending').length;const b=document.getElementById('obdg');b.textContent=p;b.classList.toggle('show',p>0);}
+
+function initChat(){
+  chats=ld('chats',{});
+  if(me.own){document.getElementById('achatbox').style.display='block';document.getElementById('ctit').textContent='اختر زبوناً';renderCU();const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&chats[u].length>0);if(us.length)openCW(us[0]);else renderMs([]);}
+  else{document.getElementById('achatbox').style.display='none';document.getElementById('ctit').textContent='دعم Nova Store';acu=me.n;if(!chats[me.n])chats[me.n]=[];renderMs(chats[me.n]);}
+  if(ctmr)clearInterval(ctmr);
+  ctmr=setInterval(()=>{chats=ld('chats',{});if(me&&me.own){renderCU();if(acu)renderMs(chats[acu]||[]);}else if(me){renderMs(chats[me.n]||[]);updCB();}},2000);
+}
+function renderCU(){const el=document.getElementById('culist');const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&chats[u].length>0);if(!us.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا توجد محادثات بعد</div>';return;}el.innerHTML=us.map(u=>{const msgs=chats[u]||[];const last=msgs[msgs.length-1];const unread=msgs.filter(m=>m.from===u&&!m.read).length;return `<div class="cuitem ${acu===u?'active':''}" onclick="openCW('${u}')"><div style="width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">👤</div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;">${u}</div><div style="font-size:11px;color:rgba(255,255,255,.38);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${last?last.text:'...'}</div></div>${unread>0?`<div class="curd">${unread}</div>`:''}</div>`;}).join('');}
+function openCW(u){acu=u;document.getElementById('ctit').textContent='محادثة: '+u;if(chats[u])chats[u].forEach(m=>{if(m.from===u)m.read=true;});sv('chats',chats);renderMs(chats[u]||[]);renderCU();}
+function renderMs(msgs){const el=document.getElementById('cmsgs');if(!msgs||!msgs.length){el.innerHTML='<div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div>';return;}el.innerHTML=msgs.map(m=>{const mine=(me.own&&m.from===OWN.u)||(!me.own&&m.from===me.n);return `<div class="mb ${mine?'mine':'other'}"><div class="mt ${mine?'mine':'other'}">${m.text}</div><div class="mtime">${m.time}</div></div>`;}).join('');el.scrollTop=el.scrollHeight;}
+function sendMsg(){const inp=document.getElementById('cinp');const txt=inp.value.trim();if(!txt)return;chats=ld('chats',{});const target=me.own?acu:me.n;if(!target){showToast('❗ اختر زبوناً أولاً');return;}if(!chats[target])chats[target]=[];chats[target].push({from:me.own?OWN.u:me.n,text:txt,time:new Date().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}),read:false});sv('chats',chats);inp.value='';renderMs(chats[target]);if(me.own)renderCU();if(!me.own)sendTG('💬 رسالة من: '+me.n+'\n'+txt);}
+function updCB(){if(!me||me.own)return;chats=ld('chats',{});const msgs=chats[me.n]||[];const ur=msgs.filter(m=>m.from===OWN.u&&!m.read).length;const b=document.getElementById('cbdg');b.textContent=ur;b.classList.toggle('show',ur>0);}
+
+function sendTG(msg){fetch('https://api.telegram.org/bot'+BOT+'/sendMessage?chat_id='+CID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+document.getElementById('mov').addEventListener('click',function(e){if(e.target===this)closeTr();});
+la();
+</script>
+</body>
+                                                               </html>
