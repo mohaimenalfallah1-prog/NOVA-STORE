@@ -337,9 +337,36 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
     <!-- الإعدادات -->
     <div class="sec" id="s3">
       <div class="stitle">⚙️ الإعدادات</div>
-      <div class="sbox sbp"><div class="sbt purple">🔥 أسعار فري فاير (NC)</div><div id="ffed"></div><button class="btsave" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#5018b0,#7030e0);color:#fff;">💾 حفظ فري فاير</button></div>
-      <div class="sbox sbo"><div class="sbt orange">🐔 أسعار ببجي موبايل (NC)</div><div id="pubged"></div><button class="btsave" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#904000,#c06000);color:#fff;">💾 حفظ ببجي</button></div>
-      <div class="sbox sbr"><div class="sbt red">🛡️ الجدار الناري</div><div style="font-size:12px;color:rgba(255,255,255,.38);margin-bottom:10px;">حظر مستخدمين من الدخول</div><div class="banrow"><input class="inp" id="bani" placeholder="اسم المستخدم"><button class="btnban" onclick="banUser()">🚫 حظر</button></div><div id="blist"></div></div>
+
+      <!-- أسعار وكميات فري فاير -->
+      <div class="sbox sbp">
+        <div class="sbt purple">🔥 فري فاير — الكميات والأسعار</div>
+        <div id="ffed"></div>
+        <button class="btsave" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#5018b0,#7030e0);color:#fff;">💾 حفظ فري فاير</button>
+      </div>
+
+      <!-- أسعار وكميات ببجي -->
+      <div class="sbox sbo">
+        <div class="sbt orange">🐔 ببجي موبايل — الكميات والأسعار</div>
+        <div id="pubged"></div>
+        <button class="btsave" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#904000,#c06000);color:#fff;">💾 حفظ ببجي</button>
+      </div>
+
+      <!-- نظام الخصومات -->
+      <div class="sbox" style="background:rgba(0,232,122,.05);border:1px solid rgba(0,232,122,.18);">
+        <div class="sbt green">🏷️ نظام الخصومات</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px;">فعّل خصماً على أي باقة — سيظهر للزبائن تلقائياً</div>
+        <div id="discEditor"></div>
+        <button class="btsave" onclick="saveDisc()" style="background:linear-gradient(135deg,var(--green),#00a050);color:#000;">💾 حفظ الخصومات</button>
+      </div>
+
+      <!-- الجدار الناري -->
+      <div class="sbox sbr">
+        <div class="sbt red">🛡️ الجدار الناري</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.38);margin-bottom:10px;">حظر مستخدمين من الدخول</div>
+        <div class="banrow"><input class="inp" id="bani" placeholder="اسم المستخدم"><button class="btnban" onclick="banUser()">🚫 حظر</button></div>
+        <div id="blist"></div>
+      </div>
     </div>
 
     <!-- الدعم -->
@@ -391,14 +418,14 @@ const BW=['قواد','قحبة','شرموط','شرموطة','بعبوص','زبي
 
 let me=null,orders=[],wallets={},gImgs={ff:null,pubg:null},trM='',trN='';
 let gP={
-  ff:[{a:'100 ألماس',c:0.99},{a:'200 ألماس',c:1.99},{a:'500 ألماس',c:4.99},{a:'1000 ألماس',c:9.99},{a:'2000 ألماس',c:19.99},{a:'5600 ألماس',c:49.99}],
-  pubg:[{a:'60 UC',c:0.99},{a:'300 UC',c:4.99},{a:'600 UC',c:9.99},{a:'1500 UC',c:24.99},{a:'3000 UC',c:49.99},{a:'6000 UC',c:99.99}]
+  ff:[{a:'100 ألماس',c:0},{a:'210 ألماس',c:0},{a:'530 ألماس',c:0},{a:'1080 ألماس',c:0},{a:'2200 ألماس',c:0}],
+  pubg:[{a:'60 شدة',c:0},{a:'325 شدة',c:0},{a:'660 شدة',c:0},{a:'1800 شدة',c:0},{a:'3850 شدة',c:0},{a:'8100 شدة',c:0}]
 };
 let chats={},acu=null,ctmr=null,cot='p';
 
 function ld(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-function la(){orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});gP=ld('gp',gP);chats=ld('chats',{});}
+function la(){orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});gP=ld('gp',gP);chats=ld('chats',{});discounts=ld('disc',{});}
 function gb(u){return parseFloat((wallets[u]||0).toFixed(2));}
 function sb(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));sv('w',wallets);}
 function san(s){return s.replace(/[<>'";&]/g,'').trim().substring(0,50);}
@@ -452,11 +479,19 @@ function applyI(){
 function renderP(){
   ['ff','pubg'].forEach(g=>{
     const em=g==='ff'?'💎':'🟡';
-    document.getElementById(g+'p').innerHTML=gP[g].map((p,i)=>`
-      <div class="pcard" data-i="${i}" onclick="selP(this,'${g}')">
-        <span class="pck">✓</span><span class="pem">${em}</span>
-        <span class="pamt">${p.a}</span><span class="ppr">${p.c} NC</span>
-      </div>`).join('');
+    document.getElementById(g+'p').innerHTML=gP[g].map((p,i)=>{
+      const dk=g+'_'+i;
+      const d=discounts[dk]||{active:false,pct:0};
+      const hasDisc=d.active&&d.pct>0;
+      const newPrice=hasDisc?(p.c*(1-d.pct/100)).toFixed(2):null;
+      return `<div class="pcard" data-i="${i}" onclick="selP(this,'${g}')" style="position:relative;">
+        <span class="pck">✓</span>
+        ${hasDisc?`<span style="position:absolute;top:5px;right:5px;background:var(--red);color:#fff;border-radius:6px;padding:1px 5px;font-size:9px;font-weight:800;">-${d.pct}%</span>`:''}
+        <span class="pem">${em}</span>
+        <span class="pamt">${p.a}</span>
+        ${hasDisc?`<span style="font-size:10px;color:rgba(255,255,255,.35);text-decoration:line-through;">${p.c} NC</span><span class="ppr" style="color:var(--green);">${newPrice} NC</span>`:`<span class="ppr">${p.c} NC</span>`}
+      </div>`;
+    }).join('');
   });
 }
 
@@ -483,24 +518,93 @@ function rendW(){
   if(o)rendU();
 }
 
+let discounts=ld('disc',{});
+
 function openS(){
   ['ff','pubg'].forEach(g=>{
     const ed=document.getElementById(g+'ed'),em=g==='ff'?'💎':'🟡';
-    ed.innerHTML=gP[g].map((p,i)=>`<div class="prow"><label>${em} ${p.a}</label><input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01"><span style="font-size:11px;color:rgba(255,255,255,.3)">NC</span></div>`).join('');
+    ed.innerHTML=gP[g].map((p,i)=>`
+      <div class="prow" style="margin-bottom:12px;flex-wrap:wrap;gap:6px;">
+        <label style="width:100%;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:4px;">${em} باقة ${i+1}</label>
+        <div style="display:flex;gap:6px;align-items:center;flex:1;">
+          <input class="pinp" id="${g}am${i}" type="text" value="${p.a}" placeholder="الكمية" style="flex:1;width:auto;text-align:right;direction:rtl;">
+          <span style="font-size:11px;color:rgba(255,255,255,.3);">الكمية</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01" style="width:72px;">
+          <span style="font-size:11px;color:rgba(255,255,255,.3);">NC</span>
+        </div>
+      </div>`).join('');
   });
+  renderDiscEditor();
   renderBL();
 }
 
+function renderDiscEditor(){
+  const el=document.getElementById('discEditor');
+  if(!el)return;
+  let html='';
+  ['ff','pubg'].forEach(g=>{
+    const em=g==='ff'?'💎':'🟡';
+    const gname=g==='ff'?'فري فاير':'ببجي';
+    html+=`<div style="margin-bottom:16px;"><div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:10px;">${em} ${gname}</div>`;
+    gP[g].forEach((p,i)=>{
+      const dk=g+'_'+i;
+      const d=discounts[dk]||{active:false,pct:0};
+      html+=`<div style="display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:6px;">
+        <span style="font-size:12px;flex:1;color:rgba(255,255,255,.7);">${p.a}</span>
+        <span style="font-size:12px;color:rgba(255,255,255,.4);">أصلي: ${p.c} NC</span>
+        <input type="number" id="dpct_${dk}" value="${d.pct}" min="0" max="90" step="5" placeholder="%" style="width:55px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;padding:5px 8px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;">
+        <span style="font-size:11px;color:rgba(255,255,255,.3);">%</span>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;">
+          <input type="checkbox" id="dact_${dk}" ${d.active?'checked':''} style="width:16px;height:16px;cursor:pointer;">
+          <span style="font-size:11px;color:var(--green);">تفعيل</span>
+        </label>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+function saveDisc(){
+  ['ff','pubg'].forEach(g=>{
+    gP[g].forEach((p,i)=>{
+      const dk=g+'_'+i;
+      const pct=parseFloat(document.getElementById('dpct_'+dk)?.value)||0;
+      const active=document.getElementById('dact_'+dk)?.checked||false;
+      discounts[dk]={active,pct:Math.min(90,Math.max(0,pct))};
+    });
+  });
+  sv('disc',discounts);
+  renderP();
+  showToast('✅ تم حفظ الخصومات');
+}
+
 function saveGP(g){
-  gP[g].forEach((p,i)=>{const v=parseFloat(document.getElementById(g+'pe'+i).value);if(v>0)gP[g][i].c=v;});
-  sv('gp',gP);renderP();showToast('✅ تم حفظ الأسعار');
+  gP[g].forEach((p,i)=>{
+    const amt=document.getElementById(g+'am'+i)?.value.trim();
+    const cost=parseFloat(document.getElementById(g+'pe'+i)?.value);
+    if(amt)gP[g][i].a=amt;
+    if(cost>=0)gP[g][i].c=cost;
+  });
+  sv('gp',gP);renderP();showToast('✅ تم حفظ الكميات والأسعار');
 }
 
 function upImg(g,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{gImgs[g]=e.target.result;sv('gi',gImgs);applyI();showToast('✅ تم تحديث الصورة');};r.readAsDataURL(f);}
 function resetImg(g){gImgs[g]=null;sv('gi',gImgs);document.getElementById(g==='ff'?'fff':'pubgf').value='';applyI();showToast('🗑 تم حذف الصورة');}
 
 const sel={ff:null,pubg:null};
-function selP(el,g){document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');const i=parseInt(el.dataset.i);sel[g]={a:gP[g][i].a,c:gP[g][i].c};}
+function selP(el,g){
+  document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  const i=parseInt(el.dataset.i);
+  const dk=g+'_'+i;
+  const d=discounts[dk]||{active:false,pct:0};
+  const hasDisc=d.active&&d.pct>0;
+  const finalCost=hasDisc?parseFloat((gP[g][i].c*(1-d.pct/100)).toFixed(2)):gP[g][i].c;
+  sel[g]={a:gP[g][i].a,c:finalCost};
+}
 
 function doOrd(g){
   if(!sel[g]){showToast('❗ اختر كمية الشحن أولاً');return;}
@@ -566,16 +670,4 @@ function initChat(){
   if(ctmr)clearInterval(ctmr);
   ctmr=setInterval(()=>{chats=ld('chats',{});if(me&&me.own){renderCU();if(acu)renderMs(chats[acu]||[]);}else if(me){renderMs(chats[me.n]||[]);updCB();}},2000);
 }
-function renderCU(){const el=document.getElementById('culist');const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&chats[u].length>0);if(!us.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا توجد محادثات بعد</div>';return;}el.innerHTML=us.map(u=>{const msgs=chats[u]||[];const last=msgs[msgs.length-1];const unread=msgs.filter(m=>m.from===u&&!m.read).length;return `<div class="cuitem ${acu===u?'active':''}" onclick="openCW('${u}')"><div style="width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">👤</div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;">${u}</div><div style="font-size:11px;color:rgba(255,255,255,.38);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${last?last.text:'...'}</div></div>${unread>0?`<div class="curd">${unread}</div>`:''}</div>`;}).join('');}
-function openCW(u){acu=u;document.getElementById('ctit').textContent='محادثة: '+u;if(chats[u])chats[u].forEach(m=>{if(m.from===u)m.read=true;});sv('chats',chats);renderMs(chats[u]||[]);renderCU();}
-function renderMs(msgs){const el=document.getElementById('cmsgs');if(!msgs||!msgs.length){el.innerHTML='<div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div>';return;}el.innerHTML=msgs.map(m=>{const mine=(me.own&&m.from===OWN.u)||(!me.own&&m.from===me.n);return `<div class="mb ${mine?'mine':'other'}"><div class="mt ${mine?'mine':'other'}">${m.text}</div><div class="mtime">${m.time}</div></div>`;}).join('');el.scrollTop=el.scrollHeight;}
-function sendMsg(){const inp=document.getElementById('cinp');const txt=inp.value.trim();if(!txt)return;chats=ld('chats',{});const target=me.own?acu:me.n;if(!target){showToast('❗ اختر زبوناً أولاً');return;}if(!chats[target])chats[target]=[];chats[target].push({from:me.own?OWN.u:me.n,text:txt,time:new Date().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}),read:false});sv('chats',chats);inp.value='';renderMs(chats[target]);if(me.own)renderCU();if(!me.own)sendTG('💬 رسالة من: '+me.n+'\n'+txt);}
-function updCB(){if(!me||me.own)return;chats=ld('chats',{});const msgs=chats[me.n]||[];const ur=msgs.filter(m=>m.from===OWN.u&&!m.read).length;const b=document.getElementById('cbdg');b.textContent=ur;b.classList.toggle('show',ur>0);}
-
-function sendTG(msg){fetch('https://api.telegram.org/bot'+BOT+'/sendMessage?chat_id='+CID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
-document.getElementById('mov').addEventListener('click',function(e){if(e.target===this)closeTr();});
-la();
-</script>
-</body>
-                                                               </html>
+function renderCU(){const el=document.getElementById('culist');const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&c
