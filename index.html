@@ -18,15 +18,15 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 /* ═══════════════════════════════════════════════════════════
-   🔥 FIREBASE CONFIG — ضع إعدادات مشروعك هنا
+   🔥 FIREBASE CONFIG — ضع إعدادات مشروعك الحقيقية هنا
    ═══════════════════════════════════════════════════════════ */
 const FB_CONFIG = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
+  apiKey:            "YOUR_API_KEY",         // استبدله بـ apiKey الخاص بمشروعك
+  authDomain:        "YOUR_PROJECT.firebaseapp.com", 
+  projectId:         "YOUR_PROJECT_ID",      
   storageBucket:     "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  messagingSenderId: "YOUR_SENDER_ID",       
+  appId:             "YOUR_APP_ID"           
 };
 
 /* ───── تهيئة Firebase ───── */
@@ -105,47 +105,56 @@ async function login(){
   try{
     await signInAnonymously(auth);
   }catch(e){ 
-    err.textContent='❌ فشل الاتصال بالسيرفر الرئيسي'; err.classList.add('show'); return; 
+    console.error("Firebase Auth Error Details:", e); // يطبع تفاصيل الخطأ التقني في الـ Console بالمتصفح
+    err.textContent = '❌ فشل الاتصال بالسيرفر الرئيسي: ' + (e.message || 'تأكد من إعدادات الـ Config وتفعيل Anonymous Auth'); 
+    err.classList.add('show'); 
+    return; 
   }
 
   // التحقق الآمن من الحساب (سواء كان أدمن أو مستخدم عادي من الـ Firestore)
-  const userRef = doc(db, 'users', uname);
-  const userDoc = await getDoc(userRef);
-  let isAdmin = false;
+  try {
+    const userRef = doc(db, 'users', uname);
+    const userDoc = await getDoc(userRef);
+    let isAdmin = false;
 
-  if(userDoc.exists()){
-    const data = userDoc.data();
-    if(data.isBanned) { err.textContent='🚫 هذا الحساب محظور'; err.classList.add('show'); return; }
-    
-    if(data.password && data.password !== rawP){
-      let tries = parseInt(localStorage.getItem('nova_tries_'+uname)||'0') + 1;
-      localStorage.setItem('nova_tries_'+uname, tries);
-      if(tries >= 5){
-        localStorage.setItem(lockKey, JSON.stringify({until: Date.now()+15*60*1000}));
-        localStorage.removeItem('nova_tries_'+uname);
-        err.textContent='🔒 تجاوزت عدد المحاولات. محظور 15 دقيقة'; err.classList.add('show'); return;
+    if(userDoc.exists()){
+      const data = userDoc.data();
+      if(data.isBanned) { err.textContent='🚫 هذا الحساب محظور'; err.classList.add('show'); return; }
+      
+      if(data.password && data.password !== rawP){
+        let tries = parseInt(localStorage.getItem('nova_tries_'+uname)||'0') + 1;
+        localStorage.setItem('nova_tries_'+uname, tries);
+        if(tries >= 5){
+          localStorage.setItem(lockKey, JSON.stringify({until: Date.now()+15*60*1000}));
+          localStorage.removeItem('nova_tries_'+uname);
+          err.textContent='🔒 تجاوزت عدد المحاولات. محظور 15 دقيقة'; err.classList.add('show'); return;
+        }
+        err.textContent='❌ كلمة المرور غير صحيحة ('+tries+'/5)'; err.classList.add('show'); return;
       }
-      err.textContent='❌ كلمة المرور غير صحيحة ('+tries+'/5)'; err.classList.add('show'); return;
+      isAdmin = data.isAdmin || false;
+    } else {
+      // إذا كان الحساب غير موجود، نقوم بإنشائه تلقائياً كمستخدم عادي
+      await setDoc(userRef, {
+        name: uname, password: rawP, wallet: 0, createdAt: serverTimestamp(),
+        lastLogin: serverTimestamp(), loginCount: 1, isAdmin: false
+      });
     }
-    isAdmin = data.isAdmin || false;
-  } else {
-    // إذا كان الحساب غير موجود، نقوم بإنشائه تلقائياً كمستخدم عادي
-    await setDoc(userRef, {
-      name: uname, password: rawP, wallet: 0, createdAt: serverTimestamp(),
-      lastLogin: serverTimestamp(), loginCount: 1, isAdmin: false
-    });
+
+    localStorage.removeItem('nova_tries_'+uname);
+    localStorage.removeItem(lockKey);
+
+    ME = { name: uname, isAdmin };
+    localStorage.setItem('nova_session', JSON.stringify(ME));
+
+    await updateDoc(userRef, { lastLogin: serverTimestamp(), loginCount: increment(1) });
+    await addDoc(collection(db,'loginLogs'),{ user: uname, time: serverTimestamp(), isAdmin });
+
+    showLoadingScreen(uname);
+  } catch(e) {
+    console.error("Firestore Error Details:", e);
+    err.textContent = '❌ خطأ في صلاحيات قاعدة البيانات (Firestore Rules)';
+    err.classList.add('show');
   }
-
-  localStorage.removeItem('nova_tries_'+uname);
-  localStorage.removeItem(lockKey);
-
-  ME = { name: uname, isAdmin };
-  localStorage.setItem('nova_session', JSON.stringify(ME));
-
-  await updateDoc(userRef, { lastLogin: serverTimestamp(), loginCount: increment(1) });
-  await addDoc(collection(db,'loginLogs'),{ user: uname, time: serverTimestamp(), isAdmin });
-
-  showLoadingScreen(uname);
 }
 
 function showLoadingScreen(uname){
@@ -186,19 +195,21 @@ function logout(){
    تحميل إعدادات الألعاب من Firestore
    ═══════════════════════════════════════════════════════════ */
 async function loadGameConfig(){
-  const cfgDoc = await getDoc(doc(db,'config','games'));
-  if(cfgDoc.exists()){
-    const d = cfgDoc.data();
-    gameData = d.packages || gameData;
-    discounts = d.discounts || {};
-  } else {
-    gameData = {
-      ff:   [{a:'100 ألماس',c:1.5},{a:'210 ألماس',c:3},{a:'530 ألماس',c:7},{a:'1080 ألماس',c:13},{a:'2200 ألماس',c:25}],
-      pubg: [{a:'60 شدة',c:1},{a:'325 شدة',c:5},{a:'660 شدة',c:9},{a:'1800 شدة',c:22},{a:'3850 شدة',c:45},{a:'8100 شدة',c:90}]
-    };
-    discounts = {};
-    await setDoc(doc(db,'config','games'),{ packages: gameData, discounts: {} });
-  }
+  try {
+    const cfgDoc = await getDoc(doc(db,'config','games'));
+    if(cfgDoc.exists()){
+      const d = cfgDoc.data();
+      gameData = d.packages || gameData;
+      discounts = d.discounts || {};
+    } else {
+      gameData = {
+        ff:   [{a:'100 ألماس',c:1.5},{a:'210 ألماس',c:3},{a:'530 ألماس',c:7},{a:'1080 ألماس',c:13},{a:'2200 ألماس',c:25}],
+        pubg: [{a:'60 شدة',c:1},{a:'325 شدة',c:5},{a:'660 شدة',c:9},{a:'1800 شدة',c:22},{a:'3850 شدة',c:45},{a:'8100 شدة',c:90}]
+      };
+      discounts = {};
+      await setDoc(doc(db,'config','games'),{ packages: gameData, discounts: {} });
+    }
+  } catch(e) { console.error(e); }
 }
 
 function getFinalPrice(g, i){
@@ -218,7 +229,7 @@ function subscribeWallet(){
     walletCache[ME.name] = bal;
     $('nw').textContent = '🪙 '+bal.toFixed(2)+' NC';
     $('wd').textContent = bal.toFixed(2);
-  });
+  }, e => console.error(e));
   unsubs.push(unsub);
 }
 
@@ -235,7 +246,6 @@ async function setWallet(uname, val){
 
 function subscribeOrders(){
   let q;
-  // تم إزالة الأوردر باي المباشر لتلافي أخطاء المزامنة الفورية عند الرفع
   if(ME.isAdmin){
     q = query(collection(db,'orders'));
   } else {
@@ -243,11 +253,10 @@ function subscribeOrders(){
   }
   const unsub = onSnapshot(q, snap=>{
     const orders = snap.docs.map(d=>({id:d.id,...d.data()}));
-    // ترتيب المصفوفة برمجياً بدلاً من السيرفر لتفادي مشكلة الـ Timestamp
     orders.sort((a,b) => (b.timeStr > a.timeStr) ? 1 : -1);
     renderOrdersList(orders);
     updateOrderBadge(orders);
-  });
+  }, e => console.error(e));
   unsubs.push(unsub);
 }
 
@@ -529,10 +538,9 @@ function showNotifBanner(msg){
    ═══════════════════════════════════════════════════════════ */
 function renderChargeTab(){
   ['ff','pubg'].forEach(g=>{
-    const em=g==='ff'?'💎':'🟡';
     $(g+'p').innerHTML=gameData[g].map((p,i)=>{
       const dk=g+'_'+i, d=discounts[dk]||{active:false,pct:0};
-      const hasDisc=d.active&&d.pct>0, fp=getFinalPrice(g,i);
+      const fp=getFinalPrice(g,i);
       return `<div class="pcard" data-i="${i}" onclick="selectPkg(this,'${g}')">
         <span class="pamt">${p.a}</span>
         <span class="ppr">${fp} NC</span>
@@ -739,7 +747,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(32,96,255,.1);}
 .inp::placeholder{color:rgba(255,255,255,.2);}
 .btnlogin{width:100%;background:linear-gradient(135deg,var(--blue),#4080ff);border:none;border-radius:13px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 28px rgba(32,96,255,.4);margin-top:4px;}
-.err{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.22);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff7070;margin-bottom:12px;display:none;}
+.err{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.22);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff7070;margin-bottom:12px;display:none;word-break:break-word;}
 .err.show{display:block;}
 
 /* APP */
@@ -863,8 +871,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .pgmethods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
 .pm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;}
 .pmi{font-size:26px;margin-bottom:7px;}
-.pmn{font-size:13px;font-weight:800;margin-bottom:3px;}
-.pmnum{font-size:10px;color:rgba(255,255,255,.35);direction:ltr;font-family:monospace;}
 .pmb{margin-top:9px;width:100%;padding:9px;border:none;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
 .pmblu{background:linear-gradient(135deg,var(--blue),#4080ff);color:#fff;}
 .pmbgo{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
@@ -930,11 +936,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .mt{max-width:76%;padding:9px 13px;font-size:13px;line-height:1.5;border-radius:14px;}
 .mt.mine{background:rgba(32,96,255,.25);border:1px solid rgba(32,96,255,.28);border-radius:4px 14px 14px 14px;}
 .mt.other{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:14px 4px 14px 14px;}
-.mtime{font-size:10px;color:rgba(255,255,255,.2);margin-top:3px;}
-.cuitem{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;cursor:pointer;margin-bottom:5px;border:1px solid transparent;transition:.2s;}
-.cuitem:hover{background:rgba(255,255,255,.03);}
-.cuitem.active{background:rgba(32,96,255,.1);border-color:rgba(32,96,255,.22);}
-.curd{background:var(--red);color:#fff;border-radius:50%;width:19px;height:19px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;}
 .swa{display:flex;align-items:center;gap:12px;background:rgba(37,211,102,.05);border:1px solid rgba(37,211,102,.15);border-radius:16px;padding:16px;margin-bottom:12px;text-decoration:none;color:inherit;}
 .wai{width:46px;height:46px;min-width:46px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
 .wai2 h3{font-size:14px;font-weight:800;margin-bottom:2px;}
@@ -1124,7 +1125,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
           <button onclick="saveNotif()" style="flex:1;padding:10px;background:linear-gradient(135deg,var(--gold),#e0aa00);border:none;border-radius:10px;color:#000;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;">📤 حفظ الإشعار</button>
           <button onclick="clearNotif()" style="padding:10px 14px;background:rgba(255,61,61,.1);border:1px solid rgba(255,61,61,.2);border-radius:10px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">🗑</button>
         </div>
-        <div id="notifPrev" style="display:none;margin-top:10px;background:rgba(255,200,48,.08);border:1px solid rgba(255,200,48,.2);border-radius:10px;padding:10px 13px;font-size:13px;color:rgba(255,200,48,.9);"></div>
       </div>
     </div>
 
@@ -1156,17 +1156,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
       </div>
       <div class="guide-box gb-green">
         <div class="guide-title" style="color:var(--green);">🆔 كيف تجد معرّفك؟</div>
-        <div class="gid-card"><div class="gid-name">🔥 Free Fire</div><div class="gid-desc">افتح اللعبة ← اضغط على صورة ملفك الشخصي ← ستجد الـ ID تحت اسمك</div></div>
+        <div class="gid-card"><div class="gid-name">🔥 Free Fire</div><div class="gid-desc">افتح الوعبة ← اضغط على صورة ملفك الشخصي ← ستجد الـ ID تحت اسمك</div></div>
         <div class="gid-card"><div class="gid-name">🐔 PUBG Mobile</div><div class="gid-desc">افتح اللعبة ← اضغط على ملفك الشخصي ← ستجد الـ ID بجانب اسمك</div></div>
       </div>
-      <div class="guide-box gb-card">
-        <div class="guide-title" style="color:rgba(255,255,255,.8);">❓ أسئلة شائعة</div>
-        <div class="faq-item"><div class="faq-q">متى يصل الشحن؟</div><div class="faq-a">خلال دقائق قليلة بعد تأكيد الدفع.</div></div>
-        <div class="faq-item"><div class="faq-q">هل الشحن آمن؟</div><div class="faq-a">نعم 100%، بدون الحاجة لكلمة مرور حسابك.</div></div>
-        <div class="faq-item"><div class="faq-q">ماذا أفعل إذا لم يصل الشحن؟</div><div class="faq-a">تواصل معنا عبر الدعم أو واتساب وسنحل المشكلة فوراً.</div></div>
-        <div class="faq-item"><div class="faq-q">هل يمكن استرداد الرصيد؟</div><div class="faq-a">حسب نوع حالة الارجاع، تأكد من معرّفك قبل الشحن.</div></div>
-      </div>
-      <a class="swa" href="https://wa.me/218926364857" target="_blank"><div class="wai">💬</div><div class="wai2"><h3>تواصل معنا</h3><p>للاستفسارات والدعم الفني</p></div></a>
     </div>
   </div>
 
