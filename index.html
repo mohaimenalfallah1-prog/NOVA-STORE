@@ -41,7 +41,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:13px;padding:13px 16px;color:#fff;font-family:'Tajawal',sans-serif;font-size:15px;outline:none;margin-bottom:12px;direction:rtl;transition:.3s;}
 .inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(32,96,255,.1);}
 .inp::placeholder{color:rgba(255,255,255,.2);}
-.btnlogin{width:100%;background:linear-gradient(135deg,var(--blue),#4080ff);border:none;border-radius:13px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 28px rgba(32,96,255,.4);margin-top:4px;}
+.btnlogin{width:100%;background:linear-gradient(135deg,var(--blue),#4080ff);border:none;border-radius:13px;padding:14px;color:#fff;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 28px rgba(32,96,255,.4);margin-top:4px;margin-bottom:8px;}
+.btnreg{width:100%;background:transparent;border:1px solid var(--border);border-radius:13px;padding:12px;color:rgba(255,255,255,0.6);font-family:'Tajawal',sans-serif;font-size:14px;cursor:pointer;transition:.3s;}
+.btnreg:hover{background:rgba(255,255,255,0.02);color:#fff;}
 .err{background:rgba(255,61,61,.08);border:1px solid rgba(255,61,61,.22);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#ff7070;margin-bottom:12px;display:none;}
 .err.show{display:block;}
 
@@ -55,7 +57,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .nname{font-size:16px;font-weight:900;font-style:italic;color:var(--cyan);}
 .nright{display:flex;align-items:center;gap:8px;}
 .nwallet{background:rgba(255,200,48,.1);border:1px solid rgba(255,200,48,.22);border-radius:18px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--gold);}
-.nuser{font-size:11px;color:rgba(255,255,255,.4);}
+.nuser{font-size:11px;color:rgba(255,255,255,.4);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .btnout{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:rgba(255,255,255,.4);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;}
 
 /* TABS */
@@ -144,7 +146,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .ul{display:flex;flex-direction:column;gap:7px;}
 .ur{background:var(--card2);border:1px solid var(--border);border-radius:11px;padding:11px 13px;}
 .urt{display:flex;align-items:center;gap:8px;}
-.un{font-weight:700;font-size:13px;flex:1;}
+.un{font-weight:700;font-size:13px;flex:1;max-width:180px;overflow:hidden;text-overflow:ellipsis;}
 .ub{color:var(--gold);font-weight:700;font-size:12px;}
 .ubtns{display:flex;gap:5px;}
 .ba{background:rgba(0,232,122,.1);border:1px solid rgba(0,232,122,.22);border-radius:7px;padding:5px 9px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
@@ -166,11 +168,11 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 .pgmethods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
 .pm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;}
 .pmi{font-size:26px;margin-bottom:7px;}
-.pmn{font-size:13px;font-weight:800;margin-bottom:3px;}
-.pmnum{font-size:10px;color:rgba(255,255,255,.35);direction:ltr;font-family:monospace;}
 .pmb{margin-top:9px;width:100%;padding:9px;border:none;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
 .pmblu{background:linear-gradient(135deg,var(--blue),#4080ff);color:#fff;}
 .pmbgo{background:linear-gradient(135deg,#c8960a,#e0aa0a);color:#000;}
+.pmnnum{font-size:10px;color:rgba(255,255,255,.35);direction:ltr;font-family:monospace;}
+.pmn{font-size:13px;font-weight:800;margin-bottom:3px;}
 
 /* ORDERS */
 .otabs{display:flex;gap:6px;margin-bottom:14px;background:var(--card);border-radius:12px;padding:4px;}
@@ -283,7 +285,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
 <body>
 <div class="bg"><div class="bgg"></div><div class="bgc bgc1"></div><div class="bgc bgc2"></div></div>
 
-<!-- LOADING -->
 <div id="ls">
   <div class="ls-ring"><div class="ls-na">NA</div></div>
   <div class="ls-title">NOVA STORE</div>
@@ -292,7 +293,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
   <div class="ls-bar"><div class="ls-fill" id="lsFill"></div></div>
 </div>
 
-<!-- LOGIN -->
 <div id="lp">
   <div class="lw">
     <div class="ll">
@@ -301,28 +301,27 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
       <p>متجر شحن الألعاب</p>
     </div>
     <div class="lc">
-      <div class="err" id="errMsg">يرجى إدخال اسم المستخدم وكلمة المرور</div>
-      <input class="inp" id="uIn" type="text" placeholder="👤 اسم المستخدم">
-      <input class="inp" id="pIn" type="password" placeholder="🔑 كلمة المرور" onkeydown="if(event.key==='Enter')login()">
-      <button class="btnlogin" onclick="login()">دخول إلى المتجر ←</button>
+      <div class="err" id="errMsg">يرجى إدخال البريد الإلكتروني وكلمة المرور</div>
+      <input class="inp" id="uIn" type="text" placeholder="✉️ البريد الإلكتروني (أو اسم مستخدم)">
+      <input class="inp" id="pIn" type="password" placeholder="🔑 كلمة المرور">
+      <button class="btnlogin" id="btnLogin">دخول إلى المتجر ←</button>
+      <button class="btnreg" id="btnReg">إنشاء حساب جديد</button>
     </div>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div class="nav">
     <div class="nbrand"><div class="ndot"></div><div class="nname">NOVA STORE</div></div>
     <div class="nright">
       <div class="nwallet" id="nw">🪙 0.00 NC</div>
       <span class="nuser" id="nu"></span>
-      <button class="btnout" onclick="logout()">خروج</button>
+      <button class="btnout" id="btnLogout">خروج</button>
     </div>
   </div>
 
   <div class="content">
 
-    <!-- s0: الشحن -->
     <div class="sec active" id="s0">
       <div class="chero">
         <div class="chero-bg"></div>
@@ -333,62 +332,59 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
         <div class="chero-line"></div>
       </div>
       <div class="gsel">
-        <div class="gsb gsff active" id="gff" onclick="sg('ff')"><div class="gck">✓</div><div class="gsi">🔥</div><div><div class="gsn">Free Fire</div><div class="gss">💎 ألماس</div></div></div>
-        <div class="gsb gspubg" id="gpubg" onclick="sg('pubg')"><div class="gck">✓</div><div class="gsi">🐔</div><div><div class="gsn">PUBG Mobile</div><div class="gss">🟡 شدة</div></div></div>
+        <div class="gsb gsff active" id="gff"><div class="gck">✓</div><div class="gsi">🔥</div><div><div class="gsn">Free Fire</div><div class="gss">💎 ألماس</div></div></div>
+        <div class="gsb gspubg" id="gpubg"><div class="gck">✓</div><div class="gsi">🐔</div><div><div class="gsn">PUBG Mobile</div><div class="gss">🟡 شدة</div></div></div>
       </div>
       <div class="cpanel active" id="pff">
         <div class="gbanner gbff"><img id="ffi" src="" style="display:none"><div class="noimg" id="ffni">🔥</div><div class="gbov"></div><div class="gblabel"><h3>Free Fire</h3><p>اشحن ألماسك الآن</p></div><div class="gbem">💎</div></div>
         <div class="plabel">اختر الكمية</div>
         <div class="pgrid" id="ffp"></div>
-        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="fid" placeholder="أدخل معرّف Free Fire"><button class="btnff" onclick="doOrd('ff')">⚡ شحن</button></div></div>
+        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="fid" placeholder="أدخل معرّف Free Fire"><button class="btnff" id="btnOrderFF">⚡ شحن</button></div></div>
       </div>
       <div class="cpanel" id="ppubg">
         <div class="gbanner gbpubg"><img id="pubgi" src="" style="display:none"><div class="noimg" id="pubgni">🐔</div><div class="gbov"></div><div class="gblabel"><h3>PUBG Mobile</h3><p>اشحن شدتك الآن</p></div><div class="gbem">🟡</div></div>
         <div class="plabel">اختر الكمية</div>
         <div class="pgrid" id="pubgp"></div>
-        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="pid" placeholder="أدخل معرّف PUBG"><button class="btnpubg" onclick="doOrd('pubg')">⚡ شحن</button></div></div>
+        <div class="idbox"><div class="idtitle">🆔 معرّف الحساب</div><div class="idrow"><input class="inp" id="pid" placeholder="أدخل معرّف PUBG"><button class="btnpubg" id="btnOrderPubg">⚡ شحن</button></div></div>
       </div>
     </div>
 
-    <!-- s1: المحفظة -->
     <div class="sec" id="s1">
       <div class="whero">
         <div class="whin"><div><div class="whlabel">رصيدك الحالي</div><div class="whamount" id="wd">0.00</div><div class="whunit">🪙 Nova Coin (NC)</div></div><div class="whicon">💰</div></div>
         <div class="wline"></div>
       </div>
-      <div class="box boxg" id="aself" style="display:none"><div class="boxt green">🔑 شحن رصيدك الخاص</div><div class="srow"><input class="inp" id="samt" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btng" onclick="selfAdd()">+ إضافة</button></div></div>
+      <div class="box boxg" id="aself" style="display:none"><div class="boxt green">🔑 شحن رصيدك الخاص</div><div class="srow"><input class="inp" id="samt" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="btng" id="btnSelfAdd">+ إضافة</button></div></div>
       <div class="box boxg" id="ausers" style="display:none"><div class="boxt green">👥 إدارة محافظ المستخدمين</div><div class="ul" id="ulist"></div></div>
       <div class="box boxb" id="aimgs" style="display:none">
         <div class="boxt blue">🖼️ تخصيص صور الألعاب</div>
         <div class="igrid">
-          <div class="ic"><div class="ip ffbg"><img id="ffprev" src="" style="display:none"><span id="ffpic" style="font-size:30px">🔥</span></div><div class="ii"><div class="in">Free Fire</div><input type="file" id="fff" accept="image/*" style="display:none" onchange="upImg('ff',this)"><button class="bul" onclick="document.getElementById('fff').click()">📤 رفع</button><button class="bri" onclick="resetImg('ff')">🗑 حذف</button></div></div>
-          <div class="ic"><div class="ip pubgbg"><img id="pubgprev" src="" style="display:none"><span id="pubgpic" style="font-size:30px">🐔</span></div><div class="ii"><div class="in">PUBG Mobile</div><input type="file" id="pubgf" accept="image/*" style="display:none" onchange="upImg('pubg',this)"><button class="bul" onclick="document.getElementById('pubgf').click()">📤 رفع</button><button class="bri" onclick="resetImg('pubg')">🗑 حذف</button></div></div>
+          <div class="ic"><div class="ip ffbg"><img id="ffprev" src="" style="display:none"><span id="ffpic" style="font-size:30px">🔥</span></div><div class="ii"><div class="in">Free Fire</div><input type="file" id="fff" accept="image/*" style="display:none"><button class="bul" id="btnUpImgFF">📤 رفع</button><button class="bri" id="btnDelImgFF">🗑 حذف</button></div></div>
+          <div class="ic"><div class="ip pubgbg"><img id="pubgprev" src="" style="display:none"><span id="pubgpic" style="font-size:30px">🐔</span></div><div class="ii"><div class="in">PUBG Mobile</div><input type="file" id="pubgf" accept="image/*" style="display:none"><button class="bul" id="btnUpImgPubg">📤 رفع</button><button class="bri" id="btnDelImgPubg">🗑 حذف</button></div></div>
         </div>
       </div>
       <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:11px;">💳 شحن المحفظة</div>
       <div class="pgmethods">
-        <div class="pm"><div class="pmi">📱</div><div class="pmn">ليبيانا</div><div class="pmnum">+218 92 636 4857</div><button class="pmb pmblu" onclick="openTr('ليبيانا','218926364857')">تحويل</button></div>
-        <div class="pm"><div class="pmi">📲</div><div class="pmn">المدار</div><div class="pmnum">+218 93 497 9712</div><button class="pmb pmbgo" onclick="openTr('المدار','218934979712')">تحويل</button></div>
+        <div class="pm"><div class="pmi">📱</div><div class="pmn">ليبيانا</div><div class="pmnum">+218 92 636 4857</div><button class="pmb pmblu" id="btnTrLibiana">تحويل</button></div>
+        <div class="pm"><div class="pmi">📲</div><div class="pmn">المدار</div><div class="pmnum">+218 93 497 9712</div><button class="pmb pmbgo" id="btnTrAlmadar">تحويل</button></div>
       </div>
       <div style="background:rgba(32,96,255,.05);border:1px solid rgba(32,96,255,.13);border-radius:11px;padding:11px;font-size:12px;color:rgba(255,255,255,.38);text-align:center;">💡 بعد التحويل سيتم مراجعة طلبك وإضافة الرصيد خلال دقائق</div>
     </div>
 
-    <!-- s2: الطلبات -->
     <div class="sec" id="s2">
       <div class="stitle">الطلبات</div>
       <div class="anote" id="anote">🔑 أنت مسجل كمالك — ترى جميع الطلبات</div>
-      <div class="otabs"><button class="otab op" id="otp" onclick="switchOT('p')">⏳ المعلقة <span id="pc"></span></button><button class="otab" id="otd" onclick="switchOT('d')">✅ المكتملة <span id="dc"></span></button></div>
+      <div class="otabs"><button class="otab op" id="otp">⏳ المعلقة <span id="pc"></span></button><button class="otab" id="otd">✅ المكتملة <span id="dc"></span></button></div>
       <div class="olw show" id="pl"></div>
       <div class="olw" id="dl"></div>
     </div>
 
-    <!-- s3: الإعدادات -->
     <div class="sec" id="s3">
       <div class="stitle">⚙️ الإعدادات</div>
-      <div class="sbox sbp"><div class="sbt purple">🔥 فري فاير — الكميات والأسعار</div><div id="ffed"></div><button class="btsave" onclick="saveGP('ff')" style="background:linear-gradient(135deg,#5018b0,#7030e0);color:#fff;">💾 حفظ فري فاير</button></div>
-      <div class="sbox sbo"><div class="sbt orange">🐔 ببجي موبايل — الكميات والأسعار</div><div id="pubged"></div><button class="btsave" onclick="saveGP('pubg')" style="background:linear-gradient(135deg,#904000,#c06000);color:#fff;">💾 حفظ ببجي</button></div>
-      <div class="sbox sbg"><div class="sbt green">🏷️ نظام الخصومات</div><div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px;">فعّل خصماً على أي باقة</div><div id="discEd"></div><button class="btsave" onclick="saveDisc()" style="background:linear-gradient(135deg,var(--green),#00a050);color:#000;">💾 حفظ الخصومات</button></div>
-      <div class="sbox sbr"><div class="sbt red">🛡️ الجدار الناري</div><div style="font-size:12px;color:rgba(255,255,255,.38);margin-bottom:10px;">حظر مستخدمين من الدخول</div><div class="banrow"><input class="inp" id="bani" placeholder="اسم المستخدم"><button class="btnban" onclick="banUser()">🚫 حظر</button></div><div id="blist"></div></div>
+      <div class="sbox sbp"><div class="sbt purple">🔥 فري فاير — الكميات والأسعار</div><div id="ffed"></div><button class="btsave" id="btnSaveFF" style="background:linear-gradient(135deg,#5018b0,#7030e0);color:#fff;">💾 حفظ فري فاير</button></div>
+      <div class="sbox sbo"><div class="sbt orange">🐔 ببجي موبايل — الكميات والأسعار</div><div id="pubged"></div><button class="btsave" id="btnSavePubg" style="background:linear-gradient(135deg,#904000,#c06000);color:#fff;">💾 حفظ ببجي</button></div>
+      <div class="sbox sbg"><div class="sbt green">🏷️ نظام الخصومات</div><div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px;">فعّل خصماً على أي باقة</div><div id="discEd"></div><button class="btsave" id="btnSaveDisc" style="background:linear-gradient(135deg,var(--green),#00a050);color:#000;">💾 حفظ الخصومات</button></div>
+      <div class="sbox sbr"><div class="sbt red">🛡️ الجدار الناري</div><div style="font-size:12px;color:rgba(255,255,255,.38);margin-bottom:10px;">حظر مستخدمين من الدخول</div><div class="banrow"><input class="inp" id="bani" placeholder="البريد الإلكتروني للزبون"><button class="btnban" id="btnBan">🚫 حظر</button></div><div id="blist"></div></div>
       <div class="sbox" style="background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.18);">
         <div class="sbt" style="color:var(--cyan);">📊 إحصائيات الموقع</div>
         <div class="stat-grid">
@@ -401,29 +397,27 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
       <div class="sbox" style="background:rgba(255,200,48,.06);border:1px solid rgba(255,200,48,.2);">
         <div class="sbt" style="color:var(--gold);">🔔 إرسال إشعار للمستخدمين</div>
         <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px;">يظهر لكل مستخدم عند دخوله الموقع</div>
-        <input class="inp" id="notifInp" placeholder="اكتب نص الإشعار..." style="margin-bottom:10px;">
-        <div style="display:flex;gap:8px;">
-          <button onclick="saveNotif()" style="flex:1;padding:10px;background:linear-gradient(135deg,var(--gold),#e0aa00);border:none;border-radius:10px;color:#000;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;">📤 حفظ الإشعار</button>
-          <button onclick="clearNotif()" style="padding:10px 14px;background:rgba(255,61,61,.1);border:1px solid rgba(255,61,61,.2);border-radius:10px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">🗑</button>
+        <input class="inp" id="notifInp" placeholder="اكتب نص الإشعار...">
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button id="btnSaveNotif" style="flex:1;padding:10px;background:linear-gradient(135deg,var(--gold),#e0aa00);border:none;border-radius:10px;color:#000;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;">📤 حفظ الإشعار</button>
+          <button id="btnClearNotif" style="padding:10px 14px;background:rgba(255,61,61,.1);border:1px solid rgba(255,61,61,.2);border-radius:10px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">🗑</button>
         </div>
         <div id="notifPrev" style="display:none;margin-top:10px;background:rgba(255,200,48,.08);border:1px solid rgba(255,200,48,.2);border-radius:10px;padding:10px 13px;font-size:13px;color:rgba(255,200,48,.9);"></div>
       </div>
     </div>
 
-    <!-- s4: الدعم -->
     <div class="sec" id="s4">
       <div class="stitle">💬 الدعم والشات</div>
       <div id="achatbox" style="display:none;margin-bottom:12px;"><div class="box boxg"><div class="boxt green">📋 محادثات الزبائن</div><div id="culist"></div></div></div>
       <div class="cwrap">
-        <div class="cheader"><div class="cav">🎧</div><div><div class="ctit" id="ctit">دعم Nova Store</div><div class="csta">متصل</div></div></div>
+        <div class="cheader"><div class="cav">🎧</div><div><div class="ctit" id="ctit">دعم Nova Store</div><div class="csta" id="chatStatus">متصل</div></div></div>
         <div class="cmsgs" id="cmsgs"><div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div></div>
-        <div class="cfoot"><input class="inp" id="cinp" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter')sendMsg()"><button class="btnsend" onclick="sendMsg()">➤</button></div>
+        <div class="cfoot"><input class="inp" id="cinp" placeholder="اكتب رسالتك..."><button class="btnsend" id="btnSendMsg">➤</button></div>
       </div>
       <a class="swa" href="https://wa.me/218926364857" target="_blank"><div class="wai">💬</div><div class="wai2"><h3>واتساب</h3><p>تواصل مباشر</p></div></a>
       <div style="text-align:center;margin-top:14px;color:rgba(255,255,255,.15);font-size:11px;">© 2026 <span style="color:var(--cyan)">NOVA STORE</span></div>
     </div>
 
-    <!-- s5: الدليل -->
     <div class="sec" id="s5">
       <div class="stitle">📖 دليل الاستخدام</div>
       <div class="guide-box gb-blue">
@@ -445,7 +439,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
       </div>
       <div class="guide-box gb-card">
         <div class="guide-title" style="color:rgba(255,255,255,.8);">❓ أسئلة شائعة</div>
-        <div class="faq-item"><div class="faq-q">متى يصل الشحن؟</div><div class="faq-a">خلال دقائق قليلة بعد تأكيد الدفع.</div></div>
+        <div class="faq-item"><div class="faq-q">متى يصل الشحن</div><div class="faq-a">خلال دقائق قليلة بعد تأكيد الدفع.</div></div>
         <div class="faq-item"><div class="faq-q">هل الشحن آمن؟</div><div class="faq-a">نعم 100%، بدون الحاجة لكلمة مرور حسابك.</div></div>
         <div class="faq-item"><div class="faq-q">ماذا أفعل إذا لم يصل الشحن؟</div><div class="faq-a">تواصل معنا عبر الدعم أو واتساب وسنحل المشكلة فوراً.</div></div>
         <div class="faq-item"><div class="faq-q">هل يمكن استرداد الرصيد؟</div><div class="faq-a">لا، تأكد من معرّفك قبل الشحن.</div></div>
@@ -464,7 +458,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
   </div>
 </div>
 
-<!-- Modal -->
 <div class="mov" id="mov">
   <div class="msh">
     <button class="mcb" onclick="closeTr()">✕</button>
@@ -472,289 +465,277 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:rgba(255,255,25
     <div class="msub">أدخل تفاصيل التحويل لشحن محفظتك</div>
     <div class="tib">حوّل إلى: <strong id="mnum" style="color:var(--cyan)"></strong><br><span style="font-size:11px;">1 نوفا كوين = $1 = 10 دينار ليبي</span></div>
     <span class="il">رقم الهاتف المحوَّل منه</span>
-    <input class="inp" id="trph" placeholder="0912345678" style="margin-bottom:11px;">
+    <input class="inp" id="trph" placeholder="0912345678">
     <span class="il">المبلغ بالدينار الليبي</span>
-    <input class="inp" id="tramt" type="number" placeholder="50" style="margin-bottom:11px;" oninput="calcNC()">
+    <input class="inp" id="tramt" type="number" placeholder="50">
     <div id="ncprev" style="background:rgba(255,200,48,.07);border:1px solid rgba(255,200,48,.18);border-radius:9px;padding:10px;text-align:center;font-size:13px;color:var(--gold);margin-bottom:14px;display:none;">ستحصل على: <strong id="ncres">0</strong> 🪙 نوفا كوين</div>
-    <button class="btntr" id="btntr" onclick="submitTr()">إرسال طلب التحويل</button>
+    <button class="btntr" id="btntr">إرسال طلب التحويل</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script>
-const OWN={u:'NovaAdmin',p:'Nova@9999'};
-const BOT='8706589417:AAGaJQr50kb9VMiGtBPBdp5swRqX300Zirs';
-const CID='8835257002';
-const BW=['قواد','قحبة','شرموط','شرموطة','بعبوص','زبي','مسكسك','مزبر','زبور'];
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-let me=null,orders=[],wallets={},gImgs={ff:null,pubg:null},trM='',trN='';
-let disc={};
-let gP={
-  ff:[{a:'100 ألماس',c:0},{a:'210 ألماس',c:0},{a:'530 ألماس',c:0},{a:'1080 ألماس',c:0},{a:'2200 ألماس',c:0}],
-  pubg:[{a:'60 شدة',c:0},{a:'325 شدة',c:0},{a:'660 شدة',c:0},{a:'1800 شدة',c:0},{a:'3850 شدة',c:0},{a:'8100 شدة',c:0}]
+// !!! ضع هنا إعدادات مشروع Firebase الخاص بك !!!
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
-let chats={},acu=null,ctmr=null,cot='p';
 
-function ld(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
-function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-function la(){orders=ld('o',[]);wallets=ld('w',{});gImgs=ld('gi',{ff:null,pubg:null});gP=ld('gp',gP);disc=ld('disc',{});chats=ld('chats',{});}
-function gb(u){return parseFloat((wallets[u]||0).toFixed(2));}
-function sb(u,v){wallets[u]=Math.max(0,parseFloat(v.toFixed(2)));sv('w',wallets);}
-function san(s){return s.replace(/[<>'";&]/g,'').trim().substring(0,50);}
-function ibn(n){return BW.some(w=>n.includes(w));}
-function ibl(){const d=ld('fwb',null);if(!d)return false;if(Date.now()<d.u)return true;localStorage.removeItem('fwb');localStorage.removeItem('fwa');return false;}
-function rsta(){localStorage.removeItem('fwa');localStorage.removeItem('fwb');}
-function gfp(g,i){const dk=g+'_'+i,d=disc[dk]||{active:false,pct:0};if(d.active&&d.pct>0)return parseFloat((gP[g][i].c*(1-d.pct/100)).toFixed(2));return gP[g][i].c;}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-function login(){
-  const ru=document.getElementById('uIn').value.trim(),rp=document.getElementById('pIn').value;
-  const err=document.getElementById('errMsg');
-  if(ibl()){const d=ld('fwb',null);err.textContent='🚫 محظور مؤقتاً. انتظر '+Math.ceil((d.u-Date.now())/60000)+' دقيقة';err.classList.add('show');return;}
-  if(!ru||!rp){err.textContent='يرجى إدخال اسم المستخدم وكلمة المرور';err.classList.add('show');return;}
-  const u=san(ru),p=rp.substring(0,100);
-  if(ibn(u)){err.textContent='🚫 هذا الاسم غير مسموح به';err.classList.add('show');return;}
-  if(u.length<2){err.textContent='❗ الاسم قصير جداً';err.classList.add('show');return;}
-  err.classList.remove('show');la();
-  const banned=ld('fwbu',[]);
-  if(banned.includes(u.toLowerCase())&&u!==OWN.u){err.textContent='🚫 هذا الحساب محظور';err.classList.add('show');return;}
-  rsta();
-  if(wallets[u]===undefined){wallets[u]=0;sv('w',wallets);}
-  me={n:u,own:(u===OWN.u&&p===OWN.p)};
-  // إخفاء صفحة الدخول وإظهار شاشة التحميل
-  document.getElementById('lp').classList.add('h');
-  const lsEl=document.getElementById('ls');
-  lsEl.classList.add('show');
-  document.getElementById('lsUser').textContent='مرحباً، '+u+' 👋';
-  // شريط التحميل
-  const fill=document.getElementById('lsFill');
-  fill.style.transition='none';fill.style.width='0';
-  setTimeout(()=>{fill.style.transition='width 3s ease';fill.style.width='100%';},50);
-  setTimeout(()=>{
-    lsEl.classList.remove('show');
-    document.getElementById('app').classList.add('show');
-    document.getElementById('nu').textContent=u;
-    updN();applyI();renderP();updTabs();renderO();updB();
-    const notif=ld('notif','');
-    if(notif)setTimeout(()=>showNotifBanner(notif),500);
-  },3000);
-}
+const ADMIN_EMAIL = "admin@nova.com"; // البريد الافتراضي للأدمن لتحديد الصلاحيات
+const BW = ['قواد','قحبة','شرموط','شرموطة','بعبوص','زبي','مسكسك','مزبر','زبور'];
 
-function logout(){
-  me=null;
-  if(ctmr){clearInterval(ctmr);ctmr=null;}
-  document.getElementById('lp').classList.remove('h');
-  document.getElementById('app').classList.remove('show');
-  document.getElementById('uIn').value='';
-  document.getElementById('pIn').value='';
-}
+let me = null; 
+let gP = { ff: [], pubg: [] };
+let disc = {};
+let gImgs = { ff: null, pubg: null };
+let sel = { ff: null, pubg: null };
+let acu = null; 
+let cot = 'p'; 
+let trM = '', trN = '';
 
-function updN(){if(!me)return;const b=gb(me.n);document.getElementById('nw').textContent='🪙 '+b.toFixed(2)+' NC';document.getElementById('wd').textContent=b.toFixed(2);}
+// دالة فحص وتطهير المدخلات
+function san(s){ return s.replace(/[<>'";&]/g,'').trim().substring(0,50); }
+function ibn(n){ return BW.some(w => n.includes(w)); }
 
-function applyI(){
-  ['ff','pubg'].forEach(g=>{
-    const src=gImgs[g];
-    const img=document.getElementById(g==='ff'?'ffi':'pubgi'),ic=document.getElementById(g==='ff'?'ffni':'pubgni');
-    if(src){img.src=src;img.style.display='block';ic.style.display='none';}else{img.style.display='none';ic.style.display='block';}
-    const pi=document.getElementById(g+'prev'),pc=document.getElementById(g+'pic');
-    if(pi&&pc){if(src){pi.src=src;pi.style.display='block';pc.style.display='none';}else{pi.style.display='none';pc.style.display='block';}}
+// مراقبة الاتصال الفوري بنظام الحسابات (Auth) الحقيقي
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    if (ibn(user.email)) {
+      showToast('🚫 اسم الحساب غير مسموح به');
+      await signOut(auth);
+      return;
+    }
+    
+    // فحص الحظر أونلاين من Firestore
+    const banCheck = await getDoc(doc(db, "firewall", user.email.toLowerCase()));
+    if (banCheck.exists()) {
+      document.getElementById('errMsg').textContent = '🚫 هذا الحساب محظور من الإدارة';
+      document.getElementById('errMsg').classList.add('show');
+      await signOut(auth);
+      return;
+    }
+
+    me = {
+      uid: user.uid,
+      email: user.email,
+      own: (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase())
+    };
+
+    // تحديث حالة ظهور المستخدم للأدمن "نشط الآن" فورياً في Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      status: "online",
+      lastSeen: serverTimestamp(),
+      role: me.own ? "admin" : "customer"
+    }, { merge: true });
+
+    document.getElementById('lp').classList.add('h');
+    const lsEl = document.getElementById('ls');
+    lsEl.classList.add('show');
+    document.getElementById('lsUser').textContent = 'مرحباً بك 👋';
+    const fill = document.getElementById('lsFill');
+    fill.style.transition = 'none'; fill.style.width = '0';
+    setTimeout(() => { fill.style.transition = 'width 1.5s ease'; fill.style.width = '100%'; }, 50);
+
+    setTimeout(() => {
+      lsEl.classList.remove('show');
+      document.getElementById('app').classList.add('show');
+      document.getElementById('nu').textContent = me.email.split('@')[0];
+      updTabs();
+      startRealtimeListeners();
+    }, 1500);
+
+  } else {
+    me = null;
+    document.getElementById('app').classList.remove('show');
+    document.getElementById('lp').classList.remove('h');
+  }
+});
+
+// بدء مستمعي Firestore الفوريين (Real-time Sync)
+function startRealtimeListeners() {
+  // 1. مزامنة الأسعار والخصومات أونلاين لحل مشكلة السعر 0
+  onSnapshot(doc(db, "settings", "prices"), (docSnap) => {
+    if (docSnap.exists()) {
+      gP = docSnap.data().gP || gP;
+      disc = docSnap.data().disc || {};
+    } else {
+      // إعداد افتراضي أول مرة إن لم يكن موجوداً بالسيرفر
+      gP = {
+        ff:[{a:'100 ألماس',c:10},{a:'210 ألماس',c:20},{a:'530 ألماس',c:50},{a:'1080 ألماس',c:100},{a:'2200 ألماس',c:200}],
+        pubg:[{a:'60 شدة',c:10},{a:'325 شدة',c:35},{a:'660 شدة',c:70},{a:'1800 شدة',c:180},{a:'3850 شدة',c:370},{a:'8100 شدة',c:750}]
+      };
+      setDoc(doc(db, "settings", "prices"), { gP, disc });
+    }
+    renderP();
+    if(me && me.own) openS();
   });
+
+  // 2. مزامنة الصور المخصصة للألعاب
+  onSnapshot(doc(db, "settings", "images"), (docSnap) => {
+    if (docSnap.exists()) { gImgs = docSnap.data(); applyI(); }
+  });
+
+  // 3. مزامنة الإعلانات والإشعارات الموجهة للزبائن
+  onSnapshot(doc(db, "settings", "notification"), (docSnap) => {
+    if (docSnap.exists() && docSnap.data().text) {
+      showNotifBanner(docSnap.data().text);
+    }
+  });
+
+  // 4. مزامنة محفظة المستخدم الحالي
+  onSnapshot(doc(db, "users", me.uid), (docSnap) => {
+    const balance = docSnap.exists() ? (docSnap.data().balance || 0) : 0;
+    document.getElementById('nw').textContent = `🪙 ${balance.toFixed(2)} NC`;
+    document.getElementById('wd').textContent = balance.toFixed(2);
+  });
+
+  // 5. مزامنة المحادثات والشات فوراُ
+  initChatRealtime();
+
+  // 6. مزامنة الطلبات الفورية للزبائن والأدمن
+  initOrdersRealtime();
+
+  // 7. لو كان المالك (الأدمن) نفتح له مراقبة وإدارة المستخدمين والإحصائيات
+  if (me.own) {
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      rendU(snapshot);
+      document.getElementById('stU').textContent = snapshot.size - 1;
+    });
+    onSnapshot(collection(db, "firewall"), (snapshot) => { renderBL(snapshot); });
+  }
 }
 
-function renderP(){
-  ['ff','pubg'].forEach(g=>{
-    const em=g==='ff'?'💎':'🟡';
-    document.getElementById(g+'p').innerHTML=gP[g].map((p,i)=>{
-      const dk=g+'_'+i,d=disc[dk]||{active:false,pct:0};
-      const hasDisc=d.active&&d.pct>0,fp=gfp(g,i);
-      return `<div class="pcard" data-i="${i}" onclick="selP(this,'${g}')">
+// دالة حساب السعر الفعلي بعد الخصم
+function gfp(g, i) {
+  const dk = g + '_' + i;
+  const d = disc[dk] || { active: false, pct: 0 };
+  if (d.active && d.pct > 0) return parseFloat((gP[g][i].c * (1 - d.pct / 100)).toFixed(2));
+  return gP[g][i].c;
+}
+
+// عرض الباقات والأسعار الفورية للزبائن
+function renderP() {
+  ['ff', 'pubg'].forEach(g => {
+    const em = g === 'ff' ? '💎' : '🟡';
+    if (!gP[g] || !gP[g].length) return;
+    document.getElementById(g + 'p').innerHTML = gP[g].map((p, i) => {
+      const dk = g + '_' + i;
+      const d = disc[dk] || { active: false, pct: 0 };
+      const hasDisc = d.active && d.pct > 0, fp = gfp(g, i);
+      return `<div class="pcard" data-i="${i}" data-game="${g}">
         <span class="pck">✓</span>
-        ${hasDisc?`<span style="position:absolute;top:4px;right:4px;background:var(--red);color:#fff;border-radius:5px;padding:1px 5px;font-size:9px;font-weight:800;">-${d.pct}%</span>`:''}
+        ${hasDisc ? `<span style="position:absolute;top:4px;right:4px;background:var(--red);color:#fff;border-radius:5px;padding:1px 5px;font-size:9px;font-weight:800;">-${d.pct}%</span>` : ''}
         <span class="pem">${em}</span>
         <span class="pamt">${p.a}</span>
-        ${hasDisc?`<span style="font-size:10px;color:rgba(255,255,255,.3);text-decoration:line-through;display:block;">${p.c} NC</span><span class="ppr" style="color:var(--green);">${fp} NC</span>`:`<span class="ppr">${p.c} NC</span>`}
+        ${hasDisc ? `<span style="font-size:10px;color:rgba(255,255,255,.3);text-decoration:line-through;display:block;">${p.c} NC</span><span class="ppr" style="color:var(--green);">${fp} NC</span>` : `<span class="ppr">${p.c} NC</span>`}
       </div>`;
     }).join('');
   });
-}
 
-function sg(g){
-  document.getElementById('gff').classList.toggle('active',g==='ff');
-  document.getElementById('gpubg').classList.toggle('active',g==='pubg');
-  document.getElementById('pff').classList.toggle('active',g==='ff');
-  document.getElementById('ppubg').classList.toggle('active',g==='pubg');
-}
-
-function updTabs(){document.getElementById('t3').style.display=me&&me.own?'flex':'none';}
-
-const secs=['s0','s1','s2','s3','s4','s5'];
-function goTab(i){
-  secs.forEach((s,j)=>{document.getElementById(s).classList.toggle('active',j===i);});
-  for(let j=0;j<=5;j++){const el=document.getElementById('t'+j);if(el)el.classList.toggle('active',j===i);}
-  if(i===1)rendW();if(i===2)renderO();if(i===3)openS();if(i===4)initChat();
-}
-
-function rendW(){
-  updN();const o=me&&me.own;
-  document.getElementById('aself').style.display=o?'block':'none';
-  document.getElementById('ausers').style.display=o?'block':'none';
-  document.getElementById('aimgs').style.display=o?'block':'none';
-  if(o)rendU();
-}
-
-function openS(){
-  ['ff','pubg'].forEach(g=>{
-    const ed=document.getElementById(g+'ed'),em=g==='ff'?'💎':'🟡';
-    ed.innerHTML=gP[g].map((p,i)=>`
-      <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;">
-        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">${em} باقة ${i+1}</div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input class="pinp" id="${g}am${i}" type="text" value="${p.a}" style="flex:1;width:auto;text-align:right;direction:rtl;padding:7px 10px;">
-          <span style="font-size:11px;color:rgba(255,255,255,.3);">الكمية</span>
-          <input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01" style="width:70px;">
-          <span style="font-size:11px;color:rgba(255,255,255,.3);">NC</span>
-        </div>
-      </div>`).join('');
+  // إعادة بناء أحداث الضغط على الباقات
+  document.querySelectorAll('.pcard').forEach(card => {
+    card.onclick = function() {
+      const g = this.dataset.game;
+      document.querySelectorAll('#' + g + 'p .pcard').forEach(p => p.classList.remove('sel'));
+      this.classList.add('sel');
+      const i = parseInt(this.dataset.i);
+      sel[g] = { a: gP[g][i].a, c: gfp(g, i) };
+    };
   });
-  renderDiscEd();renderBL();
-  document.getElementById('stU').textContent=Object.keys(wallets).filter(u=>u!==OWN.u).length;
-  document.getElementById('stO').textContent=orders.length;
-  document.getElementById('stD').textContent=orders.filter(o=>o.status==='done').length;
-  document.getElementById('stP').textContent=orders.filter(o=>o.status==='pending').length;
-  const notif=ld('notif','');
-  document.getElementById('notifInp').value=notif;
-  const prev=document.getElementById('notifPrev');
-  if(notif){prev.style.display='block';prev.textContent='🔔 '+notif;}else prev.style.display='none';
 }
 
-function saveGP(g){
-  gP[g].forEach((p,i)=>{
-    const a=document.getElementById(g+'am'+i)?.value.trim();
-    const c=parseFloat(document.getElementById(g+'pe'+i)?.value);
-    if(a)gP[g][i].a=a;if(!isNaN(c)&&c>=0)gP[g][i].c=c;
+function applyI() {
+  ['ff', 'pubg'].forEach(g => {
+    const src = gImgs[g];
+    const img = document.getElementById(g === 'ff' ? 'ffi' : 'pubgi'), ic = document.getElementById(g === 'ff' ? 'ffni' : 'pubgni');
+    if (src) { img.src = src; img.style.display = 'block'; ic.style.display = 'none'; } else { img.style.display = 'none'; ic.style.display = 'block'; }
+    const pi = document.getElementById(g + 'prev'), pc = document.getElementById(g + 'pic');
+    if (pi && pc) { if (src) { pi.src = src; pi.style.display = 'block'; pc.style.display = 'none'; } else { pi.style.display = 'none'; pc.style.display = 'block'; } }
   });
-  sv('gp',gP);renderP();showToast('✅ تم حفظ الكميات والأسعار');
 }
 
-function renderDiscEd(){
-  const el=document.getElementById('discEd');if(!el)return;
-  let html='';
-  ['ff','pubg'].forEach(g=>{
-    const em=g==='ff'?'💎':'🟡',gn=g==='ff'?'فري فاير':'ببجي';
-    html+=`<div style="margin-bottom:14px;"><div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:8px;">${em} ${gn}</div>`;
-    gP[g].forEach((p,i)=>{
-      const dk=g+'_'+i,d=disc[dk]||{active:false,pct:0};
-      html+=`<div class="drow">
-        <div style="flex:1;"><div style="font-size:12px;font-weight:700;">${p.a}</div><div style="font-size:11px;color:rgba(255,255,255,.35);">${p.c} NC</div></div>
-        <input type="number" id="dpct_${dk}" value="${d.pct}" min="0" max="90" step="5" placeholder="%" style="width:52px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;padding:5px 7px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;">
-        <span style="font-size:11px;color:rgba(255,255,255,.3);">%</span>
-        <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-          <input type="checkbox" id="dact_${dk}" ${d.active?'checked':''} style="width:16px;height:16px;cursor:pointer;accent-color:var(--green);">
-          <span style="font-size:12px;color:var(--green);font-weight:700;">تفعيل</span>
-        </label>
-      </div>`;
-    });
-    html+='</div>';
+// تنفيذ عمليات الطلبات والشحن الفوري
+async function doOrd(g) {
+  if (!sel[g]) { showToast('❗ اختر كمية الشحن أولاً'); return; }
+  const idEl = document.getElementById(g === 'ff' ? 'fid' : 'pid'), uid = idEl.value.trim();
+  if (!uid) { showToast('❗ أدخل معرّف الحساب'); return; }
+  
+  const userDocRef = doc(db, "users", me.uid);
+  const userSnap = await getDoc(userDocRef);
+  const currentBal = userSnap.exists() ? (userSnap.data().balance || 0) : 0;
+  
+  const { a, c } = sel[g];
+  if (currentBal < c) { showToast('❌ رصيدك غير كافٍ!'); return; }
+
+  // خصم الرصيد في السيرفر
+  await updateDoc(userDocRef, { balance: currentBal - c });
+  
+  const gn = g === 'ff' ? 'Free Fire' : 'PUBG Mobile';
+  
+  // حفظ الطلب في الـ Firestore لمزامنة الأدمن حياً
+  const orderRef = await addDoc(collection(db, "orders"), {
+    userId: me.uid,
+    userEmail: me.email,
+    game: gn,
+    amount: a,
+    cost: c,
+    uid: uid,
+    status: 'pending',
+    createdAt: serverTimestamp(),
+    timeString: new Date().toLocaleString('ar')
   });
-  el.innerHTML=html;
-}
 
-function saveDisc(){
-  ['ff','pubg'].forEach(g=>{
-    gP[g].forEach((p,i)=>{
-      const dk=g+'_'+i;
-      const pct=parseFloat(document.getElementById('dpct_'+dk)?.value)||0;
-      const active=document.getElementById('dact_'+dk)?.checked||false;
-      disc[dk]={active,pct:Math.min(90,Math.max(0,pct))};
-    });
+  // حماية وإرسال إشعار التليجرام الآمن عبر Backend/Cloud Function
+  sendSecureTelegramNotification({
+    title: "🛒 طلب شحن جديد",
+    game: gn,
+    amount: a,
+    cost: c,
+    uid: uid,
+    user: me.email
   });
-  sv('disc',disc);renderP();showToast('✅ تم حفظ الخصومات');
+
+  showToast('✅ تم الشحن وسيقوم الأدمن بمعالجة طلبك فوراً');
+  idEl.value = '';
+  document.querySelectorAll('#' + g + 'p .pcard').forEach(p => p.classList.remove('sel'));
+  sel[g] = null;
 }
+document.getElementById('btnOrderFF').onclick = () => doOrd('ff');
+document.getElementById('btnOrderPubg').onclick = () => doOrd('pubg');
 
-function saveNotif(){const txt=document.getElementById('notifInp').value.trim();if(!txt){showToast('❗ اكتب نص الإشعار');return;}sv('notif',txt);const p=document.getElementById('notifPrev');p.style.display='block';p.textContent='🔔 '+txt;showToast('✅ تم حفظ الإشعار');}
-function clearNotif(){sv('notif','');document.getElementById('notifInp').value='';document.getElementById('notifPrev').style.display='none';showToast('🗑 تم حذف الإشعار');}
-function showNotifBanner(msg){const el=document.createElement('div');el.style.cssText='position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:500;background:linear-gradient(135deg,rgba(255,200,48,.15),rgba(255,200,48,.08));border:1px solid rgba(255,200,48,.4);border-radius:14px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--gold);max-width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4);backdrop-filter:blur(10px);animation:fu .4s ease;display:flex;align-items:center;gap:10px;';el.innerHTML='<span>🔔 '+msg+'</span><button onclick="this.parentElement.remove()" style="background:none;border:none;color:rgba(255,200,48,.6);font-size:16px;cursor:pointer;flex-shrink:0;">✕</button>';document.body.appendChild(el);setTimeout(()=>{if(el.parentElement)el.remove();},6000);}
-
-function upImg(g,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{gImgs[g]=e.target.result;sv('gi',gImgs);applyI();showToast('✅ تم تحديث الصورة');};r.readAsDataURL(f);}
-function resetImg(g){gImgs[g]=null;sv('gi',gImgs);document.getElementById(g==='ff'?'fff':'pubgf').value='';applyI();showToast('🗑 تم حذف الصورة');}
-
-const sel={ff:null,pubg:null};
-function selP(el,g){document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');const i=parseInt(el.dataset.i);sel[g]={a:gP[g][i].a,c:gfp(g,i)};}
-
-function doOrd(g){
-  if(!sel[g]){showToast('❗ اختر كمية الشحن أولاً');return;}
-  const idEl=document.getElementById(g==='ff'?'fid':'pid'),uid=idEl.value.trim();
-  if(!uid){showToast('❗ أدخل معرّف الحساب');return;}
-  const{a,c}=sel[g],bal=gb(me.n);
-  if(bal<c){showToast('❌ رصيدك غير كافٍ! رصيدك: '+bal.toFixed(2)+' NC');return;}
-  sb(me.n,bal-c);updN();
-  const gn=g==='ff'?'Free Fire':'PUBG Mobile';
-  orders.push({id:Date.now(),user:me.n,game:gn,amount:a,cost:c,uid,time:new Date().toLocaleString('ar'),status:'pending'});
-  sv('o',orders);updB();
-  sendTG('🛒 طلب شحن جديد\nاللعبة: '+gn+'\nالكمية: '+a+'\nالتكلفة: '+c+' NC\nمعرف: '+uid+'\nالزبون: '+me.n);
-  showToast('✅ تم الشحن! خُصم '+c+' NC');
-  idEl.value='';document.querySelectorAll('#'+g+'p .pcard').forEach(p=>p.classList.remove('sel'));sel[g]=null;
-}
-
-function rendU(){
-  const list=document.getElementById('ulist'),users=Object.keys(wallets).filter(u=>u!==OWN.u);
-  if(!users.length){list.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.35);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>';return;}
-  list.innerHTML=users.map(u=>`<div class="ur"><div class="urt"><div><div class="un">👤 ${u}</div><div class="ub">🪙 ${gb(u).toFixed(2)} NC</div></div><div class="ubtns"><button class="ba" onclick="togF('${u}','a')">+ إضافة</button><button class="bw" onclick="togF('${u}','w')">- سحب</button></div></div><div class="uf" id="uf_${u}"><input class="inp" id="ua_${u}" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="bca" id="bca_${u}" onclick="doB('${u}','a')">✓</button><button class="bcw" id="bcw_${u}" onclick="doB('${u}','w')" style="display:none">✓</button></div></div>`).join('');
-}
-function togF(u,t){const f=document.getElementById('uf_'+u),ba=document.getElementById('bca_'+u),bw=document.getElementById('bcw_'+u);const op=f.classList.contains('show');if(op&&((t==='a'&&ba.style.display!=='none')||(t==='w'&&bw.style.display!=='none'))){f.classList.remove('show');return;}f.classList.add('show');if(t==='a'){ba.style.display='block';bw.style.display='none';}else{ba.style.display='none';bw.style.display='block';}}
-function doB(u,t){const amt=parseFloat(document.getElementById('ua_'+u).value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}const cur=gb(u);if(t==='w'&&amt>cur){showToast('❌ الرصيد غير كافٍ');return;}t==='a'?sb(u,cur+amt):sb(u,cur-amt);document.getElementById('ua_'+u).value='';document.getElementById('uf_'+u).classList.remove('show');rendU();updN();showToast('✅ تم '+(t==='a'?'إضافة':'سحب')+' '+amt+' NC '+(t==='a'?'لـ':'من')+' '+u);sendTG('💰 '+(t==='a'?'إضافة':'سحب')+'\nالمستخدم: '+u+'\nالمبلغ: '+amt+' NC');}
-function selfAdd(){const amt=parseFloat(document.getElementById('samt').value);if(!amt||amt<=0){showToast('❗ أدخل كمية صحيحة');return;}sb(me.n,gb(me.n)+amt);document.getElementById('samt').value='';updN();showToast('✅ تم إضافة '+amt+' NC');}
-
-function banUser(){const inp=document.getElementById('bani');const name=san(inp.value);if(!name){showToast('❗ أدخل اسم المستخدم');return;}if(name.toLowerCase()===OWN.u.toLowerCase()){showToast('❌ لا يمكن حظر المالك');return;}let b=ld('fwbu',[]);if(b.includes(name.toLowerCase())){showToast('⚠️ محظور مسبقاً');return;}b.push(name.toLowerCase());sv('fwbu',b);inp.value='';renderBL();showToast('🚫 تم حظر: '+name);}
-function unbanUser(name){let b=ld('fwbu',[]);b=b.filter(u=>u!==name);sv('fwbu',b);renderBL();showToast('✅ تم رفع الحظر عن: '+name);}
-function renderBL(){const el=document.getElementById('blist');if(!el)return;const b=ld('fwbu',[]);if(!b.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا يوجد مستخدمون محظورون</div>';return;}el.innerHTML=b.map(u=>`<div class="bitem"><span style="font-size:13px;font-weight:700;">🚫 ${u}</span><button class="btnunban" onclick="unbanUser('${u}')">رفع الحظر</button></div>`).join('');}
-
-function openTr(m,n){trM=m;trN=n;document.getElementById('mtit').textContent='تحويل عبر '+m;document.getElementById('mnum').textContent='+'+n;document.getElementById('btntr').className='btntr '+(m==='ليبيانا'?'bttb':'bttg');document.getElementById('trph').value='';document.getElementById('tramt').value='';document.getElementById('ncprev').style.display='none';document.getElementById('mov').classList.add('open');}
-function closeTr(){document.getElementById('mov').classList.remove('open');}
-function calcNC(){const a=parseFloat(document.getElementById('tramt').value)||0;const p=document.getElementById('ncprev');if(a>0){p.style.display='block';document.getElementById('ncres').textContent=(a/10).toFixed(2);}else p.style.display='none';}
-function submitTr(){const ph=document.getElementById('trph').value.trim(),amt=parseFloat(document.getElementById('tramt').value)||0;if(!ph){showToast('❗ أدخل رقم الهاتف');return;}if(amt<=0){showToast('❗ أدخل المبلغ');return;}sendTG('💳 طلب شحن محفظة\nالزبون: '+me.n+'\nالطريقة: '+trM+'\nالرقم: '+ph+'\nالمبلغ: '+amt+' دينار\nالنوفا كوين: '+(amt/10).toFixed(2)+' NC');closeTr();showToast('✅ تم إرسال طلب التحويل!');}
-
-function switchOT(t){
-  cot=t;
-  document.getElementById('otp').className='otab '+(t==='p'?'op':'');
-  document.getElementById('otd').className='otab '+(t==='d'?'od':'');
-  document.getElementById('pl').classList.toggle('show',t==='p');
-  document.getElementById('dl').classList.toggle('show',t==='d');
-}
-
-function renderO(){
-  document.getElementById('anote').style.display=me&&me.own?'block':'none';
-  const all=me&&me.own?orders:orders.filter(o=>o.user===me.n);
-  const pend=all.filter(o=>o.status==='pending'),done=all.filter(o=>o.status==='done');
-  document.getElementById('pc').textContent=pend.length?'('+pend.length+')':'';
-  document.getElementById('dc').textContent=done.length?'('+done.length+')':'';
-  const rl=(list,el)=>{
-    if(!list.length){el.innerHTML='<div class="empty"><span class="eic">📭</span><p>لا توجد طلبات</p></div>';return;}
-    el.innerHTML=list.map(o=>`<div class="ocard ${o.status}"><div class="otop"><div class="og">${o.game}</div><div class="ost ${o.status==='pending'?'opst':'odst'}">${o.status==='pending'?'⏳ معلق':'✅ مكتمل'}</div></div><div class="odtl">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.user}</span><br>الوقت: <span>${o.time}</span></div>${me&&me.own?`<div class="oac">${o.status==='pending'?`<button class="btndone" onclick="markD(${o.id})">✅ تم الشحن</button>`:''}<button class="btndel" onclick="delO(${o.id})">🗑 حذف</button></div>`:''}</div>`).join('');
-  };
-  rl(pend,document.getElementById('pl'));rl(done,document.getElementById('dl'));
-}
-function markD(id){const o=orders.find(x=>x.id===id);if(o){o.status='done';sv('o',orders);renderO();updB();showToast('✅ تم تمييز الطلب كمكتمل');}}
-function delO(id){orders=orders.filter(x=>x.id!==id);sv('o',orders);renderO();updB();showToast('🗑 تم حذف الطلب');}
-function updB(){const p=orders.filter(o=>me&&me.own?o.status==='pending':o.user===me.n&&o.status==='pending').length;const b=document.getElementById('obdg');b.textContent=p;b.classList.toggle('show',p>0);}
-
-function initChat(){
-  chats=ld('chats',{});
-  if(me.own){document.getElementById('achatbox').style.display='block';document.getElementById('ctit').textContent='اختر زبوناً';renderCU();const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&chats[u].length>0);if(us.length)openCW(us[0]);else renderMs([]);}
-  else{document.getElementById('achatbox').style.display='none';document.getElementById('ctit').textContent='دعم Nova Store';acu=me.n;if(!chats[me.n])chats[me.n]=[];renderMs(chats[me.n]);}
-  if(ctmr)clearInterval(ctmr);
-  ctmr=setInterval(()=>{chats=ld('chats',{});if(me&&me.own){renderCU();if(acu)renderMs(chats[acu]||[]);}else if(me){renderMs(chats[me.n]||[]);updCB();}},2000);
-}
-function renderCU(){const el=document.getElementById('culist');const us=Object.keys(chats).filter(u=>u!==OWN.u&&chats[u]&&chats[u].length>0);if(!us.length){el.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا توجد محادثات بعد</div>';return;}el.innerHTML=us.map(u=>{const msgs=chats[u]||[];const last=msgs[msgs.length-1];const unread=msgs.filter(m=>m.from===u&&!m.read).length;return `<div class="cuitem ${acu===u?'active':''}" onclick="openCW('${u}')"><div style="width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">👤</div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;">${u}</div><div style="font-size:11px;color:rgba(255,255,255,.38);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${last?last.text:'...'}</div></div>${unread>0?`<div class="curd">${unread}</div>`:''}</div>`;}).join('');}
-function openCW(u){acu=u;document.getElementById('ctit').textContent='محادثة: '+u;if(chats[u])chats[u].forEach(m=>{if(m.from===u)m.read=true;});sv('chats',chats);renderMs(chats[u]||[]);renderCU();}
-function renderMs(msgs){const el=document.getElementById('cmsgs');if(!msgs||!msgs.length){el.innerHTML='<div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div>';return;}el.innerHTML=msgs.map(m=>{const mine=(me.own&&m.from===OWN.u)||(!me.own&&m.from===me.n);return `<div class="mb ${mine?'mine':'other'}"><div class="mt ${mine?'mine':'other'}">${m.text}</div><div class="mtime">${m.time}</div></div>`;}).join('');el.scrollTop=el.scrollHeight;}
-function sendMsg(){const inp=document.getElementById('cinp');const txt=inp.value.trim();if(!txt)return;chats=ld('chats',{});const target=me.own?acu:me.n;if(!target){showToast('❗ اختر زبوناً أولاً');return;}if(!chats[target])chats[target]=[];chats[target].push({from:me.own?OWN.u:me.n,text:txt,time:new Date().toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'}),read:false});sv('chats',chats);inp.value='';renderMs(chats[target]);if(me.own)renderCU();if(!me.own)sendTG('💬 رسالة من: '+me.n+'\n'+txt);}
-function updCB(){if(!me||me.own)return;chats=ld('chats',{});const msgs=chats[me.n]||[];const ur=msgs.filter(m=>m.from===OWN.u&&!m.read).length;const b=document.getElementById('cbdg');b.textContent=ur;b.classList.toggle('show',ur>0);}
-
-function sendTG(msg){fetch('https://api.telegram.org/bot'+BOT+'/sendMessage?chat_id='+CID+'&text='+encodeURIComponent(msg)).catch(()=>{});}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
-document.getElementById('mov').addEventListener('click',function(e){if(e.target===this)closeTr();});
-la();
-</script>
+// نظام الطلبات والمزامنة الحية الفورية بين الأدمن والزبون
+function initOrdersRealtime() {
+  const q = me.own ? query(collection(db, "orders"), orderBy("createdAt", "desc")) : query(collection(db, "orders"), where("userId", "==", me.uid), orderBy("createdAt", "desc"));
+  
+  onSnapshot(q, (snapshot) => {
+    const orders = [];
+    snapshot.forEach(doc => orders.push({ id: doc.id, ...doc.data() }));
+    
+    const pend = orders.filter(o => o.status === 'pending');
+    const done = orders.filter(o => o.status === 'done');
+    
+    document.getElementById('pc').textContent = pend.length ? `(${pend.length})` : '';
+    document.getElementById('dc').textContent = done.length ? `(${done.length})` : '';
+    
+    const rl = (list, el) => {
+      if (!list.length) { el.innerHTML = '<div class="empty"><span class="eic">📭</span><p>لا توجد طلبات</p></div>'; return; }
+      el.innerHTML = list.map(o => `<div class="ocard ${o.status}"><div class="otop"><div class="og">${o.game}</div><div class="ost ${o.status}">${o.status_text}</div></div><div class="odetails"><div class="oinfo"><span>رقم الطلب:</span> <span>#${o.id}</span></div><div class="oinfo"><span>التاريخ:</span> <span>${o.date}</span></div><div class="oinfo"><span>الإجمالي:</span> <span>${o.total} ر.س</span></div></div></div>`).join('');
+    }
+  </script>
 </body>
-</html>
+</html> 
+      
