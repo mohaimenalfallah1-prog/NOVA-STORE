@@ -733,9 +733,430 @@ function initOrdersRealtime() {
     
     const rl = (list, el) => {
       if (!list.length) { el.innerHTML = '<div class="empty"><span class="eic">📭</span><p>لا توجد طلبات</p></div>'; return; }
-      el.innerHTML = list.map(o => `<div class="ocard ${o.status}"><div class="otop"><div class="og">${o.game}</div><div class="ost ${o.status}">${o.status_text}</div></div><div class="odetails"><div class="oinfo"><span>رقم الطلب:</span> <span>#${o.id}</span></div><div class="oinfo"><span>التاريخ:</span> <span>${o.date}</span></div><div class="oinfo"><span>الإجمالي:</span> <span>${o.total} ر.س</span></div></div></div>`).join('');
+      el.innerHTML = list.map(o => `<div class="ocard ${o.status}"><div class="otop"><div class="og">${o.game}</div><div class="ost ${o.status === 'pending' ? 'opst' : 'odst'}">${o.status === 'pending' ? '⏳ معلق' : '✅ مكتمل'}</div></div><div class="odtl">الكمية: <span>${o.amount}</span> — التكلفة: <span>${o.cost} NC</span><br>معرّف: <span>${o.uid}</span> — الزبون: <span>${o.userEmail}</span><br>الوقت: <span>${o.timeString}</span></div>${me.own ? `<div class="oac">${o.status === 'pending' ? `<button class="btndone" data-id="${o.id}">✅ تم الشحن</button>` : ''}<button class="btndel" data-id="${o.id}">🗑 حذف</button></div>` : ''}</div>`).join('');
+    };
+    
+    rl(pend, document.getElementById('pl'));
+    rl(done, document.getElementById('dl'));
+    
+    // شارات عداد التبويبات
+    const obdg = document.getElementById('obdg');
+    obdg.textContent = pend.length;
+    obdg.classList.toggle('show', pend.length > 0);
+
+    // ربط أزرار تحكم الأدمن بالطلبات
+    if (me.own) {
+      document.querySelectorAll('.btndone').forEach(b => b.onclick = async function() {
+        await updateDoc(doc(db, "orders", this.dataset.id), { status: 'done' });
+        showToast('✅ تم تأكيد إتمام الشحن');
+      });
+      document.querySelectorAll('.btndel').forEach(b => b.onclick = async function() {
+        await deleteDoc(doc(db, "orders", this.dataset.id));
+        showToast('🗑 تم حذف الطلب من قاعدة البيانات');
+      });
     }
-  </script>
-</body>
-</html> 
+    
+    // تحديث إحصائيات لوحة التحكم للأدمن حياً
+    if(me.own) {
+       document.getElementById('stO').textContent = orders.length;
+       document.getElementById('stD').textContent = done.length;
+       document.getElementById('stP').textContent = pend.length;
+    }
+  });
+}
+
+// نظام الشات الفوري المباشر (أونلاين)
+function initChatRealtime() {
+  if (me.own) {
+    document.getElementById('achatbox').style.display = 'block';
+    document.getElementById('ctit').textContent = 'اختر زبوناً من القائمة';
+    
+    onSnapshot(collection(db, "chats"), (snapshot) => {
+      const userChatsMap = {};
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const room = data.room;
+        if(!userChatsMap[room]) userChatsMap[room] = [];
+        userChatsMap[room].push(data);
+      });
+      renderChatUserList(userChatsMap);
+    });
+  } else {
+    document.getElementById('achatbox').style.display = 'none';
+    acu = me.uid;
+    const q = query(collection(db, "chats"), where("room", "==", me.uid), orderBy("timestamp", "asc"));
+    onSnapshot(q, (snapshot) => {
+      const msgs = [];
+      snapshot.forEach(doc => msgs.push(doc.data()));
+      renderMs(msgs);
+    });
+  }
+}
+
+function renderChatUserList(userChatsMap) {
+  const el = document.getElementById('culist');
+  const rooms = Object.keys(userChatsMap);
+  if (!rooms.length) { el.innerHTML = '<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا توجد محادثات بعد</div>'; return; }
+  
+  el.innerHTML = rooms.map(room => {
+    const msgs = userChatsMap[room].sort((a,b) => a.timestamp - b.timestamp);
+    const last = msgs[msgs.length - 1];
+    const unread = msgs.filter(m => m.sender !== 'admin' && !m.read).length;
+    return `<div class="cuitem ${acu === room ? 'active' : ''}" data-room="${room}">
+      <div style="width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">👤</div>
+      <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;">${last?.userEmail || room}</div><div style="font-size:11px;color:rgba(255,255,255,.38);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${last ? last.text : '...'}</div></div>
+      ${unread > 0 ? `<div class="curd">${unread}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.cuitem').forEach(item => {
+    item.onclick = function() {
+      acu = this.dataset.room;
+      document.getElementById('ctit').textContent = 'محادثة زبون';
+      const q = query(collection(db, "chats"), where("room", "==", acu), orderBy("timestamp", "asc"));
+      onSnapshot(q, (snapshot) => {
+        const msgs = [];
+        snapshot.forEach(docSnap => {
+          msgs.push(docSnap.data());
+          if(docSnap.data().sender !== 'admin' && !docSnap.data().read) {
+             updateDoc(doc(db, "chats", docSnap.id), { read: true });
+          }
+        });
+        renderMs(msgs);
+      });
+      initChatRealtime();
+    };
+  });
+}
+
+function renderMs(msgs) {
+  const el = document.getElementById('cmsgs');
+  if (!msgs || !msgs.length) { el.innerHTML = '<div style="text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:22px 0;">👋 مرحباً! كيف نقدر نساعدك؟</div>'; return; }
+  el.innerHTML = msgs.map(m => {
+    const mine = (me.own && m.sender === 'admin') || (!me.own && m.sender !== 'admin');
+    return `<div class="mb ${mine ? 'mine' : 'other'}"><div class="mt ${mine ? 'mine' : 'other'}">${m.text}</div><div class="mtime">${m.time}</div></div>`;
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('cinp');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  const roomTarget = me.own ? acu : me.uid;
+  if (!roomTarget) { showToast('❗ اختر زبوناً أولاً'); return; }
+
+  await addDoc(collection(db, "chats"), {
+    room: roomTarget,
+    sender: me.own ? 'admin' : me.uid,
+    userEmail: me.email,
+    text: txt,
+    time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+    read: false,
+    timestamp: Date.now()
+  });
+  
+  if (!me.own) {
+    sendSecureTelegramNotification({ title: "💬 رسالة دعم جديدة", user: me.email, message: txt });
+  }
+  inp.value = '';
+}
+document.getElementById('btnSendMsg').onclick = sendMsg;
+document.getElementById('cinp').onkeydown = (e) => { if (e.key === 'Enter') sendMsg(); };
+
+// إدارة المحافظ والمستخدمين من قبل الأدمن
+function rendU(snapshot) {
+  const list = document.getElementById('ulist');
+  const users = [];
+  snapshot.forEach(doc => {
+     if(doc.data().email !== ADMIN_EMAIL) users.push({ id: doc.id, ...doc.data() });
+  });
+  if (!users.length) { list.innerHTML = '<div style="font-size:12px;color:rgba(255,255,255,.35);text-align:center;padding:10px;">لا يوجد مستخدمون بعد</div>'; return; }
+  
+  list.innerHTML = users.map(u => {
+     const isOnline = u.status === 'online';
+     return `<div class="ur"><div class="urt"><div><div class="un">👤 ${u.email} <span style="color:${isOnline ? 'var(--green)' : 'rgba(255,255,255,0.2)'}; font-size:10px;">${isOnline ? '● نشط' : '● أوفلاين'}</span></div><div class="ub">🪙 ${(u.balance || 0).toFixed(2)} NC</div></div><div class="ubtns"><button class="ba" data-u="${u.id}" data-t="a">+ إضافة</button><button class="bw" data-u="${u.id}" data-t="w">- سحب</button></div></div><div class="uf" id="uf_${u.id}"><input class="inp" id="ua_${u.id}" type="number" placeholder="كمية NC" min="0.01" step="0.01"><button class="bca" id="bca_${u.id}">✓</button><button class="bcw" id="bcw_${u.id}">✓</button></div></div>`
+  }).join('');
+
+  // تهيئة أزرار السحب والإيداع
+  document.querySelectorAll('.ba, .bw').forEach(btn => {
+    btn.onclick = function() {
+      const u = this.dataset.u, t = this.dataset.t;
+      const f = document.getElementById('uf_' + u), ba = document.getElementById('bca_' + u), bw = document.getElementById('bcw_' + u);
+      f.style.display = f.style.display === 'flex' ? 'none' : 'flex';
+      ba.style.display = t === 'a' ? 'block' : 'none';
+      bw.style.display = t === 'w' ? 'block' : 'none';
+    }
+  });
+
+  // تفعيل عمليات الإيداع والسحب الفعلي لـ Firestore
+  users.forEach(u => {
+    const processBal = async (t) => {
+      const amt = parseFloat(document.getElementById('ua_' + u.id).value);
+      if (!amt || amt <= 0) { showToast('❗ أدخل كمية صحيحة'); return; }
+      const userRef = doc(db, "users", u.id);
+      const userSnap = await getDoc(userRef);
+      const cur = userSnap.exists() ? (userSnap.data().balance || 0) : 0;
+      if (t === 'w' && amt > cur) { showToast('❌ الرصيد غير كافٍ'); return; }
       
+      const newBal = t === 'a' ? cur + amt : cur - amt;
+      await updateDoc(userRef, { balance: newBal });
+      showToast('✅ تم تحديث الرصيد أونلاين بنجاح');
+    };
+    const bca = document.getElementById('bca_' + u.id); if(bca) bca.onclick = () => processBal('a');
+    const bcw = document.getElementById('bcw_' + u.id); if(bcw) bcw.onclick = () => processBal('w');
+  });
+}
+
+// شحن المالك لنفسه كاش
+document.getElementById('btnSelfAdd').onclick = async () => {
+  const amt = parseFloat(document.getElementById('samt').value);
+  if (!amt || amt <= 0) { showToast('❗ أدخل كمية صحيحة'); return; }
+  const ref = doc(db, "users", me.uid);
+  const snap = await getDoc(ref);
+  const cur = snap.exists() ? (snap.data().balance || 0) : 0;
+  await updateDoc(ref, { balance: cur + amt });
+  document.getElementById('samt').value = '';
+  showToast('✅ تم شحن محفظة الأدمن');
+};
+
+// إعدادات الباقات والأسعار أونلاين للأدمن
+function openS() {
+  ['ff', 'pubg'].forEach(g => {
+    const ed = document.getElementById(g + 'ed'), em = g === 'ff' ? '💎' : '🟡';
+    if(!gP[g]) return;
+    ed.innerHTML = gP[g].map((p, i) => `
+      <div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;">${em} باقة ${i + 1}</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input class="pinp" id="${g}am${i}" type="text" value="${p.a}" style="flex:1;width:auto;text-align:right;direction:rtl;padding:7px 10px;">
+          <span style="font-size:11px;color:rgba(255,255,255,.3);">الكمية</span>
+          <input class="pinp" id="${g}pe${i}" type="number" value="${p.c}" min="0" step="0.01" style="width:70px;">
+          <span style="font-size:11px;color:rgba(255,255,255,.3);">NC</span>
+        </div>
+      </div>`).join('');
+  });
+  renderDiscEd();
+}
+
+async function saveGP(g) {
+  gP[g].forEach((p, i) => {
+    const a = document.getElementById(g + 'am' + i)?.value.trim();
+    const c = parseFloat(document.getElementById(g + 'pe' + i)?.value);
+    if (a) gP[g][i].a = a; if (!isNaN(c) && c >= 0) gP[g][i].c = c;
+  });
+  await updateDoc(doc(db, "settings", "prices"), { gP });
+  showToast('✅ تم مزامنة وحفظ الأسعار لجميع المشتركين');
+}
+document.getElementById('btnSaveFF').onclick = () => saveGP('ff');
+document.getElementById('btnSavePubg').onclick = () => saveGP('pubg');
+
+function renderDiscEd() {
+  const el = document.getElementById('discEd'); if (!el) return;
+  let html = '';
+  ['ff', 'pubg'].forEach(g => {
+    const em = g === 'ff' ? '💎' : '🟡', gn = g === 'ff' ? 'فري فاير' : 'ببجي';
+    html += `<div style="margin-bottom:14px;"><div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:8px;">${em} ${gn}</div>`;
+    gP[g].forEach((p, i) => {
+      const dk = g + '_' + i, d = disc[dk] || { active: false, pct: 0 };
+      html += `<div class="drow">
+        <div style="flex:1;"><div style="font-size:12px;font-weight:700;">${p.a}</div><div style="font-size:11px;color:rgba(255,255,255,.35);">${p.c} NC</div></div>
+        <input type="number" id="dpct_${dk}" value="${d.pct}" min="0" max="90" step="5" placeholder="%" style="width:52px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;padding:5px 7px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;outline:none;text-align:center;direction:ltr;">
+        <span style="font-size:11px;color:rgba(255,255,255,.3);">%</span>
+        <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+          <input type="checkbox" id="dact_${dk}" ${d.active ? 'checked' : ''} style="width:16px;height:16px;cursor:pointer;accent-color:var(--green);">
+          <span style="font-size:12px;color:var(--green);font-weight:700;">تفعيل</span>
+        </label>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+document.getElementById('btnSaveDisc').onclick = async () => {
+  ['ff', 'pubg'].forEach(g => {
+    gP[g].forEach((p, i) => {
+      const dk = g + '_' + i;
+      const pct = parseFloat(document.getElementById('dpct_' + dk)?.value) || 0;
+      const active = document.getElementById('dact_' + dk)?.checked || false;
+      disc[dk] = { active, pct: Math.min(90, Math.max(0, pct)) };
+    });
+  });
+  await updateDoc(doc(db, "settings", "prices"), { disc });
+  showToast('✅ تم تعميم الخصومات على الواجهة');
+};
+
+// الجدار الناري (الحظر) أونلاين
+document.getElementById('btnBan').onclick = async () => {
+  const emailInp = document.getElementById('bani');
+  const targetEmail = emailInp.value.trim().toLowerCase();
+  if(!targetEmail || targetEmail === ADMIN_EMAIL) { showToast('❌ بريد غير صالح'); return; }
+  await setDoc(doc(db, "firewall", targetEmail), { banned: true, bannedAt: serverTimestamp() });
+  emailInp.value = '';
+  showToast('🚫 تم حظر العميل بنجاح');
+};
+
+function renderBL(snapshot) {
+  const el = document.getElementById('blist'); if (!el) return;
+  const list = []; snapshot.forEach(d => list.push(d.id));
+  if (!list.length) { el.innerHTML = '<div style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding:8px;">لا يوجد مستخدمون محظورون</div>'; return; }
+  el.innerHTML = list.map(u => `<div class="bitem"><span style="font-size:13px;font-weight:700;">🚫 ${u}</span><button class="btnunban" data-email="${u}">رفع الحظر</button></div>`).join('');
+  document.querySelectorAll('.btnunban').forEach(b => b.onclick = async function() {
+    await deleteDoc(doc(db, "firewall", this.dataset.email));
+    showToast('✅ تم إلغاء حظر العميل');
+  });
+}
+
+// نظام الإعلانات الفوري للزبائن
+document.getElementById('btnSaveNotif').onclick = async () => {
+  const txt = document.getElementById('notifInp').value.trim();
+  if (!txt) return;
+  await setDoc(doc(db, "settings", "notification"), { text: txt });
+  showToast('✅ تم بث الإشعار للموقع');
+};
+document.getElementById('btnClearNotif').onclick = async () => {
+  await setDoc(doc(db, "settings", "notification"), { text: "" });
+  document.getElementById('notifInp').value = '';
+  document.getElementById('notifPrev').style.display = 'none';
+  showToast('🗑 تم إيقاف بث الإشعار');
+};
+
+function showNotifBanner(msg) {
+  const exist = document.getElementById('active-banner'); if(exist) exist.remove();
+  const el = document.createElement('div');
+  el.id = 'active-banner';
+  el.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:500;background:linear-gradient(135deg,rgba(255,200,48,.15),rgba(255,200,48,.08));border:1px solid rgba(255,200,48,.4);border-radius:14px;padding:12px 20px;font-size:13px;font-weight:700;color:var(--gold);max-width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4);backdrop-filter:blur(10px);animation:fu .4s ease;display:flex;align-items:center;gap:10px;';
+  el.innerHTML = `<span>🔔 ${msg}</span><button id="btnCloseBanner" style="background:none;border:none;color:rgba(255,200,48,.6);font-size:16px;cursor:pointer;flex-shrink:0;">✕</button>`;
+  document.body.appendChild(el);
+  document.getElementById('btnCloseBanner').onclick = () => el.remove();
+  setTimeout(() => { if (el.parentElement) el.remove(); }, 8000);
+}
+
+// طلب شحن رصيد المحفظة عبر تحويل بنكي
+function openTr(m, n) {
+  trM = m; trN = n;
+  document.getElementById('mtit').textContent = 'تحويل عبر ' + m;
+  document.getElementById('mnum').textContent = '+' + n;
+  document.getElementById('btntr').className = 'btntr ' + (m === 'ليبيانا' ? 'bttb' : 'bttg');
+  document.getElementById('trph').value = ''; document.getElementById('tramt').value = '';
+  document.getElementById('ncprev').style.display = 'none';
+  document.getElementById('mov').classList.add('open');
+}
+document.getElementById('btnTrLibiana').onclick = () => openTr('ليبيانا', '218926364857');
+document.getElementById('btnTrAlmadar').onclick = () => openTr('المدار', '218934979712');
+
+document.getElementById('tramt').oninput = function() {
+  const a = parseFloat(this.value) || 0;
+  const p = document.getElementById('ncprev');
+  if (a > 0) { p.style.display = 'block'; document.getElementById('ncres').textContent = (a / 10).toFixed(2); } else p.style.display = 'none';
+};
+
+document.getElementById('btntr').onclick = async () => {
+  const ph = document.getElementById('trph').value.trim(), amt = parseFloat(document.getElementById('tramt').value) || 0;
+  if (!ph || amt <= 0) { showToast('❗ أدخل بيانات صحيحة'); return; }
+  
+  await addDoc(collection(db, "orders"), {
+    userId: me.uid,
+    userEmail: me.email,
+    game: "شحن محفظة (" + trM + ")",
+    amount: (amt / 10).toFixed(2) + " NC",
+    cost: amt + " د.ل",
+    uid: "رقم المرسل: " + ph,
+    status: 'pending',
+    createdAt: serverTimestamp(),
+    timeString: new Date().toLocaleString('ar')
+  });
+
+  sendSecureTelegramNotification({
+     title: "💳 طلب شحن محفظة جديد",
+     user: me.email,
+     method: trM,
+     phone: ph,
+     amount: amt
+  });
+
+  document.getElementById('mov').classList.remove('open');
+  showToast('✅ تم إرسال طلب التحويل والمراجعة قيد التنفيذ');
+};
+
+// رفع وتخصيص صور الألعاب لـ Firestore
+function handleImgUp(g, inp) {
+  const f = inp.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = async e => {
+    gImgs[g] = e.target.result;
+    await setDoc(doc(db, "settings", "images"), gImgs, { merge: true });
+    showToast('✅ تم رفع وحفظ الصورة لجميع المشاهدين');
+  };
+  r.readAsDataURL(f);
+}
+document.getElementById('btnUpImgFF').onclick = () => document.getElementById('fff').click();
+document.getElementById('btnUpImgPubg').onclick = () => document.getElementById('pubgf').click();
+document.getElementById('fff').onchange = function() { handleImgUp('ff', this); };
+document.getElementById('pubgf').onchange = function() { handleImgUp('pubg', this); };
+
+document.getElementById('btnDelImgFF').onclick = async () => { gImgs.ff = null; await setDoc(doc(db, "settings", "images"), gImgs, { merge: true }); showToast('🗑 تم الحذف'); };
+document.getElementById('btnDelImgPubg').onclick = async () => { gImgs.pubg = null; await setDoc(doc(db, "settings", "images"), gImgs, { merge: true }); showToast('🗑 تم الحذف'); };
+
+// حماية Telegram Bot Token (الربط الآمن عبر السيرفر الوسيط)
+function sendSecureTelegramNotification(payload) {
+  /* 🔒 للحماية القصوى: لا تضع التوكن هنا أبداً.
+     قم بإنشاء دالة Firebase Cloud Function بسيطة أو كود NodeJS مستقل يمتلك التوكن، واجعل الفانكشن هنا تتصل به فقط.
+     أما إذا كنت تفضل التوصيل المباشر المؤقت رغم خطورته (لا ننصح به)، يمكنك إرساله هكذا:
+     fetch('https://api.telegram.org/bot<TOKEN>/sendMessage?chat_id=<ID>&text=' + encodeURIComponent(JSON.stringify(payload)));
+  */
+  fetch('https://YOUR_BACKEND_ENDPOINT_OR_CLOUD_FUNCTION/api/notify', {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
+// التبديل بين الحساب والإنشاء (تسجيل ودخول حقيقي)
+document.getElementById('btnLogin').onclick = async () => {
+  const email = document.getElementById('uIn').value.trim();
+  const pass = document.getElementById('pIn').value;
+  if(!email || !pass) return;
+  try {
+    await signInWithEmailAndPassword(auth, email.includes('@') ? email : `${email}@nova.com`, pass);
+  } catch(e) { showToast('❌ فشل تسجيل الدخول: تحقق من البيانات'); }
+};
+
+document.getElementById('btnReg').onclick = async () => {
+  const email = document.getElementById('uIn').value.trim();
+  const pass = document.getElementById('pIn').value;
+  if(!email || !pass) return;
+  try {
+    await createUserWithEmailAndPassword(auth, email.includes('@') ? email : `${email}@nova.com`, pass);
+    showToast('✅ تم إنشاء الحساب بنجاح');
+  } catch(e) { showToast('❌ فشل الإنشاء: كلمة المرور يجب ألا تقل عن 6 خانات'); }
+};
+
+document.getElementById('btnLogout').onclick = async () => {
+  if (me) {
+    await updateDoc(doc(db, "users", me.uid), { status: "offline" });
+  }
+  await signOut(auth);
+};
+
+// تبويبات الـ Nav القديمة
+window.goTab = function(i) {
+  const secs = ['s0', 's1', 's2', 's3', 's4', 's5'];
+  secs.forEach((s, j) => { document.getElementById(s).classList.toggle('active', j === i); });
+  for (let j = 0; j <= 5; j++) { const el = document.getElementById('t' + j); if (el) el.classList.toggle('active', j === i); }
+};
+function updTabs() { document.getElementById('t3').style.display = me && me.own ? 'flex' : 'none'; }
+window.closeTr = function() { document.getElementById('mov').classList.remove('open'); };
+window.switchOT = function(t) {
+  cot = t;
+  document.getElementById('otp').className = 'otab ' + (t === 'p' ? 'op' : '');
+  document.getElementById('otd').className = 'otab ' + (t === 'd' ? 'od' : '');
+  document.getElementById('pl').classList.toggle('show', t === 'p');
+  document.getElementById('dl').classList.toggle('show', t === 'd');
+};
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+document.getElementById('mov').addEventListener('click', function (e) { if (e.target === this) closeTr(); });
+</script>
+</body>
+</html>
